@@ -29,9 +29,12 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
 SECRET_KEY = 'django-insecure-hd$322p@t6p8sckb1@lvdez-%vi!jx++qkf^3t_ok(706o-anc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost"
+]
 
 
 # Application definition
@@ -42,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles','PixAda'
+    'django.contrib.staticfiles',
+    'FPixAda'
 ]
 
 MIDDLEWARE = [
