@@ -1,4 +1,4 @@
-![image](.\assets\PixAda.jpg "logo")
+![image](https://github.com/Paz2712/pix-ada/blob/main/assets/PixAda.jpg "logo")
 
 # PixADA
 
