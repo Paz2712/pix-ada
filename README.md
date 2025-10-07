@@ -30,4 +30,6 @@ Recomendamos encarecidamente ejecutar esta aplicación web en un entorno virtual
     - Unix/MacOS `python -m pip install Django==5.2.5`
 
 # Recursos
-[cómo hacer un login](https://www.geeksforgeeks.org/python/django-sign-up-and-login-with-confirmation-email-python/)
+
+- [Cómo hacer un login (no implementado)](https://www.geeksforgeeks.org/python/django-sign-up-and-login-with-confirmation-email-python/)
+- [Cheat Sheet para HTML (requiere conocimiento en gringo)](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Cheatsheet)
