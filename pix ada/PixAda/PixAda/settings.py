@@ -17,10 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -29,9 +25,12 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
 SECRET_KEY = 'django-insecure-hd$322p@t6p8sckb1@lvdez-%vi!jx++qkf^3t_ok(706o-anc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost"
+]
 
 
 # Application definition
@@ -42,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles','PixAda'
+    'django.contrib.staticfiles',
+    'FPixAda'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'PixAda.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [], ## NO TOCAR, estamos usando app-level Templates, osea que cada app tiene sus propias templates para páginas web
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = '-04'
 
 USE_I18N = True
 

@@ -17,7 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+##-------------------------  URLs  -------------------------##
+'''
+De Axius:
+Cada que hagan una API nueva tienen que especificarla aquí para poder tener los links creados ahí con el siguiente formato:
+    path('<nombreAPI>/', include('<nombreAPI>.urls'))
+
+Pablo, ponte a estudiar HTML ctm
+'''
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('PixAda.urls'))
+    path('FPixAda/', include('FPixAda.urls'))
 ]
