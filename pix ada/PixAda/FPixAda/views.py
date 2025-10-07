@@ -5,9 +5,8 @@ from datetime import datetime
 
 # Crea tus views
 def index(request):
-    __contexto = {
-        'pestana': 'FPixAda',
-        'tit': 'Prueba título (se llama header, pero no importa mucho)' ## El nombre fué a propósito xdd
+    __contexto = {  
+        'pestana': 'FPixAda' 
     }
     return render(request, 'index.html', __contexto)
 
