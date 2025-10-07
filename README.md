@@ -29,3 +29,5 @@ Recomendamos encarecidamente ejecutar esta aplicación web en un entorno virtual
     - Windows `py -m pip install Django==5.2.5`
     - Unix/MacOS `python -m pip install Django==5.2.5`
 
+# Recursos
+[cómo hacer un login](https://www.geeksforgeeks.org/python/django-sign-up-and-login-with-confirmation-email-python/)
