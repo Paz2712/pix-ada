@@ -16,5 +16,5 @@ Diviértete Isi
 '''
 urlpatterns = [
     path("", views.index, name="index"), ## http://localhost:<puerto>/FPixAda/          Esta es la página origen de la API
-    path("time/", views.timePage, name="time"), ## http://localhost:<puerto>/FPixAda/time/
+    path("testLmao/", views.algo, name="algo"), ## http://localhost:<puerto>/FPixAda/algo/
 ]

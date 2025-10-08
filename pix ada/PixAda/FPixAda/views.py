@@ -10,8 +10,8 @@ def index(request):
     }
     return render(request, 'index.html', __contexto)
 
-def timePage(request):
-    return HttpResponse('ass')
+def algo(request):
+    return render(request, 'algo.html')
 
 '''
 De Axius:
