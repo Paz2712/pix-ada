@@ -1,4 +1,4 @@
-![A picture of toothless from How to Train your Dragon, inside a purple circle](https://github.com/Paz2712/pix-ada/blob/main/assets/PixAda.jpg "logo")
+<img src="https://github.com/Paz2712/pix-ada/blob/main/pix%20ada/PixAda/assets/logo/toothless2.jpeg?raw=true" alt="TOOTHLESS">
 
 # PixADA
 
