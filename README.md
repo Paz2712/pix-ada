@@ -1,4 +1,4 @@
-<img src="https://github.com/Paz2712/pix-ada/blob/main/pix%20ada/PixAda/assets/logo/toothless2.jpeg?raw=true" alt="TOOTHLESS">
+<img src="https://github.com/Paz2712/pix-ada/blob/main/pix%20ada/PixAda/assets/logo/toothless1.jpeg?raw=true" alt="TOOTHLESS">
 
 # PixADA
 
