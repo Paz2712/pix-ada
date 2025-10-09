@@ -1,23 +1,58 @@
-/* static/css/style.css */
-@font-face { /* Friendly Sans (truetype) */
-    font-family: 'sans-friendly';
-    src: url("../fonts/friendlySans.ttf"); /* siempre que importen una fuente usen "../fonts/<archivo>" */
+/* OpenDyslexic (Web Open) */
+@font-face { /* Normal */
+    font-family: 'open-dyslexic';
+    src:    url("../fonts/OpenDyslexic-Regular.woff") format('woff'),
+            url("../fonts/OpenDyslexic-Regular.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
+@font-face { /* Itálica */
+    font-family: 'open-dyslexic';
+    src:    url("../fonts/OpenDyslexic-Italic.woff") format('woff'),
+            url("../fonts/OpenDyslexic-Italic.woff2") format('woff2');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face { /* Negrita */
+    font-family: 'open-dyslexic';
+    src:    url('../fonts/OpenDyslexic-Bold.woff') format('woff'),
+            url('../fonts/OpenDyslexic-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face { /* Negrita-Itálica */
+    font-family: 'open-dyslexic';
+    src:    url('../fonts/OpenDyslexic-Bold-Italic.woff') format('woff'),
+            url('../fonts/OpenDyslexic-Bold-Italic.woff2') format('woff2');
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Formato */
 body {
     background-color: #CEBEDC;
+    font-family: 'open-dyslexic';
     margin: 20px;
 }
 
 h1 {
     color: #7D38D0;
-    font-family: sans-serif;
     text-align: center;
 }
 
 p {
-    color: #221E64;
-    font-family: 'sans-friendly';
+    color: #221E64; 
     font-size: 1.2em;
     text-align: center;
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+em, i {
+    font-style: italic;
 }
