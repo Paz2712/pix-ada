@@ -1,0 +1,23 @@
+/* static/css/style.css */
+@font-face { /* Friendly Sans (truetype) */
+    font-family: 'sans-friendly';
+    src: url("../fonts/friendlySans.ttf"); /* siempre que importen una fuente usen "../fonts/<archivo>" */
+}
+
+body {
+    background-color: #CEBEDC;
+    margin: 20px;
+}
+
+h1 {
+    color: #7D38D0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+p {
+    color: #221E64;
+    font-family: 'sans-friendly';
+    font-size: 1.2em;
+    text-align: center;
+}
