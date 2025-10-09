@@ -2,7 +2,23 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
 
+'''
+Aporte de Maca: sobre las funciones para crear una views
+una views es una de las vistas que tiene la pagina, pero más espesificamente es la función que se ejecuta 
+cuando alguien estra a una pagina de tu sitio web.
+ + que significa que una función retorne render(request, 'index.html', __contexto).
+ render: función de django que arma una pag web usando los templates html y a veces datos extras.
+ request: es como la petición del usuario (por ejemplo, cuando alguien entra a una URL o hace clic en un botón).
+ nombre.html: este es el nombre del archivo html que debe de estar en templates.
 
+ estas funciones se activan cuando las llaman desde urls.py en donde se retorna una pagina armada (render) 
+ que a partir de la petición del usuario (request) abra la plantilla html, y si hay datos extras se coloca en el
+ tercer parametro.
+ 
+ OSEA: return render(request, 'inicio.html')
+ le dice a Django:
+“Cuando alguien entre a esta página, muéstrale el archivo inicio.html”.
+'''
 # Crea tus views
 def index(request):
     __contexto = {  
