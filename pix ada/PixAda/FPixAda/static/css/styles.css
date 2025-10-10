@@ -37,28 +37,53 @@
     src:    url('../fonts/Comic\ Sans\ MS.ttf');
 }
 
+
 /* Formato */
-body {
+.regular {
+    font-family: "Roboto", sans-serif;
+}
+.dyslexic {
+    font-family: 'open-dyslexic', sans-serif;
+    ;
+}
+
+body.light-mode {
     background-color: #CEBEDC;
-    font-family: 'open-dyslexic';
     margin: 20px;
+
+    h1 {
+        color: #7D38D0;
+        text-align: center;
+    }
+    p {
+        color: #221E64; 
+        font-size: 1.2em;
+        text-align: center;
+    }
+}
+body.dark-mode {
+    background-color: #221E64;
+    margin: 20px;
+
+    h1 {
+        color: #AFBCFA;
+        text-align: center;
+    }
+    p {
+        color: #DCE4FB;
+        font-size: 1.2em;
+        text-align: center;
+    }
 }
 
-h1 {
-    color: #7D38D0;
-    text-align: center;
-}
-
-p {
-    color: #221E64; 
-    font-size: 1.2em;
-    text-align: center;
-}
-
-strong, b {
+strong, b { /* Le dice a las fuentes que se pongan negras */
     font-weight: bold;
 }
 
-em, i {
+em, i { /* Le dice a las fuentes que se pongan en itálica */
     font-style: italic;
+}
+
+.ba {
+    background-color: #000000;
 }
