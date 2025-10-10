@@ -21,13 +21,16 @@ cuando alguien estra a una pagina de tu sitio web.
 '''
 # Crea tus views
 def index(request):
-    __contexto = {  
-        'pestana': 'FPixAda' 
-    }
-    return render(request, 'index.html', __contexto)
+    return render(request, 'index.html')
 
 def algo(request):
-    return render(request, 'algo.html')
+    yanMode = request.GET.get('dyslexia', 'false') # El nombre es un placeholder
+    displayMode = request.GET.get('displayMode', 'light')
+    variables = {
+        'dyslexia': yanMode,
+        'displayMode': displayMode
+    }
+    return render(request, 'algo.html', variables)
 
 '''
 De Axius:
@@ -56,3 +59,5 @@ el contexto será todo lo interactivo que usará el HTML.
 Digamos que tienes adentro un ciclo que va cambiando cierta variable, crea un diccionario con esa variable que va cambiando,
 la cual será usada en el archivo HTML.
 '''
+def badApple(request):
+    return render(request, 'ba.html')

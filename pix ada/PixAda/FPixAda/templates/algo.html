@@ -2,15 +2,20 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <!-- Incluir en todo archivo HTML -->
         <title>TestPage</title>
+        
+        <!-- Incluir en todo archivo HTML -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Usar siempre para cargar archivos de estilo -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     </head>
-    <body>
+    <body 
+    class= "{% if dyslexia == 'false' %}regular
+            {% else %}dyslexic
+            {% endif %};
+            {% if displayMode == 'light' %}light-mode{% else %}dark-mode{% endif %}">
         <h1>
             Fondo: #CEBEDC
         </h1> 
@@ -20,7 +25,28 @@
             Centrado. Prueba de acentos: ÁÉÍÓÚÑ <br>
             <b>negrita</b> <br>
             <i>itálica</i> <br>
-            <b><i>negrita e itálica</i></b>
+            <b><i>negrita e itálica</i></b> <br>
         </p>
+        <form method="get" action="">
+            <button type="submit" name="dyslexia" value="{% if dyslexia == 'false' %}true{% else %}false{% endif %}">
+                {% if dyslexia == 'false' %}Activar accesibilidad{% else %}Desactivar accesibilidad{% endif %}
+            </button>
+        </form> <br>
+        <form method="get" action="">
+            <button type="submit" name="displayMode" value="{% if displayMode == 'light' %}dark{% else %}light{% endif %}">
+                {% if displayMode == 'light' %}Modo oscuro{% else %}Modo claro{% endif %}
+            </button>
+        </form>
+            <!-- IGNORAR -->
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <p>
+                heya
+            </p>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <p>
+                <a href="http://127.0.0.1:8000/FPixAda/ohno/">Te dije que lo haría :D</a>
+            </p>
+            <!-- FIN DE IGNORAR -->
+
     </body>
 </html> 
