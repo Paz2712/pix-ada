@@ -11,11 +11,15 @@
         <!-- Usar siempre para cargar archivos de estilo -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     </head>
+    
     <body 
     class= "{% if dyslexia == 'false' %}regular
             {% else %}dyslexic
             {% endif %};
-            {% if displayMode == 'light' %}light-mode{% else %}dark-mode{% endif %}">
+
+            {% if displayMode == 'light' %}light-mode
+            {% else %}dark-mode
+            {% endif %}">
         <h1>
             Fondo: #CEBEDC
         </h1> 
@@ -43,7 +47,7 @@
                 heya
             </p>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <p>
+            <p class="button">
                 <a href="http://127.0.0.1:8000/FPixAda/ohno/">Te dije que lo haría :D</a>
             </p>
             <!-- FIN DE IGNORAR -->

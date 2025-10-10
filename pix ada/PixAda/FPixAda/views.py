@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from datetime import datetime
 
 '''
 Aporte de Maca: sobre las funciones para crear una views
@@ -31,6 +30,9 @@ def algo(request):
         'displayMode': displayMode
     }
     return render(request, 'algo.html', variables)
+
+def termsCon(request):
+    return render(request, 'TAC.html')
 
 '''
 De Axius:

@@ -44,7 +44,6 @@
 }
 .dyslexic {
     font-family: 'open-dyslexic', "Roboto", sans-serif;
-    ;
 }
 
 body.light-mode {
@@ -86,4 +85,13 @@ em, i { /* Le dice a las fuentes que se pongan en itálica */
 
 .ba {
     background-color: #000000;
+}
+
+.button {
+    border-style: solid;
+    border-radius: 12px;
+    width: calc(auto);
+    text-align: center;
+    border-color: #221E64;
+    background-color: #7D38D0;
 }
