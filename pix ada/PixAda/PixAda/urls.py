@@ -27,5 +27,5 @@ Pablo, ponte a estudiar HTML ctm
 '''
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('FPixAda/', include('FPixAda.urls'))
+    path('', include('FPixAda.urls'))
 ]
