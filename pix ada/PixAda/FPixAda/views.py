@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 '''
@@ -19,21 +19,31 @@ cuando alguien estra a una pagina de tu sitio web.
 “Cuando alguien entre a esta página, muéstrale el archivo inicio.html”.
 '''
 # Crea tus views
+def arguments(request, variables):
+    diccionario = {
+        'dyslexia': request.GET.get('dyslexia', 'false'), # yanMode
+        'displayMode': request.GET.get('displayMode', 'light')
+    }
+    for item in variables:
+        diccionario[item] = variables[item]
+    return diccionario
 def index(request):
     return render(request, 'index.html')
 
 def algo(request):
-    yanMode = request.GET.get('dyslexia', 'false') # El nombre es un placeholder
-    displayMode = request.GET.get('displayMode', 'light')
-    variables = {
-        'dyslexia': yanMode,
-        'displayMode': displayMode
-    }
+    variables = arguments(request, {})
     return render(request, 'algo.html', variables)
 
 def termsCon(request):
     return render(request, 'TAC.html')
 
+def signinUsuario(request): ## EN DESARROLLO
+
+    return 0
+
+def loginUsuario(request): ## EN DESARROLLO
+
+    return 0
 '''
 De Axius:
 Con esto vamos a decirle a Django que renderize las páginas web.
