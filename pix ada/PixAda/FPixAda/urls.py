@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, views_auth
 
 '''
 De Axius:
@@ -14,9 +14,9 @@ Comentaré como se vería la url de cada view abajo para claridad
 Diviértete Isi
 '''
 urlpatterns = [
-    path("", views.index, name="index"), ## http://localhost:<puerto>/FPixAda/    Esta es la página origen de la API
-    path("testLmao/", views.algo, name="algo"), ## http://localhost:<puerto>/FPixAda/testLmao/
-    path("ohno/", views.badApple, name="BA")
+    path("", views.index, name="index"), ## http://localhost:8000/  Esta es la página origen de la API
+    path("testLmao/", views.algo, name="algo"), ## http://localhost:8000/testLmao/
+    path("ohno/", views.badApple, name="BA"), ## http://localhost:8000/ohno/ Bad apple :D
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)
