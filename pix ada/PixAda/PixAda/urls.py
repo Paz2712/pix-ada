@@ -26,6 +26,6 @@ Cada que hagan una API nueva tienen que especificarla aquí para poder tener los
 Pablo, ponte a estudiar HTML ctm
 '''
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('pixis/admin/', admin.site.urls),
     path('', include('FPixAda.urls'))
 ]
