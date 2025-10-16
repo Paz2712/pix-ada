@@ -1,5 +1,12 @@
+## Lineas 2-3, se encargan de renderizar cosas en la página o redirigir
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
+# Lineas 5-6, funciones predefinidas de login de la mano de Django
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+
+from .forms import LoginUsuariosForm, RegistroUsuariosForm
+from .utils.auth import anonymous_required
 
 '''
 Aporte de Maca: sobre las funciones para crear una views
@@ -18,32 +25,64 @@ cuando alguien estra a una pagina de tu sitio web.
  le dice a Django:
 “Cuando alguien entre a esta página, muéstrale el archivo inicio.html”.
 '''
-# Crea tus views
-def arguments(request, variables):
+# ---------- Signin y Login ---------- #
+@anonymous_required(redirect_url='homepage')
+def signinUsuario(request: HttpRequest):
+    if request.method == 'POST':
+        formulario = RegistroUsuariosForm(request.POST)
+        if formulario.is_valid():
+            usuario = formulario.save()
+            login(request, usuario, backend='FPixAda.backends.UsuariosBackend')
+            request.session.set_expiry(1800) ## La sesión durará 30[s] * 60 para convertirlo en 30 minutos
+            return redirect('homepage')
+    else:
+        formulario = RegistroUsuariosForm()
+    return render(request, 'registrarse.html', {'form': formulario})
+
+@anonymous_required(redirect_url='homepage')
+def loginUsuario(request: HttpRequest):
+    if request.method == 'POST':
+        formulario = LoginUsuariosForm(request.POST)
+        if formulario.is_valid():
+            nombre = formulario.cleaned_data['username']
+            contrasena = formulario.cleaned_data['password']
+            usuario = authenticate(request, username=nombre, password=contrasena, backend='FPixAda.backends.UsuariosBackend')
+            if usuario is not None:
+                login(request, usuario, backend='FPixAda.backends.UsuariosBackend')
+                request.session.set_expiry(30*60) # La sesión durará 30[s] * 60 para convertirlo en 30 minutos
+                return redirect('homepage')
+            formulario.add_error(None, 'Usuario o contraseña inválidos')
+    else:
+        formulario = LoginUsuariosForm()
+    return render(request, 'iniciarSesion.html', {'form': formulario})
+
+def logoutUsuario(request: HttpRequest):
+    logout(request) # Limpia la sesión
+    return redirect('login')
+
+
+def arguments(request, variables: dict):
     diccionario = {
-        'dyslexia': request.GET.get('dyslexia', 'false'), # yanMode
-        'displayMode': request.GET.get('displayMode', 'light')
+        'dyslexia': request.session.get('dyslexia', 'false'), # yanMode
+        'displayMode': request.session.get('displayMode', 'light')
     }
     for item in variables:
         diccionario[item] = variables[item]
     return diccionario
+
 def index(request):
     return render(request, 'index.html')
 
 def algo(request):
+    
     variables = arguments(request, {})
     return render(request, 'algo.html', variables)
 
-def termsCon(request):
-    return render(request, 'TAC.html')
+def contrato(request):
+    return render(request, 'contrato.html')
 
-def signinUsuario(request): ## EN DESARROLLO
 
-    return 0
 
-def loginUsuario(request): ## EN DESARROLLO
-
-    return 0
 '''
 De Axius:
 Con esto vamos a decirle a Django que renderize las páginas web.
