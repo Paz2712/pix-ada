@@ -1,0 +1,22 @@
+descubrí para que era __init__.py
+se supone que define variables para usar, pero como no
+necesitamos crear una app pública (aún) no hay mucho que definir
+por no decir nada, osea, cuando uno pone arriba del codigo
+
+import algo
+
+nosotros podríamos hacer una API que diga
+
+import FPixAda
+o
+from FPixAda import forms, models, urls, views, etcetera
+
+otra cosa, es posible explotar la página de admin si tienes
+la sesión iniciada en PixAda, asegurate de cerrar sesión con
+este link http://localhost:8000/logout/ y luego entra al panel
+de administrador para que no le de una patatús
+También cambié la página de admin a http://localhost:8000/pixis/admin/
+
+eso, no se cuando vayas a leer esto, editalo y haz un commit
+rápido cuando lo hagas
+
