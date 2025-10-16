@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'FPixAda.middleware.AdminRedirectIfUsuariosMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -129,3 +130,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_AGE = 30 * 60 ## Guarda las sesiones (cookies) por 30 minutos antes de expirar
+SESSION_SAVE_EVERY_REQUEST = True ## A cada cambio en las cookies, se actualizan solas
+
+
+AUTHENTICATION_BACKENDS = [ # Usa mi backend de autenticación :D
+    'django.contrib.auth.backends.ModelBackend',
+    'FPixAda.backends.UsuariosBackend',
+]
+
