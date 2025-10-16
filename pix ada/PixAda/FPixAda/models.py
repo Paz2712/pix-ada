@@ -53,12 +53,33 @@ class Usuarios(models.Model):
         # El rol que tendrá el (por defecto) usuario, manualmente en la pestaña de admins podemos cambiarlo
     )
 
+    # ----- Necesario para usar funciones login de Django ----- #
+
+    # Me rindo, usaré las funciones de Django para hacer el login
+    # Requiere estos dos campos, por si luego quiero integrarlo con la ventana de admin (solo nosotros lo veremos, no el usuario promedio)
+    # Lo robé del tutorial de Mozilla
+    # Quiero un café
+
+    is_active = models.BooleanField(default=True) # Comprueba si el usuario está activo, lo desactivamos en lugar de eliminarlo, para evitar conflictos en la DB
+    is_staff = models.BooleanField(default=False) # Comprueba si es uno de nosotros (nunca lo serán xdd)
+    last_login = models.DateTimeField(null=True, blank=True)
+
+    
+    @property # @property define propiedades que SI O SI debe tener la DB de los usuarios para que sea Django-Friendly
+    def is_authenticated(self):
+        # Para @Login_required y request.user.is_authenticated
+        return True
+    @property
+    def is_anonymous(self): # Ignorar, Django me obliga a ponerlo para el login. Las publicaciones serán anonimas (no usuarios)
+        return False
+
+
     # ----- Preferencias de usuario ----- #
     modoOscuro = models.BooleanField(default=False) # Modo oscuro, False por defecto
     yanMode = models.BooleanField(default=False) # Ya saben
     altoContraste = models.BooleanField(default=False) # Modo de alto contraste, para personas de visibilidad limitada
 
-    # ----- Validadores de contraseña ----- #
+    # ----- Validadores / Helpers ----- #
     validadorAlias = RegexValidator(
         regex=r'^@?[A-Za-z0-9_]{3,14}$',
         # Se que no se entiende una chota, así que explico:
@@ -91,7 +112,7 @@ class Usuarios(models.Model):
         ]
         if self.correo not in correosPermitidos and not any(self.correo.lower().endswith('@'+dominio.lower()) for dominio in dominiosPermitidos):
             # Tira error si el correo no está en la whitelist o si no tiene el dominio correcto
-            raise ValidationError("Nu uh")
+            raise ValidationError("The game")
         if self.aliasUsuario and not self.aliasUsuario.startswith('@'):
             # Comprueba que:
             # 1. Exista un alias (con que en aliasUsuario haya un string debería tirar True, si no hay nada tira False)
@@ -100,7 +121,7 @@ class Usuarios(models.Model):
         self.validadorAlias(self.aliasUsuario)
         # Esta cosa valida el alias con regex, si no cumple lo solicitado, tira un muy bonito error
         # No volveré a explicar que hace regex, ya les expliqué antes y cómo configurarlo
-
+        
     def save(self, *args, **kwargs):
         # La función save guarda la clase
         # Aquí añadimos que cambios extras queremos que se guarden también
