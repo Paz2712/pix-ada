@@ -7,82 +7,40 @@ from .models import Usuarios
 # Como añadir @ en los aliases o validar los caracteres en este
 class RegistroUsuariosForm(forms.ModelForm):
     contrasena1 = forms.CharField(
-        label="Contraseña",
-        widget=forms.PasswordInput,
-        min_length=8
-        # Contraseña, de mínimo 8 caracteres. Lo que pone en widget esconde el texto en el navegador
+        label='Contraseña',
+        widget=forms.PasswordInput(),
+        # Contraseña 1, widget=forms.PasswordInput se encarga de esconder el input del usuario de la pantalla
     )
     contrasena2 = forms.CharField(
-        label="Confirmar contraseña",
-        widget=forms.PasswordInput,
-        # Se repite la contraseña, también se esconde el texto de este campo
+        label='Repita la contraseña',
+        widget=forms.PasswordInput(),
+        # Donde el usuario debe confirmar su contraseña
     )
 
-    class Meta:
-        # Define el modelo y campos de este que se usarán, no se incluye contraseña porque ese campo se definió arriba
+    class Meta: # Metadatos, los campos que se mostrarán y se usarán de la database
         model = Usuarios
-        fields = [
-            "nombre",
-            "aliasUsuario",
-            "correo",
-        ]
+        fields = ('nombre', 'aliasUsuario', 'correo')
     
-    def clean_nombre(self):
-        # Normalizar y valida el nombre, eliminando espacios innecesarios con strip()
-        return self.cleaned_data["nombre"].strip()
-    def clean_aliasUsuario(self):
-        # Normaliza el alias, eliminando espacios innecesarios
-        # El modelo lo validará, añadiendo el @ si no lo había y usando mi amado Regex
-        return self.cleaned_data["aliasUsuario"].strip()
-    def clean_correo(self):
-        # Por si acaso, se normaliza el correo, por si el imbécil pone espacios
-        # El modelo comprobará que sea de la universidad sin minas
-        return self.cleaned_data["correo"].strip()
     def clean(self):
         cleaned = super().clean()
-        con1 = cleaned.get("contrasena1")
-        con2 = cleaned.get("contrasena2")
-        if con1 and con2 and con1 != con2:
-            raise ValidationError("Las contraseñas no coinciden")
+        p1 = cleaned.get('contrasena1') # No es Persona 1
+        p2 = cleaned.get('contrasena2') # No es Persona 2
+        if p1 and p2 and p1 != p2:
+            self.add_error('contrasena2', 'Las contraseñas deben ser iguales')
         return cleaned
+    
     def save(self, commit=True):
-        usuario = super().save(commit=False)
-        usuario.encriptar_contrasena(self.cleaned_data["contrasena1"])
+        user = super().save(commit=False)
+        user.contrasena = self.cleaned_data['contrasena1'] # Guarda la contraseña donde debe, en Usuarios.contrasena
         if commit:
-            usuario.save()
-        return usuario
-
-
+            user.save()
+        return user
+    
 class LoginUsuariosForm(forms.Form):
-    # Formulario de login, usará el nombre de usuario, no alias ni correo, para la autenticación
-    # (14-10-25) En teoría debería funcionar
-    nombre = forms.CharField(
-        label="Usuario",
-        # Aquí va el nombre de usuario (no alias ni correo, no se les olvide)
+    username = forms.CharField(
+        label='Nombre de usuario',
     )
-    contrasena = forms.CharField(
-        label="Contraseña",
-        widget=forms.PasswordInput
-        # Campo de concentración, digo contraseña. Se esconde al usuario
+    password = forms.CharField(
+        label='Contraseña',
+        widget=forms.PasswordInput(),
     )
-
-    def clean(self):
-        cleaned = super().clean()
-        nombre = cleaned.get("nombre")
-        contrasena = cleaned.get("contrasena")
-        if nombre:
-            # El nombre escrito es normalizado con strip()
-            nombreInput = cleaned.get["nombre"].strip()
-        if nombre and contrasena:
-            try:
-                # Intenta buscar un usuario que exista con ese nombre
-                usuario = Usuarios.objects.get(nombre=nombreInput)
-            except Usuarios.DoesNotExist:
-                # Si no existe, levanta un error de validación
-                raise ValidationError("Credenciales inválidas: El usuario no existe")
-            if not usuario.comprobar_contrasena(contrasena):
-                # Si el usuario existe (por eso se usa usuario.comprobar_contrasena) PERO la contraseña no coincide
-                # Levanta otro error
-                raise ValidationError("Credenciales inválidas: Contraseña incorrecta")
-            self.usuario = usuario
-        return cleaned
