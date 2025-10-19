@@ -28,7 +28,6 @@ class RegistroUsuariosForm(forms.ModelForm):
         if p1 and p2 and p1 != p2:
             self.add_error('contrasena2', 'Las contraseñas deben ser iguales')
         return cleaned
-    
     def save(self, commit=True):
         user = super().save(commit=False)
         user.contrasena = self.cleaned_data['contrasena1'] # Guarda la contraseña donde debe, en Usuarios.contrasena
@@ -39,6 +38,7 @@ class RegistroUsuariosForm(forms.ModelForm):
 class LoginUsuariosForm(forms.Form):
     username = forms.CharField(
         label='Nombre de usuario',
+        widget=forms.TextInput()
     )
     password = forms.CharField(
         label='Contraseña',
