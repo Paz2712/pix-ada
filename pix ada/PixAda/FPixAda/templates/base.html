@@ -1,10 +1,19 @@
-{%  %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <h1>Contrato de <a href="http://localhost:8000/EULA/">Términos y Condiciones<br></a></h1>
-        <button>Aceptar Contrato</button>
-        <button>Nao Nao Amigao</button>
-        <meta />
-    </head>
+<head>
+    <title>{% block title %}Title placeholder{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="{% if usuario.modoOscuro %}dark-mode{% else %}light-mode{% endif %}">
+    <div id="navBar">
+        {% block navBar %}
+        {% endblock %}
+    </div>
+    <div id="sumShit">
+        {% block sumShit %}{% endblock %}
+    </div>
+</body>
 </html>
