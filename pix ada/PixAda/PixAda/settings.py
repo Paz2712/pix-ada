@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'FPixAda.apps.FpixadaConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
