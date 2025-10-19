@@ -35,3 +35,57 @@
     font-family: 'sans-comic';
     src:    url('../fonts/Comic\ Sans\ MS.ttf');
 }
+
+.side-content {
+    height: 100%;
+    width: 35%;
+    background-color: #221E64;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    border-left: 4px solid #AFBCFA;
+    position: fixed;
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        color: #AFBCFA;
+        text-align: center;
+        font-size: x-large;
+    }
+    p {
+        font-family: 'Roboto', sans-serif;
+        color: #AFBCFA;
+        text-align: center;
+        font-size: medium;
+        a {color: #AC6CE4;}
+    }
+    button {
+        background-color: #AC6CE4;
+        height: 50px;
+    }
+    button:hover {
+        background-color: #CEBEDC
+    }
+}
+.side-bg {
+    z-index: 2;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 65%;
+    background-image: url("../images/testImg.jpg");
+
+}
+.input-field {
+    background-color: #AC6CE4;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 100px);
+    height: 25px;
+    border-radius: 10px;
+    font-size: large;
+}
+.input-field:hover {
+    background-color: #CEBEDC
+}

@@ -47,7 +47,7 @@
 }
 
 body.light-mode {
-    background-color: #CEBEDC;
+    background-color: #cebedc;
     margin-left: 160px;
     padding: 0px, 10px;
     margin: 20px;
@@ -56,11 +56,28 @@ body.light-mode {
         color: #7D38D0;
         text-align: center;
     }
+    h2 {
+        color: #7D38D0;
+        text-align: center;
+    }
     p {
         color: #221E64; 
         font-size: 1.2em;
         text-align: center;
     }
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #AC6CE4;
+        color: #221E64;
+        text-decoration: none;
+        border-radius: 5px;
+        
+    }
+    .button:hover {
+        background-color: #CEBEDC
+    }
+
 }
 body.dark-mode {
     background-color: #221E64;
@@ -74,6 +91,15 @@ body.dark-mode {
         color: #DCE4FB;
         font-size: 1.2em;
         text-align: center;
+    }
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #AC6CE4;
+        color: #221E64;
+        text-decoration: none;
+        border-radius: 5px;
+        
     }
 }
 
@@ -89,18 +115,10 @@ em, i { /* Le dice a las fuentes que se pongan en itálica */
     background-color: #000000;
 }
 
-.button {
-    border-style: solid;
-    border-radius: 12px;
-    width: calc(auto);
-    text-align: center;
-    border-color: #221E64;
-    background-color: #7D38D0;
-}
 
 .left-menu {
     height: 100%;
-    width: 160px;
+    width: 320px;
     position: fixed;
     z-index: 1;
     top: 0;
