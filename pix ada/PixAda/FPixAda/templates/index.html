@@ -5,7 +5,6 @@
     <title>PixADA</title>
     <meta charset="UTF-8"> <!--Añade formato al texto, perfecto para evitar problemas con "ñ" o "á"-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Ajusta la escala de la página con el dispositivo-->
-
     <!-- Se entiende que buscas con esta sección, nomás no es necesaria, solo sirve como apoyo
     a la hora de aparecer en buscadores de navegador, y no creo que pase de fase de desarrollo,
     pero excelente investigación Maca -->
@@ -15,8 +14,21 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
-<body class="regular light-mode">
-    <h1> FPixADA <br>
-    El foro de equidad de género </h1> <!-- De donde viene la F? Pensé que era PixAda solamente -->
+<body class="regular {% if loggeado and usuario.modoOscuro %}dark-mode{% else %}light-mode{% endif %}">
+    <h1>PixADA<br>
+    El foro de equidad de género </h1>
+    {% if loggeado %}
+        <p>Bienvenid@ de vuelta! {{ usuario.nombre }}
+        {% if rol == "Administrador" %}<br><em style="color: red;">STAFF: ADMIN</em>
+        {% elif rol == "Moderador" %}<br><em style="color: yellow;">STAFF: MOD</em>{% endif %}
+        </p>
+    {% else %}
+        <p>Inicia sesión y comparte con tus pares <br>
+        <a href="{% url 'login' %}" class="button">
+        Iniciar Sesión
+        </a> <br> <br>
+        <small>No tienes una cuenta? <a href="{% url 'signin' %}">Crea una</a></small>
+        </p>
+    {% endif %}
 </body>
 </html>
