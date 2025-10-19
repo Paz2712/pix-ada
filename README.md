@@ -24,10 +24,14 @@ Recomendamos encarecidamente ejecutar esta aplicación web en un entorno virtual
 - Python 3.12.1
 
     - Puedes instalar esta versión [aquí](https://www.python.org/downloads/release/python-3121/)
-- Django 5.2.5 (dentro del entorno virtual)
+- Django 5.2.5
 
     - Windows `py -m pip install Django==5.2.5`
     - Unix/MacOS `python -m pip install Django==5.2.5`
+- Django Widget Tweaks 1.5.0
+
+    - Windows `py -m pip install django-widget-tweaks==1.5.0`
+    - Unix/MacOS `python -m pip install django-widget-tweaks==1.5.0`
 
 # Recursos
 
