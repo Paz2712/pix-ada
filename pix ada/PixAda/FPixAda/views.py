@@ -61,22 +61,25 @@ def logoutUsuario(request: HttpRequest):
     return redirect('login')
 
 
-def arguments(request, variables: dict):
-    diccionario = {
-        'dyslexia': request.session.get('dyslexia', 'false'), # yanMode
-        'displayMode': request.session.get('displayMode', 'light')
-    }
-    for item in variables:
-        diccionario[item] = variables[item]
-    return diccionario
-
 def index(request):
-    return render(request, 'index.html')
+    userID = request.user
+    estaLogeado = userID.is_authenticated
+    variables = {
+        'usuario': userID,
+        'loggeado': estaLogeado
+    }
+    return render(request, 'index.html', variables)
 
+@login_required
 def algo(request):
-    
-    variables = arguments(request, {})
+    userID = request.user
+    variables = {
+        'usuario': userID,
+        'loggeado': userID.is_authenticated,
+        'rol': userID.rol
+    }   
     return render(request, 'algo.html', variables)
+
 
 def contrato(request):
     return render(request, 'contrato.html')
