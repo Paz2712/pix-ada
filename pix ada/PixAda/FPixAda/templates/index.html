@@ -19,8 +19,8 @@
     El foro de equidad de género </h1>
     {% if loggeado %}
         <p>Bienvenid@ de vuelta! {{ usuario.nombre }}
-        {% if rol == "Administrador" %}<br><em style="color: red;">STAFF: ADMIN</em>
-        {% elif rol == "Moderador" %}<br><em style="color: yellow;">STAFF: MOD</em>{% endif %}
+        {% if usuario.rol == 'adm' %}<br><em style="color: red;">STAFF: ADMIN</em>
+        {% elif usuario.rol == 'mod' %}<br><em style="color: yellow;">STAFF: MOD</em>{% endif %}
         </p>
     {% else %}
         <p>Inicia sesión y comparte con tus pares <br>

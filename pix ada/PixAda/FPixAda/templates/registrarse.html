@@ -14,17 +14,40 @@
         <form method="post">
             {% csrf_token %}
             <div class="side-content">
-                <h2>Nombre de Usuario</h2>
-                <p>El nombre con el cual iniciarás sesión</p>
+                <h2>
+                    Nombre de Usuario
+                </h2>
+                <p>
+                    {% if form.nombre.errors %}{% for error in form.nombre.errors %}
+                    <span class="error">{{ error }}</span>{% endfor %}
+                    {% else %}El nombre con el cual iniciarás sesión{% endif %}
+                </p>
                 {% render_field form.nombre class="form-control input-field" placeholder="Nombre" %}
-                <h2>Alias Público</h2>
-                <p>La cara pública de tu cuenta</p>
+
+                <h2>
+                    Alias Público
+                </h2>
+                <p>
+                    {% if form.aliasUsuario.errors %}{{ form.aliasUsuario.errors }}
+                    {% else %}La cara pública de tu cuenta{% endif %}
+                </p>
                 {% render_field form.aliasUsuario class="form-control input-field" placeholder="@...." %}
-                <h2>Correo Institucional</h2>
-                <p>Nos ayudará a saber que eres parte de nosotros</p>
+                
+                <h2>
+                    Correo Institucional
+                </h2>
+                <p>
+                    {% if form.correo.errors %}{{ form.correo.errors }}
+                    {% else %}Nos ayudará a saber que eres parte de nosotros{% endif %}
+                </p>
                 {% render_field form.correo class="form-control input-field" placeholder="Tu correo institucional" %}
+                
                 <h2>Contraseña</h2>
-                <p>Protege tu contraseña de los de informática con una buena contraseña</p>
+                <p>
+                    {% if form.contrasena2.errors %}{% for error in form.contrasena2.errors %}
+                    <span class="error">{{ error }}</span>{% endfor %}
+                    {% else %}Protege tu contraseña de los de informática con una buena contraseña{% endif %}
+                </p>
                 {% render_field form.contrasena1 class="form-control input-field" placeholder="Contraseña" %} <br>
                 {% render_field form.contrasena2 class="form-control input-field" placeholder="Confirma tu contraseña" %} <br>
                 <p style="font-size: x-small;">

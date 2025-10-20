@@ -37,7 +37,10 @@ def signinUsuario(request: HttpRequest):
             return redirect('homepage')
     else:
         formulario = RegistroUsuariosForm()
-    return render(request, 'registrarse.html', {'form': formulario})
+    variables = {
+        'form': formulario,
+    }
+    return render(request, 'registrarse.html', variables)
 
 @anonymous_required(redirect_url='homepage')
 def loginUsuario(request: HttpRequest):
