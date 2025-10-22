@@ -29,7 +29,7 @@ class Usuarios(models.Model):
     aliasUsuario = models.CharField(
         max_length=15,
         unique=True,
-        # Alias de usuario, busco que empiece con @ o # para diferenciarlo del nombre, si no quieren que sea unico, borren la linea 23
+        # Alias de usuario, busco que empiece con @ o # para diferenciarlo del nombre, si no quieren que sea unico, borren la linea 31
     )
     correo = models.EmailField(
         unique=True,
@@ -121,6 +121,7 @@ class Usuarios(models.Model):
         self.validadorAlias(self.aliasUsuario)
         # Esta cosa valida el alias con regex, si no cumple lo solicitado, tira un muy bonito error
         # No volveré a explicar que hace regex, ya les expliqué antes y cómo configurarlo
+        # la explicación esta desde la linea 82 a la 91 (mak)
         
     def save(self, *args, **kwargs):
         # La función save guarda la clase

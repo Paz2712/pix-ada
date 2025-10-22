@@ -19,3 +19,5 @@ También cambié la página de admin a http://localhost:8000/pixis/admin/
 
 eso, no se cuando vayas a leer esto, editalo y haz un commit
 rápido cuando lo hagas
+
+xd dale :0
