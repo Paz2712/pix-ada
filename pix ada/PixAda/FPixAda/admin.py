@@ -47,9 +47,9 @@ class PublicacionAdmin(admin.ModelAdmin):
         "titulo"
     )
     fields = ( # Las entradas que aparecerán en el formulario
-        "idPublicacion", "autor", "esAnonimo", "fechaCreacion",
+        "idPublicacion", "autor", "esAnonimo",
         "titulo", "cuerpo", "topico"
     )
-    readonly_fields = ("idPublicacion", "fechaCreacion") # Cuales campos NO pueden ser editados manualmente
+    readonly_fields = ("idPublicacion",) # Cuales campos NO pueden ser editados manualmente
     list_filter = ("autor", "esAnonimo", "fechaCreacion", "topico") # Las categorías que apareceran en los filtros de búsqueda
     search_fields = ("titulo", "autor") # Lo que usará el buscador para encontrar

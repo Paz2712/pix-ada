@@ -1,12 +1,14 @@
 ## Lineas 2-3, se encargan de renderizar cosas en la página o redirigir
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
+from django.urls import reverse
 # Lineas 5-6, funciones predefinidas de login de la mano de Django
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginUsuariosForm, RegistroUsuariosForm
 from .utils.auth import anonymous_required
+from .models import Publicacion, Comentario
 
 '''
 Aporte de Maca: sobre las funciones para crear una views
@@ -66,28 +68,44 @@ def logoutUsuario(request: HttpRequest):
 
 def index(request):
     userID = request.user
-    estaLogeado = userID.is_authenticated
+    loggeado = userID.is_authenticated
     variables = {
         'usuario': userID,
-        'loggeado': estaLogeado
+        'loggeado': loggeado,
+        'rol': userID.rol if loggeado else None
     }
     return render(request, 'index.html', variables)
 
-@login_required
+@login_required(login_url='login')
 def algo(request):
     userID = request.user
+    loggeado = userID.is_authenticated
     variables = {
         'usuario': userID,
-        'loggeado': userID.is_authenticated,
+        'loggeado': loggeado,
         'rol': userID.rol
     }   
     return render(request, 'algo.html', variables)
 
 
+def toAdmin(request: HttpRequest):
+    logout(request)
+    return redirect(reverse('admin:index'))
+
+
 def contrato(request):
     return render(request, 'contrato.html')
 
-
+@login_required(login_url='login')
+def foroView(request):
+    userID = request.user
+    publicacionesForo = Publicacion.objects.all().order_by('-fechaCreacion')
+    variables = {
+        'usuario': userID,
+        'rol': userID.rol,
+        'foro': publicacionesForo,
+    }
+    return render(request, 'foro.html', variables)
 
 '''
 De Axius:

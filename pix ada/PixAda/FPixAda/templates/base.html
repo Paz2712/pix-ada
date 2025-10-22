@@ -7,12 +7,36 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="{% if usuario.modoOscuro %}dark-mode{% else %}light-mode{% endif %}">
-    <div id="navBar">
-        {% block navBar %}
-        {% endblock %}
+<body 
+class="
+{% if usuario.modoOscuro %}dark-mode {% else %}light-mode {% endif %}
+{% if usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
+    <div
+    id="navBar"
+    class="left-menu">
+        
     </div>
-    <div id="sumShit">
+    <div
+    class="top-menu">
+        <div
+        class="user-profile">
+            <p style="padding-left: 20px;">{{ usuario.nombre }} #{{ usuario.pk }}
+                {% if usuario.rol == 'adm' %}<a class='admin-trigger' href="{% url 'redirectAdmin' %}"> ADMIN</a>
+                {% elif usuario.rol == 'mod' %}<span style="color: yellow;"> MODERADOR</span>
+                {% endif %}<br>
+                <i>{{ usuario.aliasUsuario }}</i>
+            </p>
+        </div>
+        <div
+        class="content-topbar">
+            {% block topNavbar %}{% endblock %}
+        </div>
+        <div
+        class="signout">
+            <a href="{% url 'logout' %}">x</a>
+        </div>
+    </div>
+    <div id="sumShit" class="content">
         {% block sumShit %}{% endblock %}
     </div>
 </body>

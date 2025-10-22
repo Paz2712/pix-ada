@@ -1,7 +1,7 @@
 @font-face { /* Normal */
     font-family: 'open-dyslexic';
     src:    url("../fonts/OpenDyslexic/OpenDyslexic-Regular.woff") format('woff'),
-            url("../fonts/OpenDyslexic/OpenDyslexic-Regular.woff2") format('woff2');
+            url ("../fonts/OpenDyslexic/OpenDyslexic-Regular.woff2") format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -72,12 +72,12 @@
     left: 0;
     position: fixed;
     width: 65%;
-    background-image: url("../images/testImg.jpg");
 
 }
 .input-field {
     background-color: #AC6CE4;
     font-family: 'Roboto', sans-serif;
+    color: #221E64;
     display: block;
     margin-left: auto;
     margin-right: auto;

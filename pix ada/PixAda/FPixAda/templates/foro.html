@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static }
+
+{% block title %}Foro{% endblock %}
+
+{% block topNavbar %}
+{% endblock %}
+
+{% block sumShit %}
+<h1 style="text-align: center; font-size: 4em;">
+    Foro
+</h1>
+{% if not foro %}
+<h2>
+    Nada que ver aún<br>
+    Sé el primero en publicar
+</h2>
+{% else %}{% for entrada in foro %}
+<div class="item-foro">
+    <h2 style="padding-left: 10px;">
+        {{ entrada.titulo }}   
+        <small><i>
+            {% if entrada.esAnonimo %}Por un Usuario Anónimo
+            {% else %}Por {{ entrada.autor.aliasUsuario }} {% endif %}
+            {% if entrada.autor.rol == 'adm' and not entrada.esAnonimo %}<span style="color: red;">ADMINISTRADOR</span>
+            {% elif entrada.autor.rol == 'mod' and not entrada.esAnonimo %}<span style="color: yellow;">MODERADOR</span>
+            {% else %}{% endif %}
+        </i></small>
+    </h2>
+    <p style="padding-left: 10px;">
+        <small>
+            <i>Publicado el {{ entrada.fechaCreacion }}</i><br>
+        </small>
+        {{ entrada.cuerpo }}
+    </p>
+</div>
+{% endfor %}{% endif %}
+<h2 
+style="border-top: 1px dashed #CEBEDC; text-align: center; padding-top: 55px;">
+    Has llegado al fondo del foro, vaya que tienes tiempo libre
+</h2>
+{% endblock %}

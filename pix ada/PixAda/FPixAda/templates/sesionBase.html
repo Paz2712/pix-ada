@@ -3,17 +3,15 @@
 <html lang="en">
 <head>
     <title>{% block title %}Title placeholder{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/registrarseStyle.css' %}">
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-    <div id="navBar">
+<body style="background-image:url('../static/images/bg_placeholder.jpg'); background-size: cover;">
+    <div id="navBar" class="side-content">
         {% block navBar %}
         {% endblock %}
     </div>
-    <div id="sumShit">
-        {% block sumShit %}{% endblock %}
-    </div>
+    <div class="side-bg"></div>
 </body>
 </html>

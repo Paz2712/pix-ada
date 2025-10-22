@@ -46,24 +46,82 @@
     font-family: 'open-dyslexic', "Roboto", sans-serif;
 }
 
-body.light-mode {
-    background-color: #cebedc;
-    margin-left: 160px;
-    padding: 0px, 10px;
-    margin: 20px;
-
-    h1 {
+body.dark-mode {
+    background-color: #7D38D0;
+    .left-menu {
+        background-color: #211E64;
+        height: calc(100% - 55px - 2px);
+        width: 15%;
+        z-index: 69; /* Nice */
+        bottom: 0;
+        left: 0;
+        border-right: 2px solid #AFBCFA;
+        position: fixed;
+    }
+    .top-menu {
+        background-color: #211E64;
+        height: 55px;
+        width: 100%;
+        z-index: 67;
+        top: 0;
+        left: 0;
+        display: flex;
+        border-bottom: 2px solid #AFBCFA;
+        position: fixed;
+    }
+    .index {
+        text-align: center;
+        color: #CEBEDC;
+    }
+    .user-profile {
+        top: 0;
+        left: 0;
+        z-index: 99;
+        width: 15%;
+        height: 55px;
+        border-right: 2px solid #AFBCFA;
+        display: flex;
+        background-color: #74749C;
+        align-items: center;
+        color: #211E64;
+    }
+    .signout {
+        top: 0;
+        right: 0;
+        height: 55px;
+        width: 55px;
+        background-color: red;
+        color: #000000;
+        z-index: 101;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5em;
+        a {
+            text-decoration: none;
+        }
+    }
+    .signout:hover {
+        background-color: #CEBEDC;
+    }
+    .content-topbar {
+        top: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(81% + 5px);
+        height: 55px;
         color: #7D38D0;
         text-align: center;
     }
-    h2 {
-        color: #7D38D0;
-        text-align: center;
+    .admin-trigger {
+        text-decoration: none;
+        color: red;
     }
-    p {
-        color: #221E64; 
-        font-size: 1.2em;
-        text-align: center;
+    .admin-trigger:hover {
+        color: #CEBEDC;
     }
     .button {
         display: inline-block;
@@ -75,22 +133,48 @@ body.light-mode {
         
     }
     .button:hover {
-        background-color: #CEBEDC
+        background-color: #CEBEDC;
     }
-
+    .content {
+        padding-top: 55px;
+        padding-left: 15%;
+    }
+    .item-foro {
+        border-top: 1px dashed #CEBEDC;
+    }
 }
-body.dark-mode {
-    background-color: #221E64;
-    margin: 20px;
 
-    h1 {
-        color: #AFBCFA;
-        text-align: center;
+body.light-mode {
+    background-color: #DCE4FB;
+    .left-menu {
+        background-color: #DCE4FB;
+        height: calc(100% - 75px);
+        width: 15%;
+        z-index: 69; /* Nice */
+        bottom: 0;
+        left: 0;
+        border-right: 4px solid #AFBCFA;
+        position: fixed;
     }
-    p {
-        color: #DCE4FB;
-        font-size: 1.2em;
+    .top-menu {
+        background-color: #211E64;
+        height: 75px;
+        width: 100%;
+        z-index: 67;
+        top: 0;
+        left: 0;
+        border-bottom: 4px solid #AFBCFA;
+        position: fixed;
+    }
+    .index {
         text-align: center;
+        color: #211E64;
+    }
+    .user-profile {
+        top: 0;
+        left: 0;
+        z-index: 70;
+        background-color: #AFBCFA;
     }
     .button {
         display: inline-block;
@@ -99,8 +183,31 @@ body.dark-mode {
         color: #221E64;
         text-decoration: none;
         border-radius: 5px;
-        
     }
+    .button:hover {
+        background-color: #CEBEDC;
+    }
+    .content {
+        padding-top: 75px;
+        padding-left: 15%;
+        text-align: center;
+    }
+    .content-topbar {
+        top: 0;
+        right: 0;
+        width: calc(85% - 2px);
+        align-items: center;
+    }
+}
+#footer {
+    background-color: #211E64;
+    border-top: 2px solid #AFBCFA;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    width: calc(85% - 2px);
+    height: 100px;
+    color: #AFBCFA;
 }
 
 strong, b { /* Le dice a las fuentes que se pongan negras */
@@ -113,32 +220,4 @@ em, i { /* Le dice a las fuentes que se pongan en itálica */
 
 .ba {
     background-color: #000000;
-}
-
-
-.left-menu {
-    height: 100%;
-    width: 320px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #DCE4FB;
-    border-color: #211E64;
-    border-style: solid;
-    border-width: 4px;
-    overflow-x: hidden;
-    padding-top: 20px;
-
-    a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #000000;
-        display: block;
-    }
-    a:hover {
-        color: #211E64;
-    }
-
 }

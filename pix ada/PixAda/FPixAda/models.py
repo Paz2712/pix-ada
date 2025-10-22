@@ -29,7 +29,7 @@ class Usuarios(models.Model):
     aliasUsuario = models.CharField(
         max_length=15,
         unique=True,
-        # Alias de usuario, busco que empiece con @ o # para diferenciarlo del nombre, si no quieren que sea unico, borren la linea 31
+        # Alias de usuario, busco que empiece con @ o # para diferenciarlo del nombre, si no quieren que sea unico, borren la linea 23
     )
     correo = models.EmailField(
         unique=True,
@@ -108,6 +108,7 @@ class Usuarios(models.Model):
         correosPermitidos = [
             'altamiranoaxius@proton.me',
             'lopezvegamaca@gmail.com',
+            'joaco345vz@gmail.com',
             # Whitelist de correos, pongan sus correos personales aquí para que puedan usarlos normalmente
         ]
         if self.correo not in correosPermitidos and not any(self.correo.lower().endswith('@'+dominio.lower()) for dominio in dominiosPermitidos):
@@ -121,7 +122,6 @@ class Usuarios(models.Model):
         self.validadorAlias(self.aliasUsuario)
         # Esta cosa valida el alias con regex, si no cumple lo solicitado, tira un muy bonito error
         # No volveré a explicar que hace regex, ya les expliqué antes y cómo configurarlo
-        # la explicación esta desde la linea 82 a la 91 (mak)
         
     def save(self, *args, **kwargs):
         # La función save guarda la clase
@@ -174,8 +174,9 @@ class Publicacion(models.Model):
         # Autor, es una foreign key (muchos-a-uno) ya que muchas publicaciones pueden ser de un usuario
         # Al eliminarse el usuario vinculado al autor, este queda en None, sin eliminar la publicación
     )
-    fechaCreacion = models.DateField(
+    fechaCreacion = models.DateTimeField(
         auto_created=True, 
+        auto_now_add=True,
         null=True, 
         blank=True,
         # La fecha de creación se crea automáticamente al crear la publicación creadamente creada xdddd

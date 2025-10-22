@@ -44,3 +44,8 @@ class LoginUsuariosForm(forms.Form):
         label='Contraseña',
         widget=forms.PasswordInput(),
     )
+
+class PreferenciasUsuariosForm(forms.Form):
+    modoOscuro = forms.BooleanField(
+        label='Modo Oscuro'
+    )
