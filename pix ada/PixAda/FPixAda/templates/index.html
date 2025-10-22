@@ -27,17 +27,17 @@
                 <div class="login-check">
                     <div class="remember">
                         <input type="checkbox" is="remember-me"/>
-                        <label for="remember-me">Remember me</label>
+                        <label for="remember-me">Acepto los terminos y condiciones</label>
                     </div>    
                     <div class="forgot">
-                        <a href="#">Forgot password?</a>
+                        <a href="{% url 'termsConditions' %}">Terminos y condiciones</a> <!-- XD -->
                     </div>
                 </div>
                 <div class="input-wrapper">
                     <input type="submit" class="input-login" value="Login" /> <!--Boton login-->
                 </div>
                 <div class="register">
-                    <span> No tienes una cuenta? <a href="#">Register</a></span>
+                    <span> No tienes una cuenta? <a href="{% url 'signin' %}">Register</a></span>
                 </div>
             </div>
         </div>
