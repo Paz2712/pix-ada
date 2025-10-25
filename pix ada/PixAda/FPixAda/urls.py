@@ -22,6 +22,7 @@ urlpatterns = [
     path("login/", views.loginUsuario, name="login"), ## http://localhost:8000/login/
     path("logout/", views.logoutUsuario, name='logout'), ## http://localhost:8000/logout/
     path('foro/', views.foroView, name='foro'), ## http://localhost:8000/foro/
+    path("foro/crear/", views.crearPubView, name='crearPub'),
     path('toadmin/', views.toAdmin, name='redirectAdmin'), ## http://localhost:8000/toadmin/
 ]
 '''

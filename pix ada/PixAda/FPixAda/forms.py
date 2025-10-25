@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Usuarios
+from .models import Usuarios, Publicacion, Topicos
 
 # Formularios :D
 # Cuando use clean o similar, es para hacer validaciones o normalizaciones de algo ANTES de guardar
@@ -45,7 +45,24 @@ class LoginUsuariosForm(forms.Form):
         widget=forms.PasswordInput(),
     )
 
-class PreferenciasUsuariosForm(forms.Form):
-    modoOscuro = forms.BooleanField(
-        label='Modo Oscuro'
+class publicacionesForm(forms.ModelForm):
+    crearTopico = forms.CharField( # Una entrada extra para crear un topico durante la creación del post
+        max_length = 15,
+        required = False,
+        label = 'Crea un topico'
+
     )
+    class Meta:
+        model = Publicacion
+        fields = ("titulo", "cuerpo", "topico", "esAnonimo" )
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
+            'cuerpo': forms.Textarea(attrs={'class': 'form-control'}),
+            'topico': forms.CheckboxSelectMultiple(),
+        }
+    def clean_topico(self):
+        nuevoTopico = self.cleaned_data.get('crearTopico')
+        if nuevoTopico:
+            if Topicos.objects.filter(nombre__iexact=nuevoTopico).exists(): # nombre__iexact va a buscar un nombre, cualquiera que coincida, sin importar mayusculas o minusculas
+                raise forms.ValidationError('El topico existe, agarralo de la lista')
+        return nuevoTopico

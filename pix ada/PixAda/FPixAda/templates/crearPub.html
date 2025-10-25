@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Crea tu publicacion{% endblock %}
+
+{% block sumShit %}
+<div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Publicar</button>
+</form>
+</div>
+{% endblock %}

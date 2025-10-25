@@ -108,12 +108,12 @@ class Usuarios(models.Model):
         correosPermitidos = [
             'altamiranoaxius@proton.me',
             'lopezvegamaca@gmail.com',
-            'joaco345vz@gmail.com',
+            'joaco345vz@gmail.com', # El joaco se ofreció de mod, anda ahí por si acaso su correo
             # Whitelist de correos, pongan sus correos personales aquí para que puedan usarlos normalmente
         ]
         if self.correo not in correosPermitidos and not any(self.correo.lower().endswith('@'+dominio.lower()) for dominio in dominiosPermitidos):
             # Tira error si el correo no está en la whitelist o si no tiene el dominio correcto
-            raise ValidationError("The game")
+            raise ValidationError("You lost the game dude") # xddd
         if self.aliasUsuario and not self.aliasUsuario.startswith('@'):
             # Comprueba que:
             # 1. Exista un alias (con que en aliasUsuario haya un string debería tirar True, si no hay nada tira False)

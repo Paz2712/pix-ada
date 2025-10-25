@@ -14,7 +14,6 @@ class="
     <div
     id="navBar"
     class="left-menu">
-        
     </div>
     <div
     class="top-menu">
@@ -31,9 +30,8 @@ class="
         class="content-topbar">
             {% block topNavbar %}{% endblock %}
         </div>
-        <div
-        class="signout">
-            <a href="{% url 'logout' %}">x</a>
+        <div>
+            <a class="signout" href="{% url 'logout' %}">x</a>
         </div>
     </div>
     <div id="sumShit" class="content">

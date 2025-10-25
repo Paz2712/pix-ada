@@ -6,9 +6,11 @@ from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginUsuariosForm, RegistroUsuariosForm
+from .forms import LoginUsuariosForm, RegistroUsuariosForm, publicacionesForm
 from .utils.auth import anonymous_required
-from .models import Publicacion, Comentario
+from .models import Publicacion, Comentario, Topicos
+
+from random import randint
 
 '''
 Aporte de Maca: sobre las funciones para crear una views
@@ -39,7 +41,7 @@ def signinUsuario(request: HttpRequest):
             return redirect('homepage')
     else:
         formulario = RegistroUsuariosForm()
-    variables = {
+    variables = {   
         'form': formulario,
     }
     return render(request, 'registrarse.html', variables)
@@ -65,7 +67,7 @@ def logoutUsuario(request: HttpRequest):
     logout(request) # Limpia la sesión
     return redirect('login')
 
-
+# ---------- Other Shit ---------- #
 def index(request):
     userID = request.user
     loggeado = userID.is_authenticated
@@ -83,7 +85,8 @@ def algo(request):
     variables = {
         'usuario': userID,
         'loggeado': loggeado,
-        'rol': userID.rol
+        'rol': userID.rol,
+        'page': 'test'
     }   
     return render(request, 'algo.html', variables)
 
@@ -104,8 +107,33 @@ def foroView(request):
         'usuario': userID,
         'rol': userID.rol,
         'foro': publicacionesForo,
+        'page': 'foro',
     }
     return render(request, 'foro.html', variables)
+
+@login_required(login_url='login')
+def crearPubView(request):
+    userID = request.user
+    if request.method == 'POST':
+        formulario = publicacionesForm(request.POST)
+        if formulario.is_valid():
+            publicacion = formulario.save(commit=False)
+            publicacion.autor = request.user
+            publicacion.save()
+            formulario.save_m2m() # Guarda modelo Many to Many, osea, los topicos
+            nuevoTopico = formulario.cleaned_data.get('nuevoTopico')
+            if nuevoTopico:
+                topico_obj, created = Topicos.objects.get_or_create(nombre=nuevoTopico)
+                publicacion.topico.add(topico_obj)
+            return redirect('foro')
+    else:
+        formulario = publicacionesForm()
+    variables = {
+        'form': formulario,
+        'usuario': userID,
+        'rol': userID.rol,
+    }
+    return render(request, 'crearPub.html', variables)
 
 '''
 De Axius:
@@ -134,5 +162,8 @@ el contexto será todo lo interactivo que usará el HTML.
 Digamos que tienes adentro un ciclo que va cambiando cierta variable, crea un diccionario con esa variable que va cambiando,
 la cual será usada en el archivo HTML.
 '''
+# ---------- :D ---------- #
 def badApple(request):
+    '''when te das cuenta de que puedes programar
+    lo que sea:'''
     return render(request, 'ba.html')

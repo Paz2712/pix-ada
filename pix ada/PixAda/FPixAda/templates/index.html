@@ -26,15 +26,16 @@ class="
             Bienvenida de vuelta! {{ usuario.nombre }}
             {% if usuario.rol == 'adm' %}<br><em style="color: red;">STAFF: ADMIN</em>
             {% elif usuario.rol == 'mod' %}<br><em style="color: yellow;">STAFF: MOD</em>{% endif %}
+            <br><br><a class="button" href="{% url 'foro' %}">Ir al foro</a>
         </p>
     {% else %}
         <p>Inicia sesión y comparte con tus pares <br>
-        <a href="{% url 'login' %}" class="button">
-        Iniciar Sesión
-        </a> <br> <br>
+        <a href="{% url 'login' %}" class="button">Iniciar Sesión</a>
+        <br> <br>
         <small>No tienes una cuenta? <a href="{% url 'signin' %}">Crea una</a></small>
         </p>
     {% endif %}
+    
 </span>
 </body>
 </html>

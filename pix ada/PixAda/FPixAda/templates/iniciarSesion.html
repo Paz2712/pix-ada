@@ -28,11 +28,11 @@
     {% render_field form.password class="form-control input-field" placeholder="Contraseña" %}
 
     <p style="font-size: x-small;">
-        Al iniciar sesión aceptas a nuestros <a href="http://localhost:8000/termycond/">Terminos y Condiciones</a> de uso <br>
+        Al iniciar sesión aceptas a nuestros <a href="{% url 'termsConditions' %}">Terminos y Condiciones</a> de uso <br>
         Página en alpha cerrada por IWG400. El logo de PixAda es propiedad del grupo 10 de IWG400-6. <br>
         Recomendamos encarecidamente activar las cookies de tu navegador, <br>de lo contrario el proceso podría verse afectado negativamente
     </p>
-    <button type="submit" class="input-field">Iniciar Sesión</button>
+    <input type="submit" class="input-field button" value="Iniciar Sesión">
 <!--    <p>
         {% for item in form %}{% if form.item.errors %}{% for error in form.item.errors %}
         <span class="error">{{ error }}</span>{% endfor %}{% endif %}{% endfor %}

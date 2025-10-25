@@ -45,6 +45,14 @@
     right: 0;
     border-left: 4px solid #AFBCFA;
     position: fixed;
+    align-items: center;
+    a {
+        color: #AC6CE4;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #CEBEDC;
+    }
     h2 {
         font-family: 'Roboto', sans-serif;
         color: #AFBCFA;
@@ -58,11 +66,12 @@
         font-size: medium;
         a {color: #AC6CE4;}
     }
-    button {
+    input.button {
         background-color: #AC6CE4;
         height: 50px;
+        cursor: pointer;
     }
-    button:hover {
+    input.button:hover {
         background-color: #CEBEDC
     }
 }

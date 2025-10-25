@@ -50,13 +50,19 @@ body.dark-mode {
     background-color: #7D38D0;
     .left-menu {
         background-color: #211E64;
-        height: calc(100% - 55px - 2px);
+        height: calc(100% - 57px);
         width: 15%;
         z-index: 69; /* Nice */
         bottom: 0;
         left: 0;
         border-right: 2px solid #AFBCFA;
         position: fixed;
+        .item-left {
+            border-bottom: 1px dashed #AFBCFA;
+            width: 100%;
+            text-align: left;
+            padding-left: 10px;
+        }
     }
     .top-menu {
         background-color: #211E64;
@@ -97,9 +103,7 @@ body.dark-mode {
         align-items: center;
         justify-content: center;
         font-size: 2.5em;
-        a {
-            text-decoration: none;
-        }
+        text-decoration: none;
     }
     .signout:hover {
         background-color: #CEBEDC;
@@ -130,7 +134,7 @@ body.dark-mode {
         color: #221E64;
         text-decoration: none;
         border-radius: 5px;
-        
+        cursor: pointer;
     }
     .button:hover {
         background-color: #CEBEDC;
@@ -148,13 +152,19 @@ body.light-mode {
     background-color: #DCE4FB;
     .left-menu {
         background-color: #DCE4FB;
-        height: calc(100% - 75px);
+        height: calc(100% - 57px);
         width: 15%;
         z-index: 69; /* Nice */
         bottom: 0;
         left: 0;
-        border-right: 4px solid #AFBCFA;
+        border-right: 2px solid #AFBCFA;
         position: fixed;
+        .item-left {
+            border-bottom: 1px dashed #AFBCFA;
+            width: 100%;
+            text-align: left;
+            padding-left: 10px;
+        }
     }
     .top-menu {
         background-color: #211E64;
@@ -182,7 +192,8 @@ body.light-mode {
         background-color: #AC6CE4;
         color: #221E64;
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: 10px;
+        cursor: pointer;
     }
     .button:hover {
         background-color: #CEBEDC;
