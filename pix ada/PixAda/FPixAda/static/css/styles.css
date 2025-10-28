@@ -143,7 +143,6 @@ body {
     }
     .content-topbar {
         top: 0;
-        left: calc(15% + 4px);
         right: 55px;
         z-index: 100;
         display: flex;

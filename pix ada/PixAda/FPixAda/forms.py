@@ -46,24 +46,12 @@ class LoginUsuariosForm(forms.Form):
     )
 
 class publicacionesForm(forms.ModelForm):
-    crearTopico = forms.CharField( # Una entrada extra para crear un topico durante la creación del post
-        max_length = 15,
-        required = False,
-        label = 'Crea un topico'
-
-    )
     class Meta:
         model = Publicacion
         fields = ("titulo", "cuerpo", "topico", "esAnonimo" )
         widgets = {
             'titulo': forms.TextInput(),
             'cuerpo': forms.Textarea(),
-            'topico': forms.RadioSelect() ,
+            'topico': forms.RadioSelect(attrs={'required': 'true'}) ,
             'esAnonimo': forms.CheckboxInput(),
         }
-    def clean_topico(self):
-        nuevoTopico = self.cleaned_data.get('crearTopico')
-        if nuevoTopico:
-            if Topicos.objects.filter(nombre__iexact=nuevoTopico).exists(): # nombre__iexact va a buscar un nombre, cualquiera que coincida, sin importar mayusculas o minusculas
-                raise forms.ValidationError('El topico existe, agarralo de la lista')
-        return nuevoTopico

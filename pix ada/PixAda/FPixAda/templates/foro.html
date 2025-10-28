@@ -22,7 +22,7 @@
 {% else %}{% for entrada in foro %} <!-- Un bonito ciclo "for" que automatiza el crear las entradas del foro -->
 <div class="item-foro">
     <h2 style="padding-left: 10px;">
-        {{ entrada.titulo }}   
+        {{ entrada.titulo }}  
         <small><i>
             {% if entrada.esAnonimo %}Por un Usuario Anónimo
             {% else %}Por {{ entrada.autor.aliasUsuario }} {% endif %}

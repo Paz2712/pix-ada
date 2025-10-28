@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <script src="{% static 'js/smth.js' %}"></script>
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
 <body 
@@ -33,7 +33,7 @@ class="
             {% block topNavbar %}{% endblock %}
         </div>
         <div>
-            <a class="signout" href="{% url 'logout' %}" title="Cerrar Sesión">x</a>
+            <a class="signout" href="{% url 'logout' %}" title="Cerrar Sesión" onpointerover="algo()">x</a>
         </div>
     </div>
     <div id="sumShit" class="content">

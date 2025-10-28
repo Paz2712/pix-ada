@@ -121,11 +121,6 @@ def crearPubView(request):
             publicacion = formulario.save(commit=False)
             publicacion.autor = request.user
             publicacion.save()
-            formulario.save_m2m() # Guarda modelo Many to Many, osea, los topicos
-            nuevoTopico = formulario.cleaned_data.get('nuevoTopico')
-            if nuevoTopico:
-                topico_obj, created = Topicos.objects.get_or_create(nombre=nuevoTopico)
-                publicacion.topico.add(topico_obj)
             return redirect('foro')
     else:
         formulario = publicacionesForm()

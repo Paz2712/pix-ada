@@ -186,9 +186,10 @@ class Publicacion(models.Model):
         # El contenido, está en duda aún el tamaño máximo, no se si limitarlo a 500 o ponerle un número ridiculamente alto
         # O ridiculamente bajo, por las risas
     )
-    topico = models.ManyToManyField(
-        Topicos, 
-        blank=True
+    topico = models.ForeignKey(
+        Topicos,
+        on_delete=models.SET_NULL,
+        null=True
         # El tópico, tiene una relación muchos-a-muchos (multiples tópicos pueden ser de multiples publicaciones)
         # Puede estar en blanco
     )
