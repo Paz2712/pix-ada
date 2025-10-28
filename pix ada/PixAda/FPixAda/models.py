@@ -14,7 +14,7 @@ usar models.charField y especifiquen un máximo de largo con (max_length=<el nú
 Para un atributo que requiera de SI o NO,
 usar models.BooleanField y especifiquen un valor por defecto con (default=<True o False>)
 '''
-## El usuario
+# El usuario
 class Usuarios(models.Model):
     # Isidora, Pablo, Santi, probablemente Benja y Maca, este es el resultado de 3 noches sin dormir e investigación
     # intensa. Intenté documentar y explicar todo lo que hice, por qué, entre muchas otras cosas con tal de
@@ -219,3 +219,9 @@ class Comentario(models.Model):
         max_length=200,
         # El contenido del comentario, está en duda su tamaño
     )
+
+class perfilusuario(models.Model):
+    FotoPerfil= models.ImageField(upload_to='fotos_perfil/', null=True, blank=True),
+    Alias= models.CharField(max_length=50, blank=True),
+    Description=models.TextField(max_length=700, blank=True ),
+    

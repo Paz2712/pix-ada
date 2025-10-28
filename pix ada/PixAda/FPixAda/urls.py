@@ -14,9 +14,7 @@ Comentaré como se vería la url de cada view abajo para claridad
 Diviértete Isi
 '''
 urlpatterns = [ 
-    path("", views.index, name="homepage"), ## http://localhost:8000/  Esta es la página origen de la API
-    path("nuevo/", views.indexnuevo, name="nuevoindex"), ## http://localhost:8000/nuevo/  
-    # el nuevo/ aun no esta conectado con el resto
+    path("", views.index, name="homepage"), ## http://localhost:8000/  Esta es la página origen de la API 
     path("testLmao/", views.algo, name="test"), ## http://localhost:8000/testLmao/
     path("ohno/", views.badApple, name="BadApple"), ## http://localhost:8000/ohno/ Bad apple :D
     path("termycond/", views.contrato, name='termsConditions'), ## http://localhost:8000/EULA/
