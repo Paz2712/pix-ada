@@ -75,7 +75,6 @@ class Usuarios(models.Model):
 
 
     # ----- Preferencias de usuario ----- #
-    modoOscuro = models.BooleanField(default=False) # Modo oscuro, False por defecto
     yanMode = models.BooleanField(default=False) # Ya saben
     altoContraste = models.BooleanField(default=False) # Modo de alto contraste, para personas de visibilidad limitada
 
@@ -163,7 +162,7 @@ class Publicacion(models.Model):
         # para que se vea en la página de admin
     )
     titulo = models.CharField(
-        max_length=50,
+        max_length=100,
         # El título de la publicación, de 50 caracteres de largo
     )
     autor = models.ForeignKey(

@@ -26,11 +26,11 @@ se salvaron por el momento
 class UsuariosAdmin(admin.ModelAdmin):
     list_display = ( 
         "nombre", "aliasUsuario", "correo", "rol", 
-        "modoOscuro", "yanMode", "altoContraste"
+        "yanMode", "altoContraste"
     )
     fields = ( 
         "nombre", "aliasUsuario", "correo", "contrasena", "rol", 
-        "modoOscuro", "yanMode", "altoContraste"
+        "yanMode", "altoContraste"
     )
     list_filter = ("rol",)
     search_fields = ("nombre", "aliasUsuario", "correo")

@@ -1,41 +1,63 @@
-{% extends 'sesionBase.html' %}
 {% load static %}
-{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixADA</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylesdos.css' %}">
+    <!-- Boxicons para los íconos -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
 
-{% block title %}Inicia Sesión{% endblock %}
+<body>
+    <div class="wrapper">
+        <div class="login-wrapper">
+            <div class="login-header">PixADA</div>
 
-{% block navBar %}
-<form method="post">
-    {% csrf_token %}
-    <h2>
-        Nombre de Usuario
-    </h2>
-    <p>
-        {% if form.username.errors %}{% for error in form.username.errors %}
-        <span class="error">{{ error }}</span>{% endfor %}
-        {% endif %}
-    </p>
-    {% render_field form.username class="form-control input-field" placeholder="Nombre de Usuario" %}
+            <!-- El <form> -->
+            <form class="login-form" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
 
-    <h2>
-        Contraseña
-    </h2>
-    <p>
-        {% if form.password.errors %}{% for error in form.password.errors %}
-        <span class="error">{{ error }}</span>{% endfor %}
-        {% endif %}
-    </p>
-    {% render_field form.password class="form-control input-field" placeholder="Contraseña" %}
+                <!-- Username -->
+                <div class="input-wrapper">
+                    <input type="text" id="user" name="username" class="input-field" required>
+                    <label for="user" class="label">Username</label>
+                    <i class="bx bx-user icon"></i>    
+                </div>
 
-    <p style="font-size: x-small;">
-        Al iniciar sesión aceptas a nuestros <a href="{% url 'termsConditions' %}">Terminos y Condiciones</a> de uso <br>
-        Página en alpha cerrada por IWG400. El logo de PixAda es propiedad del grupo 10 de IWG400-6. <br>
-        Recomendamos encarecidamente activar las cookies de tu navegador, <br>de lo contrario el proceso podría verse afectado negativamente
-    </p>
-    <input type="submit" class="input-field button" value="Iniciar Sesión">
-<!--    <p>
-        {% for item in form %}{% if form.item.errors %}{% for error in form.item.errors %}
-        <span class="error">{{ error }}</span>{% endfor %}{% endif %}{% endfor %}
-    </p> No logré hacerle display a los errores-->
-</form>
-{% endblock %}
+                <!-- Password -->
+                <div class="input-wrapper">
+                    <input type="password" id="pw" name="password" class="input-field" required>
+                    <label for="pw" class="label">Password</label>
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+
+                <!-- Check y enlace -->
+                <div class="login-check">
+                    <div class="remember">
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        <label for="remember-me">Acepto los términos y condiciones</label>
+                    </div>    
+                    <div class="forgot">
+                        <a href="{% url 'termsConditions' %}">Términos y condiciones</a>
+                    </div>
+                </div>
+
+                <!-- Botón login -->
+                <div class="input-wrapper">
+                    <button type="submit" class="input-login">Login</button>
+                </div>
+
+                <!-- Register -->
+                <div class="register">
+                    <span>¿No tienes una cuenta? 
+                        <a href="{% url 'signin' %}">Register</a>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,13 +11,12 @@
     <meta name="description" content="foro de equidad de genero">
     <meta name="author" content="Los pixis">
     <meta name="Keywords" content="foro, equidad de genero, mujeres, ayuda, apoyo">
-
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body 
 class="
-{% if loggeado and usuario.yanMode %}dyslexic {% else %}regular {% endif %}
-{% if loggeado and usuario.modoOscuro %}dark-mode {% else %}light-mode {% endif %}">
+{% if loggeado and usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
 <span class="index">
     <h1>PixADA<br>
     El foro de equidad de género </h1>
@@ -29,7 +28,7 @@ class="
             <br><br><a class="button" href="{% url 'foro' %}">Ir al foro</a>
         </p>
     {% else %}
-        <p>Inicia sesión y comparte con tus pares <br>
+        <p>Inicia sesión y comparte con tus pares <br><br>
         <a href="{% url 'login' %}" class="button">Iniciar Sesión</a>
         <br> <br>
         <small>No tienes una cuenta? <a href="{% url 'signin' %}">Crea una</a></small>

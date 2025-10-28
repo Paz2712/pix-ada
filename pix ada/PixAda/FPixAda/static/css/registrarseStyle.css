@@ -35,6 +35,10 @@
     font-family: 'sans-comic';
     src:    url('../fonts/Comic\ Sans\ MS.ttf');
 }
+body {
+    background-image: url('../images/bg_placeholder.jpg'); 
+    background-size: cover;
+}
 
 .side-content {
     height: 100%;

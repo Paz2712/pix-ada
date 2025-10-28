@@ -6,9 +6,16 @@
 
 {% block sumShit %}
 <div>
+    <h2>Crea tu publicación</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% render_field form.titulo placeholder="Título" id="titulo" class="form-control title-field" %} <br>
+    {% render_field form.cuerpo placeholder="Exprésate" class="form-control body-field" %}
+    <h2>Tópico</h2>
+    {% render_field form.topico class="form-control" %}
+    <p>
+        Anonimo? {% render_field form.esAnonimo class="form-control" %}
+    </p>
     <button type="submit" class="button">Publicar</button>
 </form>
 </div>

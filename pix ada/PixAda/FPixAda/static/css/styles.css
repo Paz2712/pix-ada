@@ -46,50 +46,82 @@
     font-family: 'open-dyslexic', "Roboto", sans-serif;
 }
 
-body.dark-mode {
-    background-color: #7D38D0;
+body {
+    background-color: #DCE4FB;
     .left-menu {
-        background-color: #211E64;
-        height: calc(100% - 57px);
+        background-color: #CEBEDC;
+        height: calc(100% - 59px);
         width: 15%;
         z-index: 69; /* Nice */
         bottom: 0;
         left: 0;
-        border-right: 2px solid #AFBCFA;
+        border-right: 4px solid #221E64;
         position: fixed;
-        .item-left {
-            border-bottom: 1px dashed #AFBCFA;
-            width: 100%;
-            text-align: left;
+        a.item-left {
+            display: flex;
+            border-bottom: 2px solid #221E64;
+            justify-content: left;
+            height: 50px;
+            align-items: center;
             padding-left: 10px;
+            text-decoration: none;
+        }
+        a.item-left:hover {
+            background-color: #DCE4FB;
+            cursor: pointer;
         }
     }
     .top-menu {
-        background-color: #211E64;
+        background-color: #CEBEDC;
         height: 55px;
         width: 100%;
         z-index: 67;
         top: 0;
         left: 0;
         display: flex;
-        border-bottom: 2px solid #AFBCFA;
+        border-bottom: 4px solid #221E64;
         position: fixed;
+    }
+    .title-field {
+        background-color: #CEBEDC;
+        font-family: 'Roboto', sans-serif;
+        color: #221E64;
+        display: block;
+        left: auto;
+        width: 50%;
+        height: 25px;
+        border-radius: 10px;
+        font-size: large;
+    }
+    .body-field {
+        background-color: #CEBEDC;
+        font-family: 'Roboto', sans-serif;
+        color: #221E64;
+        display: block;
+        left: auto;
+        right: auto;
+        width: 50%;
+        height: 75px;
+        text-align: start;
+        border-radius: 10px;
+        font-size: large;
     }
     .index {
         text-align: center;
-        color: #CEBEDC;
+        color: #221E64;
+        align-content: center;
     }
     .user-profile {
         top: 0;
         left: 0;
         z-index: 99;
-        width: 15%;
+        width: calc(15%);
         height: 55px;
-        border-right: 2px solid #AFBCFA;
+        border-right: 4px solid #221E64;
         display: flex;
-        background-color: #74749C;
+        background-color: #AEBCF9;
         align-items: center;
-        color: #211E64;
+        color: black;
     }
     .signout {
         top: 0;
@@ -106,16 +138,16 @@ body.dark-mode {
         text-decoration: none;
     }
     .signout:hover {
-        background-color: #CEBEDC;
+        background-color: #221E64;
+        color: #DCE4FB;
     }
     .content-topbar {
         top: 0;
-        right: 0;
+        left: calc(15% + 4px);
+        right: 55px;
         z-index: 100;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(81% + 5px);
+        width: calc(81% + 3px);
         height: 55px;
         color: #7D38D0;
         text-align: center;
@@ -125,7 +157,7 @@ body.dark-mode {
         color: red;
     }
     .admin-trigger:hover {
-        color: #CEBEDC;
+        color: #221E64;
     }
     .button {
         display: inline-block;
@@ -141,84 +173,32 @@ body.dark-mode {
     }
     .content {
         padding-top: 55px;
-        padding-left: 15%;
+        padding-left: 16%;
     }
     .item-foro {
-        border-top: 1px dashed #CEBEDC;
+        border-top: 1px dashed  ;
     }
 }
 
-body.light-mode {
-    background-color: #DCE4FB;
-    .left-menu {
-        background-color: #DCE4FB;
-        height: calc(100% - 57px);
-        width: 15%;
-        z-index: 69; /* Nice */
-        bottom: 0;
-        left: 0;
-        border-right: 2px solid #AFBCFA;
-        position: fixed;
-        .item-left {
-            border-bottom: 1px dashed #AFBCFA;
-            width: 100%;
-            text-align: left;
-            padding-left: 10px;
-        }
-    }
-    .top-menu {
-        background-color: #211E64;
-        height: 75px;
-        width: 100%;
-        z-index: 67;
-        top: 0;
-        left: 0;
-        border-bottom: 4px solid #AFBCFA;
-        position: fixed;
-    }
-    .index {
-        text-align: center;
-        color: #211E64;
-    }
-    .user-profile {
-        top: 0;
-        left: 0;
-        z-index: 70;
-        background-color: #AFBCFA;
-    }
-    .button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #AC6CE4;
-        color: #221E64;
-        text-decoration: none;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    .button:hover {
-        background-color: #CEBEDC;
-    }
-    .content {
-        padding-top: 75px;
-        padding-left: 15%;
-        text-align: center;
-    }
-    .content-topbar {
-        top: 0;
-        right: 0;
-        width: calc(85% - 2px);
-        align-items: center;
-    }
+#forum-end { /* Texto al final del foro */
+    border-top: 1px dashed #CEBEDC;
+    text-align: center; 
+    padding-top: 55px;
 }
-#footer {
-    background-color: #211E64;
-    border-top: 2px solid #AFBCFA;
-    position:absolute;
+
+#footer-limits {
+    background-color: #CEBEDC;
+    position:relative;
     bottom: 0;
     right: 0;
     width: calc(85% - 2px);
     height: 100px;
     color: #AFBCFA;
+}
+
+#focus-pagina {
+    text-align: center; 
+    font-size: 4em;
 }
 
 strong, b { /* Le dice a las fuentes que se pongan negras */

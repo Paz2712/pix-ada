@@ -108,6 +108,7 @@ def foroView(request):
         'rol': userID.rol,
         'foro': publicacionesForo,
         'page': 'foro',
+        'minForo': len(publicacionesForo) >= 25 # Lo pongo para saber si hay más de 10 publicaciones en el foro
     }
     return render(request, 'foro.html', variables)
 
@@ -134,6 +135,10 @@ def crearPubView(request):
         'rol': userID.rol,
     }
     return render(request, 'crearPub.html', variables)
+
+def qanda(request):
+    return render(request, "giasfelfebrehber.html", )
+
 
 '''
 De Axius:
@@ -167,3 +172,23 @@ def badApple(request):
     '''when te das cuenta de que puedes programar
     lo que sea:'''
     return render(request, 'ba.html')
+
+
+def Prueba(request):
+    lista = [0, 1, 2, 3, "no 4", 5]
+    chance= randint(-1,9)
+    variables = { 
+        'coin': chance,
+        'lista': lista,
+    }
+    return render(request, "prueba.html", variables)
+
+def gambling(request):
+    import random 
+    dado= random.randint(1,20)
+    dot = {"punto": dado
+    }
+    return (request, "prueba.html", dot)
+
+def indexnuevo(request):
+    return render(request, 'indexnuevo.html')

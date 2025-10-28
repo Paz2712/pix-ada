@@ -6,14 +6,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
 <body 
 class="
-{% if usuario.modoOscuro %}dark-mode {% else %}light-mode {% endif %}
 {% if usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
     <div
     id="navBar"
     class="left-menu">
+    {% block leftNavbar %}{% endblock %}
     </div>
     <div
     class="top-menu">
@@ -31,7 +33,7 @@ class="
             {% block topNavbar %}{% endblock %}
         </div>
         <div>
-            <a class="signout" href="{% url 'logout' %}">x</a>
+            <a class="signout" href="{% url 'logout' %}" title="Cerrar Sesión">x</a>
         </div>
     </div>
     <div id="sumShit" class="content">

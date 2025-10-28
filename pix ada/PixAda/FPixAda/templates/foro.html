@@ -3,20 +3,23 @@
 
 {% block title %}Foro{% endblock %}
 
-{% block topNavbar %}
-<a class='button' href="{% url 'crearPub'%}"></a>
+{% block leftNavbar %}
+<a class="item-left" href="{% url 'crearPub' %}">Crear publicación<br><small>funciona a medias</small></a> <!-- Copypastear, esta cosa es modular -->
 {% endblock %}
 
-{% block sumShit %}
-<h1 style="text-align: center; font-size: 4em;">
+{% block topNavbar %}
+{% endblock %}
+
+{% block sumShit %} <!-- contenido -->
+<h1 id="focus-pagina">
     Foro
 </h1>
 {% if not foro %}
 <h2>
-    Nada que ver aún<br>
+    Nada que ver aún<br> <!-- en preparacion de almuerzo...-->
     Sé el primero en publicar
 </h2>
-{% else %}{% for entrada in foro %}
+{% else %}{% for entrada in foro %} <!-- Un bonito ciclo "for" que automatiza el crear las entradas del foro -->
 <div class="item-foro">
     <h2 style="padding-left: 10px;">
         {{ entrada.titulo }}   
@@ -36,8 +39,8 @@
     </p>
 </div>
 {% endfor %}{% endif %}
-<h2 
-style="border-top: 1px dashed #CEBEDC; text-align: center; padding-top: 55px;">
-    Has llegado al fondo del foro, vaya que tienes tiempo libre
+<h2 id="forum-end"> <!-- El texto que aparece al llegar al final del foro -->
+    {% if minForo %}Has llegado al fondo del foro, vaya que tienes tiempo libre
+    {% else %}Nada nuevo aún, llena este espacio con lo que pasa por tu mente{% endif %}
 </h2>
 {% endblock %}

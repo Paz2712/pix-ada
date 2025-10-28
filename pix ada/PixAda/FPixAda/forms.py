@@ -56,9 +56,10 @@ class publicacionesForm(forms.ModelForm):
         model = Publicacion
         fields = ("titulo", "cuerpo", "topico", "esAnonimo" )
         widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
-            'cuerpo': forms.Textarea(attrs={'class': 'form-control'}),
-            'topico': forms.CheckboxSelectMultiple(),
+            'titulo': forms.TextInput(),
+            'cuerpo': forms.Textarea(),
+            'topico': forms.RadioSelect() ,
+            'esAnonimo': forms.CheckboxInput(),
         }
     def clean_topico(self):
         nuevoTopico = self.cleaned_data.get('crearTopico')
