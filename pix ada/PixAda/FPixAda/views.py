@@ -188,6 +188,7 @@ def Prueba(request):
 
 
 '''
+
 def edicion_perfil(request): #para que el pejelagarto pueda ver lo de su perfil modificado
     perfil= request.user.perfilusuario
     if request.method == 'POST': #es para ver si el usuario es un usuario, es que si no tiene cuenta no puede editar su perfil 
@@ -199,7 +200,6 @@ def edicion_perfil(request): #para que el pejelagarto pueda ver lo de su perfil 
         form= perfilusuarioform(instance=perfil)
     return render(request, 'perfilUsuario.html', {'form': form})
 '''
-
 def edicion_perfil(request):
     if not request.user.is_authenticated:
         user = User.objects.get(username='AnnoyingDog')
