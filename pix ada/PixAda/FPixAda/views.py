@@ -6,11 +6,14 @@ from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginUsuariosForm, RegistroUsuariosForm, publicacionesForm
+from .forms import LoginUsuariosForm, RegistroUsuariosForm, publicacionesForm, perfilusuarioform
 from .utils.auth import anonymous_required
-from .models import Publicacion, Comentario, Topicos
+from .models import Publicacion, Comentario, Topicos, perfilusuario
 
 from random import randint
+#------------sacar luego
+from django.contrib.auth.models import User
+#-----------
 
 '''
 Aporte de Maca: sobre las funciones para crear una views
@@ -182,6 +185,41 @@ def Prueba(request):
         'lista': lista,
     }
     return render(request, "prueba.html", variables)
+
+
+'''
+def edicion_perfil(request): #para que el pejelagarto pueda ver lo de su perfil modificado
+    perfil= request.user.perfilusuario
+    if request.method == 'POST': #es para ver si el usuario es un usuario, es que si no tiene cuenta no puede editar su perfil 
+        form= perfilusuarioform(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form= perfilusuarioform(instance=perfil)
+    return render(request, 'perfilUsuario.html', {'form': form})
+'''
+
+def edicion_perfil(request):
+    if not request.user.is_authenticated:
+        user = User.objects.get(username='AnnoyingDog')
+        login(request, user, backend= 'django.contrib.auth.backends.ModelBackend')
+    else:
+        user= request.user
+
+    perfil, creado = perfilusuario.objects.get_or_create(user=user)
+    if request.method == 'POST':
+        form = perfilusuarioform(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form = perfilusuarioform(instance=perfil)
+
+    return render(request, 'perfilUsuario.html', {'form': form})
+
+#-------------------------------------------------------------------------------
+
 
 def gambling(request):
     import random 

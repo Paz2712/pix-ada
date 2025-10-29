@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Usuarios, Publicacion, Topicos
+from .models import Usuarios, Publicacion, Topicos, perfilusuario
 
 # Formularios :D
 # Cuando use clean o similar, es para hacer validaciones o normalizaciones de algo ANTES de guardar
@@ -67,3 +67,9 @@ class publicacionesForm(forms.ModelForm):
             if Topicos.objects.filter(nombre__iexact=nuevoTopico).exists(): # nombre__iexact va a buscar un nombre, cualquiera que coincida, sin importar mayusculas o minusculas
                 raise forms.ValidationError('El topico existe, agarralo de la lista')
         return nuevoTopico
+    
+class perfilusuarioform(forms.ModelForm): #permite que el usuario elija un archivo de su pc y la suba a su perfil
+    class Meta:
+        model = perfilusuario # el nombre de la clase creada en el models.py que tiene que ver con esto 
+        #fields = ("alias", "descripcion", "foto" ) #las cosas que tienen que ir :p
+        fields= '__all__'

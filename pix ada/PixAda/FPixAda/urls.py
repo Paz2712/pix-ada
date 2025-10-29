@@ -25,6 +25,7 @@ urlpatterns = [
     path("foro/crear/", views.crearPubView, name='crearPub'), ## http://localhost:8000/foro/crear/
     path('toadmin/', views.toAdmin, name='redirectAdmin'), ## http://localhost:8000/toadmin/
     path("hola/", views.Prueba, name="magico"), ## http://127.0.0.1:8000/hola/
+    path("editarperfil/", views.edicion_perfil, name= "perfil"), ## http://127.0.0.1:8000/editarperfil/
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)
