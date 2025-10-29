@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
-import os
+import os #este es por las imagenes
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-hd$322p@t6p8sckb1@lvdez-%vi!jx++qkf^3t_ok(706o-anc'
 
+MEDIA_URL = '/media/' # es el url que sube para que se ponga la foto
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images') #esto es para que el usuario pueda guardar su foto y luego pasarla al MEDIA_URL para que la suba
 DEBUG = True ## NO TOCAR, rompe los archivos en .\<apps>\static
 
 ALLOWED_HOSTS = [

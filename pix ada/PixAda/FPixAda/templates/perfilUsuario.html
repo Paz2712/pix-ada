@@ -1,11 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/stylesdos.css' %}">
+
 </head>
 <body>
-    
+    <h2>Perfil de Usuario</h2>
+
+    <!-- esto muestra la foto del perfil -->
+    <div class="perfil-foto">
+        {% if request.user.perfilusuario.FotoPerfil %}
+            <img src="{{ request.user.perfilusuario.FotoPerfil.url }}" alt="Foto de perfil" width="150" height="150" style="border-radius:50%;">
+        {% else %}
+            <img src="{% static 'images/default-profile.png' %}" alt="Foto de perfil" width="150" height="150" style="border-radius:50%;">
+        {% endif %}
+    </div>
+
+    <!-- alias y descripción -->
+    <div class="perfil-info">
+        <p><strong>Alias:</strong> {{ form.instance.Alias }}</p>
+        <p><strong>Descripción:</strong> {{ form.instance.Description }}</p>
+    </div>
+
+    <!-- Formulario para editar perfil -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar cambios</button>
+    </form>
+
 </body>
 </html>

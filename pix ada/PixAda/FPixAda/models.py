@@ -3,6 +3,9 @@ from django.contrib.auth.hashers import make_password, check_password, identify_
 from django.core.exceptions import ValidationError # Un error bien bonito que ocurre si no hacen lo que pedimos (lo uso para el correo)
 from django.core.validators import RegexValidator # Es un validador del que me enamoré, me hace la vida más facil
 
+#--------sacar luego
+from django.contrib.auth.models import User
+#----------------
 
 '''
 Aquí se crea el modelo de la base de datos
@@ -14,7 +17,7 @@ usar models.charField y especifiquen un máximo de largo con (max_length=<el nú
 Para un atributo que requiera de SI o NO,
 usar models.BooleanField y especifiquen un valor por defecto con (default=<True o False>)
 '''
-## El usuario
+# El usuario
 class Usuarios(models.Model):
     # Isidora, Pablo, Santi, probablemente Benja y Maca, este es el resultado de 3 noches sin dormir e investigación
     # intensa. Intenté documentar y explicar todo lo que hice, por qué, entre muchas otras cosas con tal de
@@ -220,3 +223,18 @@ class Comentario(models.Model):
         max_length=200,
         # El contenido del comentario, está en duda su tamaño
     )
+
+class perfilusuario(models.Model):
+    fotoperfil= models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)# el blank hace que no sea obligatorio subir una foto
+    #alias= models.CharField(max_length=50, blank=True) # no se si poner que no sea obligatorio poner el alias
+    description=models.TextField(max_length=700, blank=True ) #no es obligatorio crear una descripción
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self): #esto es para que el alias se vea legible para los mortales
+        return self.user.username
+    '''
+    def __str__(self): #esto es para que el alias se vea legible para los mortales
+        return self.alias or "Usuario sin alias"
+    '''
+    
+

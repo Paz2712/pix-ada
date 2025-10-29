@@ -14,9 +14,7 @@ Comentaré como se vería la url de cada view abajo para claridad
 Diviértete Isi
 '''
 urlpatterns = [ 
-    path("", views.index, name="homepage"), ## http://localhost:8000/  Esta es la página origen de la API
-    path("nuevo/", views.indexnuevo, name="nuevoindex"), ## http://localhost:8000/nuevo/  
-    # el nuevo/ aun no esta conectado con el resto
+    path("", views.index, name="homepage"), ## http://localhost:8000/  Esta es la página origen de la API 
     path("testLmao/", views.algo, name="test"), ## http://localhost:8000/testLmao/
     path("ohno/", views.badApple, name="BadApple"), ## http://localhost:8000/ohno/ Bad apple :D
     path("termycond/", views.contrato, name='termsConditions'), ## http://localhost:8000/EULA/
@@ -27,6 +25,7 @@ urlpatterns = [
     path("foro/crear/", views.crearPubView, name='crearPub'), ## http://localhost:8000/foro/crear/
     path('toadmin/', views.toAdmin, name='redirectAdmin'), ## http://localhost:8000/toadmin/
     path("hola/", views.Prueba, name="magico"), ## http://127.0.0.1:8000/hola/
+    path("editarperfil/", views.edicion_perfil, name= "perfil"), ## http://127.0.0.1:8000/editarperfil/
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)
