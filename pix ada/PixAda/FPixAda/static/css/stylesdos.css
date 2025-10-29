@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: 5px 0 0 0;
     font-family: "Poppins", sans-serif;
 }
 
@@ -91,6 +91,7 @@ a:hover {
 }
 
 .input-wrapper {
+    padding-top: 10px;
     display: flex;
     position: relative;
     flex-direction: column;

@@ -131,8 +131,14 @@ def crearPubView(request):
     }
     return render(request, 'crearPub.html', variables)
 
-def qanda(request):
-    return render(request, "giasfelfebrehber.html", )
+@login_required(login_url='login')
+def perfilUsuario(request):
+    userID = request.user
+    variables = {
+        'usuario': userID,
+        'rol': userID.rol,
+    }
+    return HttpResponse("Nothing here yet")
 
 
 '''

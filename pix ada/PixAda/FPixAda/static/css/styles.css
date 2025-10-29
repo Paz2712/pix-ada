@@ -199,6 +199,16 @@ body {
     text-align: center; 
     font-size: 4em;
 }
+footer {
+    position: relative;
+    margin-top: 0px;
+    clear: both;
+    background-color: #000000;
+    right: 0;
+    width: calc(100% - 15% - 4px);
+    height: fit-content;
+    max-height: 100px;
+}
 
 strong, b { /* Le dice a las fuentes que se pongan negras */
     font-weight: bold;

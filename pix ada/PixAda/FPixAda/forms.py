@@ -55,3 +55,4 @@ class publicacionesForm(forms.ModelForm):
             'topico': forms.RadioSelect(attrs={'required': 'true'}) ,
             'esAnonimo': forms.CheckboxInput(),
         }
+
