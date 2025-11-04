@@ -65,6 +65,7 @@ body {
             align-items: center;
             padding-left: 10px;
             text-decoration: none;
+            color: #221E64;
         }
         a.item-left:hover {
             background-color: #DCE4FB;
@@ -185,29 +186,9 @@ body {
     padding-top: 55px;
 }
 
-#footer-limits {
-    background-color: #CEBEDC;
-    position:relative;
-    bottom: 0;
-    right: 0;
-    width: calc(85% - 2px);
-    height: 100px;
-    color: #AFBCFA;
-}
-
 #focus-pagina {
     text-align: center; 
     font-size: 4em;
-}
-footer {
-    position: relative;
-    margin-top: 0px;
-    clear: both;
-    background-color: #000000;
-    right: 0;
-    width: calc(100% - 15% - 4px);
-    height: fit-content;
-    max-height: 100px;
 }
 
 strong, b { /* Le dice a las fuentes que se pongan negras */

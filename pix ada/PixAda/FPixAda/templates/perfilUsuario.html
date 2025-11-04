@@ -14,10 +14,10 @@
 
     <!-- esto muestra la foto del perfil -->
     <div class="perfil-foto">
-        {% if request.user.perfilusuario.FotoPerfil %}
-            <img src="{{ request.user.perfilusuario.FotoPerfil.url }}" alt="Foto de perfil" width="150" height="150" style="border-radius:50%;">
+        {% if not fotoPerfil %}
+            <img src="{{ profilePath }}" alt="Foto de perfil" width="150" height="150" style="border-radius:50%;">
         {% else %}
-            <img src="{% static 'images/default-profile.png' %}" alt="Foto de perfil" width="150" height="150" style="border-radius:50%;">
+            <img src="{{ profilePath }}" alt="Foto de perfil" width="150" height="150" style="border-radius:50%;">
         {% endif %}
     </div>
 

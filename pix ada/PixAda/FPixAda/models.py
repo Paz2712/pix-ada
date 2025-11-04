@@ -225,13 +225,15 @@ class Comentario(models.Model):
     )
 
 class perfilusuario(models.Model):
-    fotoperfil= models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)# el blank hace que no sea obligatorio subir una foto
+    user = models.OneToOneField(Usuarios, on_delete=models.CASCADE)
     #alias= models.CharField(max_length=50, blank=True) # no se si poner que no sea obligatorio poner el alias
     description=models.TextField(max_length=700, blank=True ) #no es obligatorio crear una descripción
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    fotoPerfil = models.CharField(
+        blank=True,
+    )
 
     def __str__(self): #esto es para que el alias se vea legible para los mortales
-        return self.user.username
+        return self.user.nombre
     '''
     def __str__(self): #esto es para que el alias se vea legible para los mortales
         return self.alias or "Usuario sin alias"

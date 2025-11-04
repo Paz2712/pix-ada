@@ -134,15 +134,6 @@ def crearPubView(request):
     }
     return render(request, 'crearPub.html', variables)
 
-@login_required(login_url='login')
-def perfilUsuario(request):
-    userID = request.user
-    variables = {
-        'usuario': userID,
-        'rol': userID.rol,
-    }
-    return HttpResponse("Nothing here yet")
-
 
 '''
 De Axius:
@@ -201,23 +192,30 @@ def edicion_perfil(request): #para que el pejelagarto pueda ver lo de su perfil 
         form= perfilusuarioform(instance=perfil)
     return render(request, 'perfilUsuario.html', {'form': form})
 '''
+@login_required(login_url='login')
 def edicion_perfil(request):
-    if not request.user.is_authenticated:
-        user = User.objects.get(username='AnnoyingDog')
-        login(request, user, backend= 'django.contrib.auth.backends.ModelBackend')
-    else:
-        user= request.user
+    perfilGuardado = False
+    userID= request.user
 
-    perfil, creado = perfilusuario.objects.get_or_create(user=user)
+    perfil, creado = perfilusuario.objects.get_or_create(user=userID)
     if request.method == 'POST':
-        form = perfilusuarioform(request.POST, request.FILES, instance=perfil)
+        form = perfilusuarioform(request.POST, instance=perfil)
         if form.is_valid():
             form.save()
+            perfilGuardado = True
             return redirect('perfil')
     else:
         form = perfilusuarioform(instance=perfil)
+    print(perfilGuardado)
+    variables = {
+        'form': form,
+        'usuario': userID,
+        'nombreUsr': userID.nombre,
+        'aliasUsr': userID.aliasUsuario,
+        'statusPerfil': perfilGuardado,
+    }
 
-    return render(request, 'perfilUsuario.html', {'form': form})
+    return render(request, 'perfilUsuario.test.html', variables)
 
 #-------------------------------------------------------------------------------
 

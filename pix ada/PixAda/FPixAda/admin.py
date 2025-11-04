@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuarios, Topicos, Publicacion
+from .models import Usuarios, Topicos, Publicacion, perfilusuario
 
 
 '''
@@ -53,3 +53,10 @@ class PublicacionAdmin(admin.ModelAdmin):
     readonly_fields = ("idPublicacion",) # Cuales campos NO pueden ser editados manualmente
     list_filter = ("autor", "esAnonimo", "fechaCreacion", "topico") # Las categorías que apareceran en los filtros de búsqueda
     search_fields = ("titulo", "autor") # Lo que usará el buscador para encontrar
+
+@admin.register(perfilusuario)
+class perfilusuarioAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    fields = ('description', 'user')
+    search_fields = ('user',)
+    readonly_fields = ('user',)

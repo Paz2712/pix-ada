@@ -55,15 +55,10 @@ class publicacionesForm(forms.ModelForm):
             'topico': forms.RadioSelect(attrs={'required': 'true'}) ,
             'esAnonimo': forms.CheckboxInput(),
         }
-    def clean_topico(self):
-        nuevoTopico = self.cleaned_data.get('crearTopico')
-        if nuevoTopico:
-            if Topicos.objects.filter(nombre__iexact=nuevoTopico).exists(): # nombre__iexact va a buscar un nombre, cualquiera que coincida, sin importar mayusculas o minusculas
-                raise forms.ValidationError('El topico existe, agarralo de la lista')
-        return nuevoTopico
     
 class perfilusuarioform(forms.ModelForm): #permite que el usuario elija un archivo de su pc y la suba a su perfil
     class Meta:
         model = perfilusuario # el nombre de la clase creada en el models.py que tiene que ver con esto 
         #fields = ("alias", "descripcion", "foto" ) #las cosas que tienen que ir :p
-        fields= '__all__'
+        fields= ('description',)
+        
