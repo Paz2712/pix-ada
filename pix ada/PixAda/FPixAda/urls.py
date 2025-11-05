@@ -21,6 +21,7 @@ urlpatterns = [
     path("signin/", views.signinUsuario, name='signin'), ## http://localhost:8000/signin/
     path("login/", views.loginUsuario, name="login"), ## http://localhost:8000/login/
     path("logout/", views.logoutUsuario, name='logout'), ## http://localhost:8000/logout/
+    path("FAQ/",views.preguntasfrecuentes,name="FAQ"), ## http://localhost:8000/FAQ/
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)

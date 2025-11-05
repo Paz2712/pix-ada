@@ -118,3 +118,7 @@ la cual será usada en el archivo HTML.
 '''
 def badApple(request):
     return render(request, 'ba.html')
+
+
+def preguntasfrecuentes(request):
+    return render(request,"preguntasfrecente.html")
