@@ -1,11 +1,59 @@
 body{
     background-color: #221E64;
-    font-family: 'open-dyslexic';
-    src:    url("../fonts/OpenDyslexic/OpenDyslexic-Italic.woff") format('woff'),
-            url("../fonts/OpenDyslexic/OpenDyslexic-Italic.woff2") format('woff2');
-    font-weight: normal;
-    font-style: italic;
     }
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #221E64;
+    border-right: 2px solid #ddd;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    margin-bottom: 52px;
+    padding: 17px;
+    border: none;
+    background-color: #afbcfa;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    color: #ddd;
+} 
+
+.sidebar button:hover {
+    background-color: #221E64;
+}
+
+.sidebar .logo {
+    width: 100%;        
+    height: auto;       
+    border-radius: 12px;
+    margin-bottom: 52px;
+    display: block;     
+}
+
+.contenido {
+    flex: 1;
+    padding: 20px;
+    }
+
+.top-line {
+height: 3px;                 
+background-color: #ffffff;   
+width: 100%;                 
+margin-top: 100px;   
+}         
+
 
 .header::before {
 content: "";
@@ -38,9 +86,17 @@ font-weight: bold;
 letter-spacing: 3px;
 }
 
+.header h2{
+color: white;
+font-size: 30px;
+margin: 0;
+font-weight: bold;
+letter-spacing: 3px;
+}
 
 .subtitulo {
-background-color:#ac6ce4 ;
+background-color: #211d5e;   
+border: 4px solid #9c7fff;
 padding: 15px 0;
 width: 60%;
 margin: 50px auto 25px auto;
@@ -65,7 +121,7 @@ font-weight: bold;
 }
 
 details {
-background-color: #8a8093;
+background-color: #afbcfa;
 border-radius: 12px;
 padding: 18px 22px;
 margin: 20px auto;
