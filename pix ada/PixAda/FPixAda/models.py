@@ -142,7 +142,7 @@ class Usuarios(models.Model):
         super().save(*args, **kwargs) # Guarda los cambios antes de crear la entrada en la base de datos
 
     def __str__(self):
-        return self.nombre
+        return str(self.pk)
     # Util para debug, cómo, no se aún, pero una discusión de stackoverflow lo recomendó
     
 
@@ -223,10 +223,15 @@ class Comentario(models.Model):
         max_length=200,
         # El contenido del comentario, está en duda su tamaño
     )
+    esAnonimo = models.BooleanField(
+        default=False,
+    )
 
 class perfilusuario(models.Model):
-    user = models.OneToOneField(Usuarios, on_delete=models.CASCADE)
-    #alias= models.CharField(max_length=50, blank=True) # no se si poner que no sea obligatorio poner el alias
+    user = models.OneToOneField(
+        Usuarios, 
+        on_delete=models.CASCADE
+    )
     description=models.TextField(max_length=700, blank=True ) #no es obligatorio crear una descripción
     fotoPerfil = models.CharField(
         blank=True,
@@ -234,9 +239,3 @@ class perfilusuario(models.Model):
 
     def __str__(self): #esto es para que el alias se vea legible para los mortales
         return self.user.nombre
-    '''
-    def __str__(self): #esto es para que el alias se vea legible para los mortales
-        return self.alias or "Usuario sin alias"
-    '''
-    
-

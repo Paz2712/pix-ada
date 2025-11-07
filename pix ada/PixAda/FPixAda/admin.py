@@ -24,8 +24,8 @@ se salvaron por el momento
 
 @admin.register(Usuarios)
 class UsuariosAdmin(admin.ModelAdmin):
-    list_display = ( 
-        "nombre", "aliasUsuario", "correo", "rol", 
+    list_display = (
+        "pk", "nombre", "aliasUsuario", "correo", "rol", 
         "yanMode", "altoContraste"
     )
     fields = ( 

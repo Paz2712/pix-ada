@@ -1,5 +1,5 @@
 ## Lineas 2-3, se encargan de renderizar cosas en la página o redirigir
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest
 from django.urls import reverse
 # Lineas 5-6, funciones predefinidas de login de la mano de Django
@@ -81,18 +81,6 @@ def index(request):
     }
     return render(request, 'index.html', variables)
 
-@login_required(login_url='login')
-def algo(request):
-    userID = request.user
-    loggeado = userID.is_authenticated
-    variables = {
-        'usuario': userID,
-        'loggeado': loggeado,
-        'rol': userID.rol,
-        'page': 'test'
-    }   
-    return render(request, 'algo.html', variables)
-
 
 def toAdmin(request: HttpRequest):
     logout(request)
@@ -168,64 +156,26 @@ def badApple(request):
     lo que sea:'''
     return render(request, 'ba.html')
 
-
-def Prueba(request):
-    lista = [0, 1, 2, 3, "no 4", 5]
-    chance= randint(-1,9)
-    variables = { 
-        'coin': chance,
-        'lista': lista,
-    }
-    return render(request, "prueba.html", variables)
-
-
-'''
-
-def edicion_perfil(request): #para que el pejelagarto pueda ver lo de su perfil modificado
-    perfil= request.user.perfilusuario
-    if request.method == 'POST': #es para ver si el usuario es un usuario, es que si no tiene cuenta no puede editar su perfil 
-        form= perfilusuarioform(request.POST, request.FILES, instance=perfil)
-        if form.is_valid():
-            form.save()
-            return redirect('perfil')
-    else:
-        form= perfilusuarioform(instance=perfil)
-    return render(request, 'perfilUsuario.html', {'form': form})
-'''
 @login_required(login_url='login')
-def edicion_perfil(request):
-    perfilGuardado = False
+def edicion_perfil(request, userPK):
     userID= request.user
-
+    perfilActual = get_object_or_404(perfilusuario, user=userPK)
     perfil, creado = perfilusuario.objects.get_or_create(user=userID)
     if request.method == 'POST':
         form = perfilusuarioform(request.POST, instance=perfil)
         if form.is_valid():
             form.save()
-            perfilGuardado = True
-            return redirect('perfil')
+            return redirect('perfil', str(userPK))
     else:
         form = perfilusuarioform(instance=perfil)
-    print(perfilGuardado)
     variables = {
         'form': form,
         'usuario': userID,
-        'nombreUsr': userID.nombre,
-        'aliasUsr': userID.aliasUsuario,
-        'statusPerfil': perfilGuardado,
+        'nombreUsr': perfilActual.user.nombre,
+        'aliasUsr': perfilActual.user.aliasUsuario,
+        'perfilUsr': perfilActual,
+        'esUsuarioActual': perfilActual.user == userID,
     }
+    print(variables['esUsuarioActual'])
 
-    return render(request, 'perfilUsuario.test.html', variables)
-
-#-------------------------------------------------------------------------------
-
-
-def gambling(request):
-    import random 
-    dado= random.randint(1,20)
-    dot = {"punto": dado
-    }
-    return (request, "prueba.html", dot)
-
-def indexnuevo(request):
-    return render(request, 'indexnuevo.html')
+    return render(request, 'perfilUsuario.html', variables)

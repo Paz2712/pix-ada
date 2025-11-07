@@ -51,7 +51,7 @@ body {
     .left-menu {
         background-color: #CEBEDC;
         height: calc(100% - 59px);
-        width: 15%;
+        width: 225px;
         z-index: 69; /* Nice */
         bottom: 0;
         left: 0;
@@ -75,10 +75,11 @@ body {
     .top-menu {
         background-color: #CEBEDC;
         height: 55px;
-        width: 100%;
+        width: calc(100% - 225px - 4px - 55px);
+        /* Largo de la pantalla - width del menu izquierdo - borde izquierdo - el botón de signout */
         z-index: 67;
         top: 0;
-        left: 0;
+        right: 55px;
         display: flex;
         border-bottom: 4px solid #221E64;
         position: fixed;
@@ -101,11 +102,12 @@ body {
         display: block;
         left: auto;
         right: auto;
-        width: 50%;
-        height: 75px;
+        width: 75%;
+        height: 100px;
         text-align: start;
         border-radius: 10px;
         font-size: large;
+        resize: none;
     }
     .index {
         text-align: center;
@@ -113,30 +115,33 @@ body {
         align-content: center;
     }
     .user-profile {
+        position: fixed;
         top: 0;
         left: 0;
-        z-index: 99;
-        width: calc(15%);
+        z-index: 100;
+        width: 225px;
         height: 55px;
         border-right: 4px solid #221E64;
-        display: flex;
+        border-bottom: 4px solid #221E64;
         background-color: #AEBCF9;
-        align-items: center;
         color: black;
+        margin-top: auto;
+        margin-bottom: auto;
     }
     .signout {
-        top: 0;
-        right: 0;
+        display: grid;
         height: 55px;
         width: 55px;
+        right: 0;
         background-color: red;
         color: #000000;
         z-index: 101;
-        display: flex;
         align-items: center;
         justify-content: center;
         font-size: 2.5em;
         text-decoration: none;
+        position: fixed;
+        border-bottom: 4px solid #221E64;
     }
     .signout:hover {
         background-color: #221E64;
@@ -147,10 +152,11 @@ body {
         right: 55px;
         z-index: 100;
         display: flex;
-        width: calc(81% + 3px);
+        width: calc(100% - 225px - 4px - 55px);
         height: 55px;
         color: #7D38D0;
         text-align: center;
+        position: fixed;
     }
     .admin-trigger {
         text-decoration: none;
@@ -173,11 +179,20 @@ body {
     }
     .content {
         padding-top: 55px;
-        padding-left: 16%;
+        padding-left: 225px;
     }
     .item-foro {
         border-top: 1px dashed  ;
     }
+}
+
+.view-profile {
+    text-decoration: none;
+    color: #221E64;
+    cursor: pointer;
+}
+.view-profile:hover {
+    color: #7D38D0;
 }
 
 #forum-end { /* Texto al final del foro */

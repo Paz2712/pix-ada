@@ -5,7 +5,6 @@
 
 {% block leftNavbar %}
 <a class="item-left" href="{% url 'crearPub' %}">Crear publicación</a> <!-- Copypastear, esta cosa es modular -->
-<a class="item-left" href="{% url 'perfil' %}">Editar Perfil de Usuario</a>
 {% endblock %}
 
 {% block topNavbar %}
@@ -26,7 +25,7 @@
         {{ entrada.titulo }}  
         <small><i>
             {% if entrada.esAnonimo %}Por un Usuario Anónimo
-            {% else %}Por {{ entrada.autor.aliasUsuario }} {% endif %}
+            {% else %}Por <a href="{% url 'perfil' entrada.autor.pk %}" class="view-profile">{{ entrada.autor.aliasUsuario }}</a> {% endif %}
             {% if entrada.autor.rol == 'adm' and not entrada.esAnonimo %}<span style="color: red;">ADMINISTRADOR</span>
             {% elif entrada.autor.rol == 'mod' and not entrada.esAnonimo %}<span style="color: yellow;">MODERADOR</span>
             {% else %}{% endif %}
