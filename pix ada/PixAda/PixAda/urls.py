@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 ##-------------------------  URLs  -------------------------##
 '''
@@ -26,6 +28,9 @@ Cada que hagan una API nueva tienen que especificarla aquí para poder tener los
 Pablo, ponte a estudiar HTML ctm
 '''
 urlpatterns = [
-    path('pixis/admin/', admin.site.urls),
+    path('pixis/admin/', admin.site.urls), ## http://127.0.0.1:8000/pixis/admin/
     path('', include('FPixAda.urls'))
 ]
+
+if settings.DEBUG: #este coso es por lo de las imagenes de perfil
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

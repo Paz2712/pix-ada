@@ -1,16 +1,61 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>PixADA</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylesdos.css' %}">
+    <!-- Boxicons para los íconos -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
+
 <body>
-    <!-- templates/login.html -->
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Entrar</button>
-    </form>
+    <div class="wrapper">
+        <div class="login-wrapper">
+            <div class="login-header">PixADA</div>
+
+            <!-- El <form> -->
+            <form class="login-form" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"> <!-- Permite tener la variable "next" de manera persistente -->
+
+                <!-- Username -->
+                <div class="input-wrapper">
+                    <input type="text" id="user" name="username" class="input-field" required>
+                    <label for="user" class="label">Nombre de Usuario</label>
+                    <i class="bx bx-user icon"></i>    
+                </div>
+
+                <!-- Password -->
+                <div class="input-wrapper">
+                    <input type="password" id="pw" name="password" class="input-field" required>
+                    <label for="pw" class="label">Contraseña</label>
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+
+                <!-- Terminos y Condiciones -->
+                <div class="login-check">
+                    <div class="forgot">
+                        <a href="{% url 'termsConditions' %}">Términos y condiciones</a>
+                    </div>
+                </div>
+
+                <!-- Botón login -->
+                <div class="input-wrapper">
+                    <button type="submit" class="input-login">Iniciar Sesión</button>
+                </div>
+
+                <!-- Register -->
+                <div class="register">
+                    <span>¿No tienes una cuenta? 
+                        <a href="{% url 'signin' %}">Registrarse</a>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

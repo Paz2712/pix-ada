@@ -1,63 +1,78 @@
 {% load static %}
-{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Registrate</title>
-    <meta style="overflow: hidden;">
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/registrarseStyle.css' %}">
+    <title>PixADA</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylesdos.css' %}">
+    <!-- Boxicons para los íconos -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
-<body style="background-image:url('../static/images/testImg.jpg'); background-size: cover;">
-    <div>
-        <form method="post">
-            {% csrf_token %}
-            <div class="side-content">
-                <h2>
-                    Nombre de Usuario
-                </h2>
-                <p>
-                    {% if form.nombre.errors %}{% for error in form.nombre.errors %}
-                    <span class="error">{{ error }}</span>{% endfor %}
-                    {% else %}El nombre con el cual iniciarás sesión{% endif %}
-                </p>
-                {% render_field form.nombre class="form-control input-field" placeholder="Nombre" %}
 
-                <h2>
-                    Alias Público
-                </h2>
-                <p>
-                    {% if form.aliasUsuario.errors %}{{ form.aliasUsuario.errors }}
-                    {% else %}La cara pública de tu cuenta{% endif %}
-                </p>
-                {% render_field form.aliasUsuario class="form-control input-field" placeholder="@...." %}
-                
-                <h2>
-                    Correo Institucional
-                </h2>
-                <p>
-                    {% if form.correo.errors %}{{ form.correo.errors }}
-                    {% else %}Nos ayudará a saber que eres parte de nosotros{% endif %}
-                </p>
-                {% render_field form.correo class="form-control input-field" placeholder="Tu correo institucional" %}
-                
-                <h2>Contraseña</h2>
-                <p>
-                    {% if form.contrasena2.errors %}{% for error in form.contrasena2.errors %}
-                    <span class="error">{{ error }}</span>{% endfor %}
-                    {% else %}Protege tu contraseña de los de informática con una buena contraseña{% endif %}
-                </p>
-                {% render_field form.contrasena1 class="form-control input-field" placeholder="Contraseña" %} <br>
-                {% render_field form.contrasena2 class="form-control input-field" placeholder="Confirma tu contraseña" %} <br>
-                <p style="font-size: x-small;">
-                    Al crear una cuenta aceptas a nuestros <a href="http://localhost:8000/termycond/">Terminos y Condiciones</a> de uso <br>
-                    Página en alpha cerrada por IWG400. El logo de PixAda es propiedad del grupo 10 de IWG400-6. <br>
-                    Recomendamos encarecidamente activar las cookies de tu navegador, <br>de lo contrario el proceso podría verse afectado negativamente
-                </p>
-                <button type="submit" class="input-field">Crear cuenta</button>
-            </div>
-        </form>
+<body>
+    <div class="wrapper">
+        <div class="login-wrapper">
+            <div class="login-header">PixADA</div>
+
+            <!-- El <form> -->
+            <form class="login-form" method="POST" action="{% url 'signin' %}">
+                {% csrf_token %}
+
+                <!-- Nombre -->
+                <div class="input-wrapper">
+                    <input type="text" id="user" name="nombre" class="input-field" required>
+                    <label for="user" class="label">Nombre de Usuario</label>
+                    <i class="bx bx-user icon"></i>    
+                </div>
+
+                <!-- Alias -->
+                <div class="input-wrapper">
+                    <input type="text" id="pw" name="aliasUsuario" class="input-field" required>
+                    <label for="pw" class="label">Alias</label>
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+
+                <!-- Correo -->
+                <div class="input-wrapper">
+                    <input type="text" id="pw" name="correo" class="input-field" required>
+                    <label for="pw" class="label">Correo</label>
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="input-wrapper">
+                    <input type="password" id="pw" name="contrasena1" class="input-field" required>
+                    <label for="pw" class="label">Contraseña</label>
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="input-wrapper">
+                    <input type="password" id="pw" name="contrasena2" class="input-field" required>
+                    <label for="pw" class="label">Confirmar Contraseña</label>
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+
+                <!-- Check y enlace -->
+                <div class="login-check">
+                    <div class="remember">
+                        <input type="checkbox" id="remember-me" name="remember-me" required>
+                        <label for="remember-me">Acepto los términos y condiciones</label>
+                    </div>    
+                    <div class="forgot">
+                        <a href="{% url 'termsConditions' %}">Términos y condiciones</a>
+                    </div>
+                </div>
+
+                <!-- Botón login -->
+                <div class="input-wrapper">
+                    <button type="submit" class="input-login">Registrarse</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

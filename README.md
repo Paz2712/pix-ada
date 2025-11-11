@@ -5,35 +5,31 @@
 
 Un proyecto de la mano del grupo 10 del paralelo 6 de proyecto inicial.
 
-- Equipo Django Base:
-    - Isidora García
-    - Axius Altamirano
-
 - Equipo Back-End:
-    - Pablo Salinas
-    - Santiago Bergh
+    - Axius Altamirano
+    - Macarena Lopez
 
 - Equipo Front-End:
-    - Macarena Lopez
+    - Isidora García
+    - Santiago Bergh
+    - Pablo Salinas
     - Benjamin Molina
+
 
 ## Dependencias
 
 Recomendamos encarecidamente ejecutar esta aplicación web en un entorno virtual con:
 
 - Python 3.12.1
-
     - Puedes instalar esta versión [aquí](https://www.python.org/downloads/release/python-3121/)
-- Django 5.2.5
+- Paquetes PIP
+    - Un archivo con los paquetes y otros dos se han proporcionado para instalar los paquetes PIP
+    
+    - Para CMD: Correr archivo <strong>requisitos.bat</strong>
+    - Para Powershell: Escribir en la terminal `.\requisitos.ps1`
 
-    - Windows `py -m pip install Django==5.2.5`
-    - Unix/MacOS `python -m pip install Django==5.2.5`
-- Django Widget Tweaks 1.5.0
 
-    - Windows `py -m pip install django-widget-tweaks==1.5.0`
-    - Unix/MacOS `python -m pip install django-widget-tweaks==1.5.0`
 
 # Recursos
 
-- [Cómo hacer un login (no implementado)](https://www.geeksforgeeks.org/python/django-sign-up-and-login-with-confirmation-email-python/)
 - [Cheat Sheet para HTML (requiere conocimiento en gringo)](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Cheatsheet)

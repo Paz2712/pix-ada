@@ -6,14 +6,40 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% static 'js/smth.js' %}"></script>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
-<body class="{% if usuario.modoOscuro %}dark-mode{% else %}light-mode{% endif %}">
-    <div id="navBar">
-        {% block navBar %}
-        {% endblock %}
+<body 
+class="
+{% if usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
+    <div id="navBar" class="left-menu">
+        {% block leftNavbar %}{% endblock %}
+        <a class="item-left" href="{% url 'perfil' usuario.pk %}">Editar Perfil de Usuario</a>
+        <a href="{% url 'foro' %}" class="item-left">Foro</a>
     </div>
-    <div id="sumShit">
-        {% block sumShit %}{% endblock %}
+
+    <div class="top-menu">
+        <div class="user-profile">
+            <p>{{ usuario.nombre }} #{{ usuario.pk }}
+                {% if usuario.rol == 'adm' %}<a class='admin-trigger' href="{% url 'redirectAdmin' %}"> ADMIN</a>
+                {% elif usuario.rol == 'mod' %}<span style="color: yellow;"> MODERADOR</span>
+                {% endif %}<br>
+                <i>{{ usuario.aliasUsuario }}</i>
+            </p>
+        </div>
+
+        <div
+        class="content-topbar">
+            {% block topNavbar %}{% endblock %}
+        </div>
+
+        <div>
+            <a class="signout" href="{% url 'logout' %}" title="Cerrar Sesión">x</a>
+        </div>
+    </div>
+
+    <div id="sumShit" class="content">
+        {% block sumShit %}{% endblock %} <!-- Bloque de contenido -->
     </div>
 </body>
 </html>

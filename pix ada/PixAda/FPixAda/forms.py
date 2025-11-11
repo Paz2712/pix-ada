@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Usuarios
+from .models import Usuarios, Publicacion, Topicos, perfilusuario
 
 # Formularios :D
 # Cuando use clean o similar, es para hacer validaciones o normalizaciones de algo ANTES de guardar
@@ -44,3 +44,21 @@ class LoginUsuariosForm(forms.Form):
         label='Contraseña',
         widget=forms.PasswordInput(),
     )
+
+class publicacionesForm(forms.ModelForm):
+    class Meta:
+        model = Publicacion
+        fields = ("titulo", "cuerpo", "topico", "esAnonimo" )
+        widgets = {
+            'titulo': forms.TextInput(),
+            'cuerpo': forms.Textarea(),
+            'topico': forms.RadioSelect(attrs={'required': 'true'}) ,
+            'esAnonimo': forms.CheckboxInput(),
+        }
+    
+class perfilusuarioform(forms.ModelForm): #permite que el usuario elija un archivo de su pc y la suba a su perfil
+    class Meta:
+        model = perfilusuario # el nombre de la clase creada en el models.py que tiene que ver con esto 
+        #fields = ("alias", "descripcion", "foto" ) #las cosas que tienen que ir :p
+        fields= ('description',)
+        

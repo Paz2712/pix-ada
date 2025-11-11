@@ -3,6 +3,9 @@ from django.contrib.auth.hashers import make_password, check_password, identify_
 from django.core.exceptions import ValidationError # Un error bien bonito que ocurre si no hacen lo que pedimos (lo uso para el correo)
 from django.core.validators import RegexValidator # Es un validador del que me enamoré, me hace la vida más facil
 
+#--------sacar luego
+from django.contrib.auth.models import User
+#----------------
 
 '''
 Aquí se crea el modelo de la base de datos
@@ -14,10 +17,10 @@ usar models.charField y especifiquen un máximo de largo con (max_length=<el nú
 Para un atributo que requiera de SI o NO,
 usar models.BooleanField y especifiquen un valor por defecto con (default=<True o False>)
 '''
-## El usuario
+# El usuario
 class Usuarios(models.Model):
     # Isidora, Pablo, Santi, probablemente Benja y Maca, este es el resultado de 3 noches sin dormir e investigación
-    # intensa. Intenté documentar y explicar todo lo que hice, por qué, entre muchas otras cosas con tal de
+    # intensa. Intenté documentar y explicar todo lo que hice, porque, entre muchas otras cosas, con tal de
     # que puedan editarlo a su gusto. Disfruten, o lloren ante el orden o desorden de mi código, solo quiero dormir
 
     # ----- Identificadores ----- #
@@ -29,7 +32,7 @@ class Usuarios(models.Model):
     aliasUsuario = models.CharField(
         max_length=15,
         unique=True,
-        # Alias de usuario, busco que empiece con @ o # para diferenciarlo del nombre, si no quieren que sea unico, borren la linea 31
+        # Alias de usuario, busco que empiece con @ o # para diferenciarlo del nombre, si no quieren que sea unico, borren la linea 23
     )
     correo = models.EmailField(
         unique=True,
@@ -51,6 +54,13 @@ class Usuarios(models.Model):
         choices=rolesDisponibles, 
         default="usr",
         # El rol que tendrá el (por defecto) usuario, manualmente en la pestaña de admins podemos cambiarlo
+    )
+    creado = models.DateField(
+        blank=True,
+        null=True,
+        auto_created=True,
+        auto_now_add=True,
+        editable=True,
     )
 
     # ----- Necesario para usar funciones login de Django ----- #
@@ -75,7 +85,6 @@ class Usuarios(models.Model):
 
 
     # ----- Preferencias de usuario ----- #
-    modoOscuro = models.BooleanField(default=False) # Modo oscuro, False por defecto
     yanMode = models.BooleanField(default=False) # Ya saben
     altoContraste = models.BooleanField(default=False) # Modo de alto contraste, para personas de visibilidad limitada
 
@@ -108,11 +117,12 @@ class Usuarios(models.Model):
         correosPermitidos = [
             'altamiranoaxius@proton.me',
             'lopezvegamaca@gmail.com',
+            'joaco345vz@gmail.com', # El joaco se ofreció de mod, anda ahí por si acaso su correo
             # Whitelist de correos, pongan sus correos personales aquí para que puedan usarlos normalmente
         ]
         if self.correo not in correosPermitidos and not any(self.correo.lower().endswith('@'+dominio.lower()) for dominio in dominiosPermitidos):
             # Tira error si el correo no está en la whitelist o si no tiene el dominio correcto
-            raise ValidationError("The game")
+            raise ValidationError("You lost the game dude") # xddd
         if self.aliasUsuario and not self.aliasUsuario.startswith('@'):
             # Comprueba que:
             # 1. Exista un alias (con que en aliasUsuario haya un string debería tirar True, si no hay nada tira False)
@@ -121,7 +131,6 @@ class Usuarios(models.Model):
         self.validadorAlias(self.aliasUsuario)
         # Esta cosa valida el alias con regex, si no cumple lo solicitado, tira un muy bonito error
         # No volveré a explicar que hace regex, ya les expliqué antes y cómo configurarlo
-        # la explicación esta desde la linea 82 a la 91 (mak)
         
     def save(self, *args, **kwargs):
         # La función save guarda la clase
@@ -140,7 +149,7 @@ class Usuarios(models.Model):
         super().save(*args, **kwargs) # Guarda los cambios antes de crear la entrada en la base de datos
 
     def __str__(self):
-        return self.nombre
+        return str(self.pk)
     # Util para debug, cómo, no se aún, pero una discusión de stackoverflow lo recomendó
     
 
@@ -163,7 +172,7 @@ class Publicacion(models.Model):
         # para que se vea en la página de admin
     )
     titulo = models.CharField(
-        max_length=50,
+        max_length=100,
         # El título de la publicación, de 50 caracteres de largo
     )
     autor = models.ForeignKey(
@@ -174,8 +183,9 @@ class Publicacion(models.Model):
         # Autor, es una foreign key (muchos-a-uno) ya que muchas publicaciones pueden ser de un usuario
         # Al eliminarse el usuario vinculado al autor, este queda en None, sin eliminar la publicación
     )
-    fechaCreacion = models.DateField(
+    fechaCreacion = models.DateTimeField(
         auto_created=True, 
+        auto_now_add=True,
         null=True, 
         blank=True,
         # La fecha de creación se crea automáticamente al crear la publicación creadamente creada xdddd
@@ -186,9 +196,10 @@ class Publicacion(models.Model):
         # El contenido, está en duda aún el tamaño máximo, no se si limitarlo a 500 o ponerle un número ridiculamente alto
         # O ridiculamente bajo, por las risas
     )
-    topico = models.ManyToManyField(
-        Topicos, 
-        blank=True
+    topico = models.ForeignKey(
+        Topicos,
+        on_delete=models.SET_NULL,
+        null=True
         # El tópico, tiene una relación muchos-a-muchos (multiples tópicos pueden ser de multiples publicaciones)
         # Puede estar en blanco
     )
@@ -197,8 +208,19 @@ class Publicacion(models.Model):
         # Después veo esta variable para saber si mostrar o no el alias del usuario al crear una publicación
         # Por defecto no es anonima
     )
+    ofensivo = models.BooleanField(
+        default=False
+    )
+    enRevision = models.BooleanField(
+        default=False
+    )
+    motivoRevision = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True
+    )
     def __str__(self):
-        return str(self.idPublicacion) + " " + self.titulo
+        return f"{str(self.idPublicacion)}: {self.titulo}"
     # Ayuda...
 
 class Comentario(models.Model):
@@ -219,3 +241,19 @@ class Comentario(models.Model):
         max_length=200,
         # El contenido del comentario, está en duda su tamaño
     )
+    esAnonimo = models.BooleanField(
+        default=False,
+    )
+
+class perfilusuario(models.Model):
+    user = models.OneToOneField(
+        Usuarios, 
+        on_delete=models.CASCADE
+    )
+    description=models.TextField(max_length=700, blank=True ) #no es obligatorio crear una descripción
+    fotoPerfil = models.CharField(
+        blank=True,
+    )
+
+    def __str__(self): #esto es para que el alias se vea legible para los mortales
+        return self.user.nombre
