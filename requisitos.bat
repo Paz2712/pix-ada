@@ -1,4 +1,39 @@
 @echo off
 
-REM Instalar requisitos en "requirements.txt"
-pip install -r requirements.txt
+REM Instalar requisitos
+pip install asgiref==3.10.0
+pip install certifi==2025.10.5
+pip install charset-normalizer==3.4.4
+pip install click==8.3.0
+pip install colorama==0.4.6
+pip install Django==5.2.5
+pip install django-widget-tweaks==1.5.0
+pip install filelock==3.20.0
+pip install fsspec==2025.10.0
+pip install hf-xet==1.2.0
+pip install huggingface-hub==0.36.0
+pip install idna==3.11
+pip install Jinja2==3.1.6
+pip install joblib==1.5.2
+pip install MarkupSafe==2.1.5
+pip install mpmath==1.3.0
+pip install networkx==3.5
+pip install numpy==2.3.4
+pip install packaging==25.0
+pip install pillow==12.0.0
+pip install PyYAML==6.0.3
+pip install regex==2025.11.3
+pip install requests==2.32.5
+pip install sacremoses==0.1.1
+pip install safetensors==0.6.2
+pip install sentencepiece==0.2.1
+pip install setuptools==70.2.0
+pip install sqlparse==0.5.3
+pip install sympy==1.14.0
+pip install tokenizers==0.22.1
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install tqdm==4.67.1
+pip install transformers==4.57.1
+pip install typing_extensions==4.15.0
+pip install tzdata==2025.2
+pip install urllib3==2.5.0
