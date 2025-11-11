@@ -7,29 +7,48 @@
 {% endblock %}
 
 {% block sumShit %}
+    <!--    Muestra el nombre o aliasdependiendo de si es el usuario
+            o un externo quien ve el perfil    -->
     {% if esUsuarioActual %}
-    <h2>Perfil de {{ nombreUsr }}</h2>{% else %}
-    <h2>Perfil de {{ aliasUsr }}</h2>{% endif %}
+        <h1>Perfil de {{ nombreUsr }}</h1>
+    {% else %}
+        <h1>Perfil de {{ aliasUsr }}</h1>
+    {% endif %}
     <p>
-        {% if esUsuarioActual %}<strong>Alias de Usuario: </strong>{{ aliasUsr }} <br>
+        <!--    Mostrará el alias si es el mismo usuario quien ve el perfil
+                no lo hará en otro caso para evitar redundancia    -->
+        {% if esUsuarioActual %}
+            <strong>Alias de Usuario: </strong>{{ aliasUsr }} <br>
         {% endif %}
+
         <strong>Correo: </strong>{{ perfilUsr.user.correo }} <br>
-        <strong>Descripción: </strong>"{{ perfilUsr.description }}" <br>
+
+        {% if perfilUsr.user.creado is None %}
+            <i>Fecha de creación desconocida</i><br>
+        {% else %}
+            <strong>Fecha de creación: </strong>{{ perfilUsr.user.creado }}<br>
+        {% endif %}
+
+        {% if not esUsuarioActual %}
+            <strong>Descripción: </strong>"{{ perfilUsr.description }}" <br>
+        {% endif %}
+
         {% if perfilUsr.user.rol == 'adm' %}
             <strong>Rol: </strong><span style="color: red;">Administrador</span>
         {% elif perfilUsr.user.rol == 'mod' %}
             <strong>Rol: </strong><span style="color: yellow;">Moderador</span>
-        {% else %}{% endif %}
+        {% else %}
+    {% endif %}
     </p>
     {% if esUsuarioActual %}
-    <div style="border-top: 1px dashed #221e64;">
-    <form method="post">
-        {% csrf_token %}
-        <h2>Editar Perfil</h2>
-        <p><Strong>Descripción:</Strong></p>
-        {% render_field form.description class="form-control body-field" placeholder="Descripción" %}<br>
-        <button type="submit" class="button">Guardar</button>
-    </form>
-    <div>
+        <div style="border-top: 1px dashed #221e64;">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Editar Perfil</h2>
+            <p><Strong>Descripción:</Strong></p>
+            {% render_field form.description class="form-control body-field" placeholder="Descripción" %}<br>
+            <button type="submit" class="button">Guardar</button>
+        </form>
+        <div>
     {% endif %}
 {% endblock %}

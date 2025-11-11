@@ -20,7 +20,7 @@ usar models.BooleanField y especifiquen un valor por defecto con (default=<True 
 # El usuario
 class Usuarios(models.Model):
     # Isidora, Pablo, Santi, probablemente Benja y Maca, este es el resultado de 3 noches sin dormir e investigación
-    # intensa. Intenté documentar y explicar todo lo que hice, por qué, entre muchas otras cosas con tal de
+    # intensa. Intenté documentar y explicar todo lo que hice, porque, entre muchas otras cosas, con tal de
     # que puedan editarlo a su gusto. Disfruten, o lloren ante el orden o desorden de mi código, solo quiero dormir
 
     # ----- Identificadores ----- #
@@ -54,6 +54,13 @@ class Usuarios(models.Model):
         choices=rolesDisponibles, 
         default="usr",
         # El rol que tendrá el (por defecto) usuario, manualmente en la pestaña de admins podemos cambiarlo
+    )
+    creado = models.DateField(
+        blank=True,
+        null=True,
+        auto_created=True,
+        auto_now_add=True,
+        editable=True,
     )
 
     # ----- Necesario para usar funciones login de Django ----- #
@@ -200,6 +207,17 @@ class Publicacion(models.Model):
         default=False
         # Después veo esta variable para saber si mostrar o no el alias del usuario al crear una publicación
         # Por defecto no es anonima
+    )
+    ofensivo = models.BooleanField(
+        default=False
+    )
+    enRevision = models.BooleanField(
+        default=False
+    )
+    motivoRevision = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True
     )
     def __str__(self):
         return str(self.idPublicacion) + " " + self.titulo

@@ -25,15 +25,15 @@ se salvaron por el momento
 @admin.register(Usuarios)
 class UsuariosAdmin(admin.ModelAdmin):
     list_display = (
-        "pk", "nombre", "aliasUsuario", "correo", "rol", 
-        "yanMode", "altoContraste"
+        "pk", "nombre", "aliasUsuario", "correo", "rol", "creado",
     )
     fields = ( 
         "nombre", "aliasUsuario", "correo", "contrasena", "rol", 
-        "yanMode", "altoContraste"
+        "yanMode", "altoContraste", "creado",
     )
-    list_filter = ("rol",)
+    list_filter = ("rol", "creado",)
     search_fields = ("nombre", "aliasUsuario", "correo")
+    readonly_fields = ("creado",)
     
 
 @admin.register(Topicos)
