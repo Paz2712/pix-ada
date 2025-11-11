@@ -1,7 +1,7 @@
 @font-face { /* Normal */
     font-family: 'open-dyslexic';
     src:    url("../fonts/OpenDyslexic/OpenDyslexic-Regular.woff") format('woff'),
-            url("../fonts/OpenDyslexic/OpenDyslexic-Regular.woff2") format('woff2');
+            url ("../fonts/OpenDyslexic/OpenDyslexic-Regular.woff2") format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -35,6 +35,10 @@
     font-family: 'sans-comic';
     src:    url('../fonts/Comic\ Sans\ MS.ttf');
 }
+body {
+    background-image: url('../images/bg_placeholder.jpg'); 
+    background-size: cover;
+}
 
 .side-content {
     height: 100%;
@@ -45,6 +49,14 @@
     right: 0;
     border-left: 4px solid #AFBCFA;
     position: fixed;
+    align-items: center;
+    a {
+        color: #AC6CE4;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #CEBEDC;
+    }
     h2 {
         font-family: 'Roboto', sans-serif;
         color: #AFBCFA;
@@ -58,11 +70,12 @@
         font-size: medium;
         a {color: #AC6CE4;}
     }
-    button {
+    input.button {
         background-color: #AC6CE4;
         height: 50px;
+        cursor: pointer;
     }
-    button:hover {
+    input.button:hover {
         background-color: #CEBEDC
     }
 }
@@ -72,12 +85,12 @@
     left: 0;
     position: fixed;
     width: 65%;
-    background-image: url("../images/testImg.jpg");
 
 }
 .input-field {
     background-color: #AC6CE4;
     font-family: 'Roboto', sans-serif;
+    color: #221E64;
     display: block;
     margin-left: auto;
     margin-right: auto;

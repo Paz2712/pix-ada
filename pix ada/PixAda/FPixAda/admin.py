@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuarios, Topicos, Publicacion
+from .models import Usuarios, Topicos, Publicacion, perfilusuario
 
 
 '''
@@ -24,16 +24,16 @@ se salvaron por el momento
 
 @admin.register(Usuarios)
 class UsuariosAdmin(admin.ModelAdmin):
-    list_display = ( 
-        "nombre", "aliasUsuario", "correo", "rol", 
-        "modoOscuro", "yanMode", "altoContraste"
+    list_display = (
+        "pk", "nombre", "aliasUsuario", "correo", "rol", "creado",
     )
     fields = ( 
         "nombre", "aliasUsuario", "correo", "contrasena", "rol", 
-        "modoOscuro", "yanMode", "altoContraste"
+        "yanMode", "altoContraste", "creado",
     )
-    list_filter = ("rol",)
+    list_filter = ("rol", "creado",)
     search_fields = ("nombre", "aliasUsuario", "correo")
+    readonly_fields = ("creado",)
     
 
 @admin.register(Topicos)
@@ -47,9 +47,16 @@ class PublicacionAdmin(admin.ModelAdmin):
         "titulo"
     )
     fields = ( # Las entradas que aparecerán en el formulario
-        "idPublicacion", "autor", "esAnonimo", "fechaCreacion",
+        "idPublicacion", "autor", "esAnonimo",
         "titulo", "cuerpo", "topico"
     )
-    readonly_fields = ("idPublicacion", "fechaCreacion") # Cuales campos NO pueden ser editados manualmente
+    readonly_fields = ("idPublicacion",) # Cuales campos NO pueden ser editados manualmente
     list_filter = ("autor", "esAnonimo", "fechaCreacion", "topico") # Las categorías que apareceran en los filtros de búsqueda
     search_fields = ("titulo", "autor") # Lo que usará el buscador para encontrar
+
+@admin.register(perfilusuario)
+class perfilusuarioAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    fields = ('description', 'user')
+    search_fields = ('user',)
+    readonly_fields = ('user',)

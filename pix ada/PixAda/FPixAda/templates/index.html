@@ -4,43 +4,37 @@
 <head>
     <title>PixADA</title>
     <meta charset="UTF-8"> <!--Añade formato al texto, perfecto para evitar problemas con "ñ" o "á"-->
-    <meta http-equiv="X-UA-Ccompatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Login From</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/stylesdos.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Ajusta la escala de la página con el dispositivo-->
+    <!-- Se entiende que buscas con esta sección, nomás no es necesaria, solo sirve como apoyo
+    a la hora de aparecer en buscadores de navegador, y no creo que pase de fase de desarrollo,
+    pero excelente investigación Maca -->
+    <meta name="description" content="foro de equidad de genero">
+    <meta name="author" content="Los pixis">
+    <meta name="Keywords" content="foro, equidad de genero, mujeres, ayuda, apoyo">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <div class="wrapper">
-        <div class="login-wrapper">
-            <div class="login-header">Login</div>
-            <div class="login-from">
-                <div class="input-wrapper">
-                    <input type="text" id="user" class="input-field" required>
-                    <label for="user" class="label">Username</label>
-                    <i class="bx bx-user icon"></i>    
-                </div>
-                <div class="input-wrapper">
-                    <input type="password" id="pw" class="input-field" required>
-                    <label for="pw" class="label">Password</label>
-                    <i class="bx bx-lock-all icon"></i>
-                </div>
-                <div class="login-check">
-                    <div class="remember">
-                        <input type="checkbox" is="remember-me"/>
-                        <label for="remember-me">Acepto los terminos y condiciones</label>
-                    </div>    
-                    <div class="forgot">
-                        <a href="{% url 'termsConditions' %}">Terminos y condiciones</a> <!-- XD -->
-                    </div>
-                </div>
-                <div class="input-wrapper">
-                    <input type="submit" class="input-login" value="Login" /> <!--Boton login-->
-                </div>
-                <div class="register">
-                    <span> No tienes una cuenta? <a href="{% url 'signin' %}">Register</a></span>
-                </div>
-            </div>
-        </div>
-    </div>
+<body 
+class="
+{% if loggeado and usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
+<span class="index">
+    <h1>PixADA<br>
+    El foro de equidad de género </h1>
+    {% if loggeado %}
+        <p>
+            Bienvenida de vuelta! {{ usuario.nombre }}
+            {% if usuario.rol == 'adm' %}<br><em style="color: red;">STAFF: ADMIN</em>
+            {% elif usuario.rol == 'mod' %}<br><em style="color: yellow;">STAFF: MOD</em>{% endif %}
+            <br><br><a class="button" href="{% url 'foro' %}">Ir al foro</a>
+        </p>
+    {% else %}
+        <p>Inicia sesión y comparte con tus pares <br><br>
+        <a href="{% url 'login' %}" class="button">Iniciar Sesión</a>
+        <br> <br>
+        <small>No tienes una cuenta? <a href="{% url 'signin' %}">Crea una</a></small>
+        </p>
+    {% endif %}
+    
+</span>
 </body>
 </html>

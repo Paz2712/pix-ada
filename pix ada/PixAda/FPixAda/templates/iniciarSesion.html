@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/stylesdos.css' %}">
     <!-- Boxicons para los íconos -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
 
 <body>
@@ -19,27 +20,24 @@
             <!-- El <form> -->
             <form class="login-form" method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"> <!-- Permite tener la variable "next" de manera persistente -->
 
                 <!-- Username -->
                 <div class="input-wrapper">
                     <input type="text" id="user" name="username" class="input-field" required>
-                    <label for="user" class="label">Username</label>
+                    <label for="user" class="label">Nombre de Usuario</label>
                     <i class="bx bx-user icon"></i>    
                 </div>
 
                 <!-- Password -->
                 <div class="input-wrapper">
                     <input type="password" id="pw" name="password" class="input-field" required>
-                    <label for="pw" class="label">Password</label>
+                    <label for="pw" class="label">Contraseña</label>
                     <i class="bx bx-lock-alt icon"></i>
                 </div>
 
-                <!-- Check y enlace -->
+                <!-- Terminos y Condiciones -->
                 <div class="login-check">
-                    <div class="remember">
-                        <input type="checkbox" id="remember-me" name="remember-me">
-                        <label for="remember-me">Acepto los términos y condiciones</label>
-                    </div>    
                     <div class="forgot">
                         <a href="{% url 'termsConditions' %}">Términos y condiciones</a>
                     </div>
@@ -47,13 +45,13 @@
 
                 <!-- Botón login -->
                 <div class="input-wrapper">
-                    <button type="submit" class="input-login">Login</button>
+                    <button type="submit" class="input-login">Iniciar Sesión</button>
                 </div>
 
                 <!-- Register -->
                 <div class="register">
                     <span>¿No tienes una cuenta? 
-                        <a href="{% url 'signin' %}">Register</a>
+                        <a href="{% url 'signin' %}">Registrarse</a>
                     </span>
                 </div>
             </form>

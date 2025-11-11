@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Crea tu publicacion{% endblock %}
+
+{% block topNavbar %}
+<p style="padding-left: 20px;">Algo</p>
+{% endblock %}
+
+{% block sumShit %}
+<div>
+    <h2>Crea tu publicación</h2>
+<form method="post">
+    {% csrf_token %}
+    {% render_field form.titulo placeholder="Título" id="titulo" class="form-control title-field" %} <br>
+    {% render_field form.cuerpo placeholder="Exprésate" class="form-control body-field" %}
+    <h2>Tópico</h2>
+    {% render_field form.topico class="form-control" %}
+    <p>
+        Anonimo? {% render_field form.esAnonimo class="form-control" %}
+    </p>
+    <button type="submit" class="button">Publicar</button>
+    {% if form.errors %}{% for error in form.errors %}
+    <p>{{ error }}</p>{% endfor %}{% endif %}
+</form>
+</div>
+{% endblock %}

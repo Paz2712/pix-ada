@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static }
+
+{% block title %}Foro{% endblock %}
+
+{% block leftNavbar %}
+<a class="item-left" href="{% url 'crearPub' %}">Crear publicación</a> <!-- Copypastear, esta cosa es modular -->
+{% endblock %}
+
+{% block topNavbar %}
+{% endblock %}
+
+{% block sumShit %} <!-- contenido -->
+<h1 id="focus-pagina">
+    Foro
+</h1>
+{% if not foro %}
+<h2>
+    Nada que ver aún<br> <!-- en preparacion de almuerzo...-->
+    Sé el primero en publicar
+</h2>
+{% else %}{% for entrada in foro %} <!-- Un bonito ciclo "for" que automatiza el crear las entradas del foro -->
+<div class="item-foro">
+    <h2 style="padding-left: 10px;">
+        {{ entrada.titulo }}  
+        <small><i>
+            {% if entrada.esAnonimo %}Por un Usuario Anónimo
+            {% else %}Por <a href="{% url 'perfil' entrada.autor.pk %}" class="view-profile">{{ entrada.autor.aliasUsuario }}</a> {% endif %}
+            {% if entrada.autor.rol == 'adm' and not entrada.esAnonimo %}<span style="color: red;">ADMINISTRADOR</span>
+            {% elif entrada.autor.rol == 'mod' and not entrada.esAnonimo %}<span style="color: yellow;">MODERADOR</span>
+            {% else %}{% endif %}
+        </i></small>
+    </h2>
+    <p style="padding-left: 10px;">
+        <small>
+            <i>Publicado el {{ entrada.fechaCreacion }}</i><br>
+        </small>
+        {{ entrada.cuerpo }}
+    </p>
+</div>
+{% endfor %}{% endif %}
+<h2 id="forum-end"> <!-- El texto que aparece al llegar al final del foro -->
+    {% if minForo %}Has llegado al fondo del foro, vaya que tienes tiempo libre
+    {% else %}Nada nuevo aún, llena este espacio con lo que pasa por tu mente{% endif %}
+</h2>
+{% endblock %}

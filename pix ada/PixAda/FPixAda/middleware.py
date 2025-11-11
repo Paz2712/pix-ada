@@ -16,3 +16,5 @@ class AdminRedirectIfUsuariosMiddleware:
             return redirect('BadApple') # Magia damas y caballeros
 
         return self.get_response(request)
+    
+## Le pedí ayuda a alguien en reddit para hacer esto, tenía muchas ganas de hacer algo así xdd
