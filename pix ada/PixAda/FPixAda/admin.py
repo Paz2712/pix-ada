@@ -44,14 +44,15 @@ class TopicosAdmin(admin.ModelAdmin):
 class PublicacionAdmin(admin.ModelAdmin):
     list_display = ( # Lo que se ve desde el menú general
         "idPublicacion", "autor", "esAnonimo", "fechaCreacion",
-        "titulo"
+        "titulo", 'ofensivo', 'enRevision'
     )
     fields = ( # Las entradas que aparecerán en el formulario
         "idPublicacion", "autor", "esAnonimo",
-        "titulo", "cuerpo", "topico"
+        "titulo", "cuerpo", "topico", 
+        'ofensivo', 'enRevision', 'motivoRevision'
     )
-    readonly_fields = ("idPublicacion",) # Cuales campos NO pueden ser editados manualmente
-    list_filter = ("autor", "esAnonimo", "fechaCreacion", "topico") # Las categorías que apareceran en los filtros de búsqueda
+    readonly_fields = ("idPublicacion", 'motivoRevision') # Cuales campos NO pueden ser editados manualmente
+    list_filter = ("autor", "esAnonimo", "fechaCreacion", "topico", 'ofensivo', 'enRevision') # Las categorías que apareceran en los filtros de búsqueda
     search_fields = ("titulo", "autor") # Lo que usará el buscador para encontrar
 
 @admin.register(perfilusuario)

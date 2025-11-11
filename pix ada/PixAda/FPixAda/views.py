@@ -93,13 +93,14 @@ def contrato(request):
 @login_required(login_url='login')
 def foroView(request):
     userID = request.user
-    publicacionesForo = Publicacion.objects.all().order_by('-fechaCreacion').filter()
+    publicacionesForo = Publicacion.objects.all().filter(ofensivo=False)
+    publicacionesOrden = publicacionesForo.order_by('-fechaCreacion')
     variables = {
         'usuario': userID,
         'rol': userID.rol,
-        'foro': publicacionesForo,
+        'foro': publicacionesOrden,
         'page': 'foro',
-        'minForo': len(publicacionesForo) >= 25 # Lo pongo para saber si hay más de 25 publicaciones en el foro
+        'minForo': len(publicacionesOrden) >= 25 # Lo pongo para saber si hay más de 25 publicaciones en el foro
     }
     return render(request, 'foro.html', variables)
 
@@ -123,8 +124,9 @@ def crearPubView(request):
                 publicacion.ofensivo = True
                 archivo = open("logModeracion.txt", "a")
                 archivo.write(f"{str(publicacion.idPublicacion)}, {str(request.user.nombre)}, {str(mod_score)}, \n")
+                archivo.close()
             publicacion.save()
-            Publicacion.objects.delete()
+            return redirect('foro')
     else:
         formulario = publicacionesForm()
 

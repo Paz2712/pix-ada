@@ -220,7 +220,7 @@ class Publicacion(models.Model):
         blank=True
     )
     def __str__(self):
-        return str(self.idPublicacion) + " " + self.titulo
+        return f"{str(self.idPublicacion)}: {self.titulo}"
     # Ayuda...
 
 class Comentario(models.Model):
