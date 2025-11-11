@@ -142,6 +142,7 @@ def crearPubView(request):
 def ayuda(request):
     return 0
 
+
 def badApple(request):
     '''when te das cuenta de que puedes programar
     lo que sea:'''
@@ -169,6 +170,10 @@ def edicion_perfil(request, userPK):
         'esUsuarioActual': perfilActual.user == userID,
     }
     return render(request, 'perfilUsuario.html', variables)
+
+
+def preguntasfrecuentes(request):
+    return render(request,"preguntasfrecente.html")
 
 
 '''
@@ -214,3 +219,5 @@ el contexto será todo lo interactivo que usará el HTML.
 Digamos que tienes adentro un ciclo que va cambiando cierta variable, crea un diccionario con esa variable que va cambiando,
 la cual será usada en el archivo HTML.
 '''
+def badApple(request):
+    return render(request, 'ba.html')

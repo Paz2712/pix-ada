@@ -21,10 +21,10 @@ urlpatterns = [
     path("login/", views.loginUsuario, name="login"), ## http://localhost:8000/login/
     path("logout/", views.logoutUsuario, name='logout'), ## http://localhost:8000/logout/
     path('foro/', views.foroView, name='foro'), ## http://localhost:8000/foro/
-    #path('foro/publicacion/<str:')
     path("foro/crear/", views.crearPubView, name='crearPub'), ## http://localhost:8000/foro/crear/
     path('toadmin/', views.toAdmin, name='redirectAdmin'), ## http://localhost:8000/toadmin/
     path("perfil/<str:userPK>", views.edicion_perfil, name= "perfil"), ## http://127.0.0.1:8000/editarperfil/
+    path("FAQ/",views.preguntasfrecuentes,name="FAQ"), ## http://localhost:8000/FAQ/
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)
