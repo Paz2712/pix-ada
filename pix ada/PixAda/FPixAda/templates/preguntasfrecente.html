@@ -11,16 +11,14 @@
     <div class="layout">
 
     <aside class="sidebar">
-        <div class="top-line">
         <img src="{% static 'images/toothless1.jpg' %}" class="logo" alt="CHIMUELITO :)">
-        </div>
-        <button>Ir al Foro</button>
-
-
-
-       
-
-    </aside>
+        <div class="top-line"></div>
+        <a class="item-left" href="{% url 'foro' %}">Ir al foro</a>
+        <a class="item-left" href="{% url 'crearPub' %}"> Crear Publicacion</a>
+     </aside>
+    
+    
+    
 
     <main class="contenido">
 
@@ -55,7 +53,9 @@
     </details>
     <details class="contrasena">
         <summary>olvide mi contraseña que hago?</summary>
-        <p>no te preocupes! en nuestro login está la opción de cambiar contraseña, es tan facil como mandar un correo verificador a tu mail pidiendo que cambies tu contraseña.</p>
+        <p>Actualmente no puedes hacer nada:(</p>
+        <p>PixAda se encuentra en fase beta asi que recuerda bien tu contraseña no la podras cambiar</p>
+        <p>Esperamos que en un futuro se pueda implementar esta funcion <span>Estate atento a futuras novedades!</span></p>
     </details>
     
     <div class="subtitulo">

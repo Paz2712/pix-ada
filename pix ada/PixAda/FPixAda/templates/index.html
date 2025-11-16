@@ -14,9 +14,7 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
-<body 
-class="
-{% if loggeado and usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
+<body class="{% if loggeado and usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
 <span class="index">
     <h1>PixADA<br>
     El foro de equidad de género </h1>
@@ -27,6 +25,28 @@ class="
             {% elif usuario.rol == 'mod' %}<br><em style="color: yellow;">STAFF: MOD</em>{% endif %}
             <br><br><a class="button" href="{% url 'foro' %}">Ir al foro</a>
         </p>
+            
+        
+        <h1>Bienvenid@ a Pix Ada</h1>
+        <p>Te presentamos <strong>Pix Ada</strong>, un entorno donde se pueden compartir ideas, experiencias y aprendizajes desde la horizontalidad. Todas las voces valen, sin importar la proveniencia. Deseamos la seguridad de todos nuestros usuarios y que se sientan incluidos, especialmente las mujeres y personas de género no binario que quieran expresarse y conectar con otras personas.</p>
+    
+        <p>Para que todo esto funcione y se pueda disfrutar de un entorno seguro, debes comprometerte a cumplir con tus responsabilidades de usuario:</p>
+
+        
+        <span class="indexList-wrapper">
+        <ul>
+            <li><strong>Respeto ante todo:</strong> Cada opinión merece ser escuchada sin juicios ni descalificaciones.</li>
+            <li><strong>Horizontalidad:</strong> Aquí nadie está “por encima” de nadie; todas y todos aprendemos juntes.</li>
+            <li><strong>Honestidad:</strong> Comparte tus ideas y experiencias con transparencia y sinceridad.</li>
+            <li><strong>Escucha activa:</strong> Valora lo que otras personas aportan, incluso si piensan distinto.</li>
+            <li><strong>Motivación para crecer:</strong> Este es un espacio para inspirarnos mutuamente y construir comunidad.</li>
+        </ul>
+        </span>
+        <p><strong>Te esperamos en Pix Ada y recuerda que “Tu voz sí importa”.</strong></p>
+        <p><strong>¡Únete a la conversación y hagamos de Pix Ada un espacio diverso, seguro y lleno de aprendizaje!</strong></p>
+        <p>Para más información sobre términos de servicios y condiciones de usuario, visita la siguiente sección de la página web: 
+            <!-- hay que poner link que mande pagina de termino y condiciones -->
+
     {% else %}
         <p>Inicia sesión y comparte con tus pares <br><br>
         <a href="{% url 'login' %}" class="button">Iniciar Sesión</a>

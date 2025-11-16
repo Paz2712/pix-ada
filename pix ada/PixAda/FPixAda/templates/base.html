@@ -6,36 +6,39 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="{% static 'js/smth.js' %}"></script>
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    {% block head %}{% endblock %}
 </head>
 <body 
 class="
 {% if usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
-    <div id="navBar" class="left-menu">
-        {% block leftNavbar %}{% endblock %}
-        <a class="item-left" href="{% url 'perfil' usuario.pk %}">Editar Perfil de Usuario</a>
-        <a href="{% url 'foro' %}" class="item-left">Foro</a>
+
+    <div id="left-border"></div>
+    <div id="top-border"></div>
+    <div class="profile-wrapper">
+        <p class="profile">
+        {% if usuario.rol == 'adm' %}
+            {{ usuario.nombre }} <a href="{% url 'redirectAdmin' %}" class="admin-trigger">ADMIN</a>
+        {% elif usuario.rol == 'mod' %}
+            {{ usuario.nombre }} <span class="mod-untrigger">MOD</span>
+        {% else %}
+            {{ usuario.nombre }}
+        {% endif %}
+        </span>
+        <a href="{% url 'perfil' usuario.pk %}" class="profile-trigger">
+            {{ usuario.aliasUsuario }}
+        </a>
+        </p>
+    </div>
+    <div class="item-left-wrapper">
+        <a href="{% url 'foro' %}" class="item-left">
+            Foro
+        </a>
+        <a href="{% url 'crearPub' %}" class="item-left">
+            Crear Publicación
+        </a>
     </div>
 
-    <div class="top-menu">
-        <div class="user-profile">
-            <p>{{ usuario.nombre }} #{{ usuario.pk }}
-                {% if usuario.rol == 'adm' %}<a class='admin-trigger' href="{% url 'redirectAdmin' %}"> ADMIN</a>
-                {% elif usuario.rol == 'mod' %}<span style="color: yellow;"> MODERADOR</span>
-                {% endif %}<br>
-                <i>{{ usuario.aliasUsuario }}</i>
-            </p>
-        </div>
-
-        <div
-        class="content-topbar">
-            {% block topNavbar %}{% endblock %}
-        </div>
-
-        <div>
-            <a class="signout" href="{% url 'logout' %}" title="Cerrar Sesión">x</a>
-        </div>
     </div>
 
     <div id="sumShit" class="content">

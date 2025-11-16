@@ -1,6 +1,6 @@
 ## Lineas 2-3, se encargan de renderizar cosas en la página o redirigir
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, Http404
 from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -9,9 +9,9 @@ from django.contrib.auth.decorators import login_required
 import time
 from transformers import pipeline
 
-from .forms import LoginUsuariosForm, RegistroUsuariosForm, publicacionesForm, perfilusuarioform
+from .forms import LoginUsuariosForm, RegistroUsuariosForm, publicacionesForm, perfilusuarioform, apelarForm
 from .utils.auth import anonymous_required
-from .models import Publicacion, Comentario, Topicos, perfilusuario
+from .models import Publicacion, Comentario, Topicos, perfilusuario, Usuarios
 
 moderador = pipeline("text-classification", model="cardiffnlp/twitter-roberta-base-offensive")
 traductor = pipeline("translation", model="Helsinki-NLP/opus-mt-es-en")
@@ -22,7 +22,6 @@ def revisarTexto(contenido):
     print(f'Texto original: {contenido} \nTexto traducido: {traducir} \n')
     print(resultado)
     return resultado
-
 
 
 @anonymous_required(redirect_url='homepage')
@@ -36,6 +35,7 @@ def signinUsuario(request: HttpRequest):
             return redirect('homepage')
     else:
         formulario = RegistroUsuariosForm()
+    perfilusuario.objects.create(user=usuario.pk)
     variables = {
         'form': formulario,
     }
@@ -82,8 +82,10 @@ def index(request):
 
 
 def toAdmin(request: HttpRequest):
-    logout(request)
-    return redirect(reverse('admin:index'))
+    if request.user.rol == 'adm':
+        logout(request)
+        return redirect(reverse('admin:index'))
+    return redirect('BadApple')
 
 
 def contrato(request):
@@ -109,8 +111,8 @@ def foroView(request):
 def crearPubView(request):
     userID = request.user
 
-    if request.method == 'POST':
-        formulario = publicacionesForm(request.POST)
+    if request.method == 'POST': # Siempre va
+        formulario = publicacionesForm(request.POST) # Se define el formulario
         if formulario.is_valid():
             titulo = formulario.cleaned_data['titulo']
             cuerpo = formulario.cleaned_data['cuerpo']
@@ -122,14 +124,15 @@ def crearPubView(request):
             publicacion.autor = request.user
             if mod_flag == 'offensive':
                 publicacion.ofensivo = True
+                publicacion.save()
                 archivo = open("logModeracion.txt", "a")
                 archivo.write(f"{str(publicacion.idPublicacion)}, {str(request.user.nombre)}, {str(mod_score)}, \n")
                 archivo.close()
+                return redirect()
             publicacion.save()
             return redirect('foro')
     else:
         formulario = publicacionesForm()
-
     variables = {
         'form': formulario,
         'usuario': userID,
@@ -138,9 +141,35 @@ def crearPubView(request):
     return render(request, 'crearPub.html', variables)
 
 
-@login_required(login_url='login')
-def ayuda(request):
+def postView(request, postID):
+    publicacion = get_object_or_404(Publicacion, idPublicacion=postID)
+    if not publicacion.ofensivo: # Si el post no esta flageado, lo mandará a la visualización normal
+        return render(
+            request, 
+            'publicacion.html',
+            {
+                'publicacion': publicacion,
+                'usuario': request.user,
+            })
+    """
+    if publicacion.ofensivo and not publicacion.enRevision:
+        if request.method == 'POST':
+            formulario = apelarForm(request.POST)
+            if formulario.is_valid():
+                publicacion.enRevision = True
+                publicacion.motivoRevision = formulario.cleaned_data['motivo']
+                return redirect(
+                    request,
+                    '')
+        else:
+            formulario = apelarForm()
     return 0
+    """
+
+
+def foroFilterView(request, filterBY):
+    return 0
+
 
 
 def badApple(request):
@@ -153,6 +182,7 @@ def badApple(request):
 def edicion_perfil(request, userPK):
     userID= request.user
     perfilActual = get_object_or_404(perfilusuario, user=userPK)
+    print(perfilActual)
     perfil, creado = perfilusuario.objects.get_or_create(user=userID)
     if request.method == 'POST':
         form = perfilusuarioform(request.POST, instance=perfil)
@@ -169,6 +199,8 @@ def edicion_perfil(request, userPK):
         'perfilUsr': perfilActual,
         'esUsuarioActual': perfilActual.user == userID,
     }
+    usuario = Usuarios.objects.get(nombre="Axius")
+    print(usuario)
     return render(request, 'perfilUsuario.html', variables)
 
 

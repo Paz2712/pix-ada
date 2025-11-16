@@ -1,2 +1,4 @@
-
+ID, Usuario, Puntaje
 None, Axius, 0.6870313286781311, 
+None, Axius, 0.7152060866355896, 
+21, Axius, 0.790015459060669, 

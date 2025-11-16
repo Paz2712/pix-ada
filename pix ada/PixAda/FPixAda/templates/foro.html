@@ -3,13 +3,6 @@
 
 {% block title %}Foro{% endblock %}
 
-{% block leftNavbar %}
-<a class="item-left" href="{% url 'crearPub' %}">Crear publicación</a> <!-- Copypastear, esta cosa es modular -->
-{% endblock %}
-
-{% block topNavbar %}
-{% endblock %}
-
 {% block sumShit %} <!-- contenido -->
 <h1 id="focus-pagina">
     Foro
@@ -19,7 +12,8 @@
     Nada que ver aún<br> <!-- en preparacion de almuerzo...-->
     Sé el primero en publicar
 </h2>
-{% else %}{% for entrada in foro %} <!-- Un bonito ciclo "for" que automatiza el crear las entradas del foro -->
+<!-- Un bonito ciclo "for" que automatiza el crear las entradas del foro -->
+{% else %}{% for entrada in foro %} 
 <div class="item-foro">
     <h2 style="padding-left: 10px;">
         {{ entrada.titulo }}  

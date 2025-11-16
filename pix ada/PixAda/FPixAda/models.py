@@ -171,11 +171,10 @@ class Publicacion(models.Model):
         # Nuestra primary key, todo el resto tiene de primary key un id por defecto, aquí especifico una
         # para que se vea en la página de admin
     )
-    titulo = models.CharField(
-        max_length=100,
-        # El título de la publicación, de 50 caracteres de largo
+    titulo = models.CharField( # Character field, para texto
+        max_length=100, # Longitud máxima
     )
-    autor = models.ForeignKey(
+    autor = models.ForeignKey( # muchos a uno
         Usuarios, 
         on_delete=models.SET_NULL, 
         null=True, 
@@ -183,15 +182,15 @@ class Publicacion(models.Model):
         # Autor, es una foreign key (muchos-a-uno) ya que muchas publicaciones pueden ser de un usuario
         # Al eliminarse el usuario vinculado al autor, este queda en None, sin eliminar la publicación
     )
-    fechaCreacion = models.DateTimeField(
+    fechaCreacion = models.DateTimeField( # Fecha y Hora
         auto_created=True, 
-        auto_now_add=True,
+        auto_now_add=True, 
         null=True, 
         blank=True,
         # La fecha de creación se crea automáticamente al crear la publicación creadamente creada xdddd
         # Mátame, ese chiste fué malísimo, peor que los de la maca  
     )
-    cuerpo = models.TextField(
+    cuerpo = models.TextField( # Mucho texto
         max_length=500
         # El contenido, está en duda aún el tamaño máximo, no se si limitarlo a 500 o ponerle un número ridiculamente alto
         # O ridiculamente bajo, por las risas
@@ -199,11 +198,11 @@ class Publicacion(models.Model):
     topico = models.ForeignKey(
         Topicos,
         on_delete=models.SET_NULL,
-        null=True
-        # El tópico, tiene una relación muchos-a-muchos (multiples tópicos pueden ser de multiples publicaciones)
+        null=True,
+        # El tópico, tiene una relación (multiples tópicos pueden ser de multiples publicaciones)
         # Puede estar en blanco
     )
-    esAnonimo = models.BooleanField(
+    esAnonimo = models.BooleanField( # True o False
         default=False
         # Después veo esta variable para saber si mostrar o no el alias del usuario al crear una publicación
         # Por defecto no es anonima
@@ -246,7 +245,7 @@ class Comentario(models.Model):
     )
 
 class perfilusuario(models.Model):
-    user = models.OneToOneField(
+    user = models.OneToOneField( # Uno a uno
         Usuarios, 
         on_delete=models.CASCADE
     )

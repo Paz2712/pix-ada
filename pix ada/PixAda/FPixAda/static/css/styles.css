@@ -44,36 +44,110 @@
 }
 .dyslexic {
     font-family: 'open-dyslexic', "Roboto", sans-serif;
+    font-size: 0.85em;
+}
+
+.indexList-wrapper {
+    text-align: left;
+    padding-left: 300px;
 }
 
 body {
     background-color: #DCE4FB;
-    .left-menu {
-        background-color: #CEBEDC;
-        height: calc(100% - 59px);
-        width: 225px;
-        z-index: 69; /* Nice */
-        bottom: 0;
-        left: 0;
-        border-right: 4px solid #221E64;
-        position: fixed;
-        a.item-left {
-            display: flex;
-            border-bottom: 2px solid #221E64;
-            justify-content: left;
-            height: 50px;
-            align-items: center;
-            padding-left: 10px;
-            text-decoration: none;
-            color: #221E64;
-        }
-        a.item-left:hover {
-            background-color: #DCE4FB;
-            cursor: pointer;
-        }
-    }
+}
+
+.logo-wrapper {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    text-align: center;
+    align-content: center;
+    border-bottom: rgb(0, 0, 0) 2px solid;
+    border-right: #000000 2px solid;
+    background-image: url(../images/logoMorado.png);
+    background-size: contain;
+}
+.logo {
+    color: #000000;
+    font-size: 3em;
+}
+
+
+.profile-wrapper {
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 101.5px;
+    text-align: center;
+    align-items: center;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+
+}
+.profile { /* Sección de perfil a la izquierda */
+    color: #000000;
+    font-size: 1em;
+}
+.profile-trigger { /* Controla el botón para ir al perfil de la pe */
+    text-decoration: none;
+    color: #000000;
+}
+.profile-trigger:hover {
+    color: #c96fe9;
+}
+
+.admin-trigger {
+    text-decoration: none;
+    color: red;
+}
+.admin-trigger:hover {
+    color: #221E64;
+}
+.mod-untrigger {
+    color: yellow;
+}
+
+.item-left-wrapper {
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 100;
+    width: 200px; /*linea largo*/
+    height: 102px;
+    top: 205.5px;  /*eje y*/
+    border-radius: 0px 30px 0px 30px;
+    background: transparent;
+
+}
+.item-left {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    border-bottom: #7D38D0 2px solid;
+    text-decoration: none;
+    align-items: center;
+    left: 2%; /* Align y axis */
+     /* Align x axis */
+    /* only for flex or flexbox items */
+}
+.item-left:hover {
+    background-color: #7D38D0;
+    border-radius: 0px 30px 0px 30px;
+    background: transparent;
+    color: black;
+    justify-content: center;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    transition: 0.3s;
+
+}
+
+body {
     .top-menu {
-        background-color: #CEBEDC;
+        background-color: #c96fe9;
         height: 55px;
         width: calc(100% - 225px - 4px - 55px);
         /* Largo de la pantalla - width del menu izquierdo - borde izquierdo - el botón de signout */
@@ -85,7 +159,7 @@ body {
         position: fixed;
     }
     .title-field {
-        background-color: #CEBEDC;
+        background-color: #c96fe9;
         font-family: 'Roboto', sans-serif;
         color: #221E64;
         display: block;
@@ -96,7 +170,7 @@ body {
         font-size: large;
     }
     .body-field {
-        background-color: #CEBEDC;
+        background-color: #c96fe9;
         font-family: 'Roboto', sans-serif;
         color: #221E64;
         display: block;
@@ -158,13 +232,6 @@ body {
         text-align: center;
         position: fixed;
     }
-    .admin-trigger {
-        text-decoration: none;
-        color: red;
-    }
-    .admin-trigger:hover {
-        color: #221E64;
-    }
     .button {
         display: inline-block;
         padding: 10px 20px;
@@ -175,7 +242,7 @@ body {
         cursor: pointer;
     }
     .button:hover {
-        background-color: #CEBEDC;
+        background-color: #c96fe9;
     }
     .content {
         padding-top: 55px;
@@ -196,7 +263,7 @@ body {
 }
 
 #forum-end { /* Texto al final del foro */
-    border-top: 1px dashed #CEBEDC;
+    border-top: 1px dashed #000000;
     text-align: center; 
     padding-top: 55px;
 }
@@ -209,11 +276,35 @@ body {
 strong, b { /* Le dice a las fuentes que se pongan negras */
     font-weight: bold;
 }
-
 em, i { /* Le dice a las fuentes que se pongan en itálica */
     font-style: italic;
 }
 
 .ba {
     background-color: #000000;
+}
+
+#tyc-h1 {
+    text-align: center;
+}
+
+#left-border {
+    position: fixed;
+    z-index:0;
+    width: 208px;
+    height: calc(100% - 75px);
+    background-color: #93b3fa;
+    border-radius: 30px 30px 30px 30px;
+    left: 0;
+    bottom: 10px;
+}
+
+#top-border {
+    position: fixed;
+    top: 0;
+    height: 75px;
+    width: 100%;
+    background-color: #93B3FA;
+    left: 0;
+    border-bottom: #000000 1px solid;
 }

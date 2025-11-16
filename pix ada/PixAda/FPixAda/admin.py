@@ -60,4 +60,3 @@ class perfilusuarioAdmin(admin.ModelAdmin):
     list_display = ('user',)
     fields = ('description', 'user')
     search_fields = ('user',)
-    readonly_fields = ('user',)

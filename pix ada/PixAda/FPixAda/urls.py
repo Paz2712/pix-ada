@@ -23,8 +23,10 @@ urlpatterns = [
     path('foro/', views.foroView, name='foro'), ## http://localhost:8000/foro/
     path("foro/crear/", views.crearPubView, name='crearPub'), ## http://localhost:8000/foro/crear/
     path('toadmin/', views.toAdmin, name='redirectAdmin'), ## http://localhost:8000/toadmin/
-    path("perfil/<str:userPK>", views.edicion_perfil, name= "perfil"), ## http://127.0.0.1:8000/editarperfil/
+    path("perfil/<str:userPK>", views.edicion_perfil, name= "perfil"), ## http://127.0.0.1:8000/perfil/6
     path("FAQ/",views.preguntasfrecuentes,name="FAQ"), ## http://localhost:8000/FAQ/
+    path('foro/post/<str:postID>', views.postView, name='publicacion')
+
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)
