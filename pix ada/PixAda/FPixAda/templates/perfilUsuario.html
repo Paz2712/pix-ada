@@ -9,11 +9,13 @@
 {% block sumShit %}
     <!--    Muestra el nombre o aliasdependiendo de si es el usuario
             o un externo quien ve el perfil    -->
+    <h1 id="focus-pagina">
     {% if esUsuarioActual %}
-        <h1>Perfil de {{ nombreUsr }}</h1>
+        Perfil de <span style="color: #7D38D0;">{{ nombreUsr }}</span>
     {% else %}
-        <h1>Perfil de {{ aliasUsr }}</h1>
+        Perfil de <span style="color: #7D38D0;">{{ aliasUsr }}</span>
     {% endif %}
+    </h1>
     <p>
         <!--    Mostrará el alias si es el mismo usuario quien ve el perfil
                 no lo hará en otro caso para evitar redundancia    -->

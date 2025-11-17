@@ -18,13 +18,23 @@
     <h2 style="padding-left: 10px;">
         {{ entrada.titulo }}  
         <small><i>
-            {% if entrada.esAnonimo %}Por un Usuario Anónimo
-            {% else %}Por <a href="{% url 'perfil' entrada.autor.pk %}" class="view-profile">{{ entrada.autor.aliasUsuario }}</a> {% endif %}
-            {% if entrada.autor.rol == 'adm' and not entrada.esAnonimo %}<span style="color: red;">ADMINISTRADOR</span>
-            {% elif entrada.autor.rol == 'mod' and not entrada.esAnonimo %}<span style="color: yellow;">MODERADOR</span>
-            {% else %}{% endif %}
+            {% if entrada.autor == None%}
+                Por un Usuario Eliminado
+            {% else %}
+                {% if entrada.esAnonimo %}
+                    Por un Usuario Anónimo
+                {% else %}
+                    Por <a href="{% url 'perfil' entrada.autor.pk %}" class="view-profile">{{ entrada.autor.aliasUsuario }}</a> 
+                {% endif %}
+                {% if entrada.autor.rol == 'adm' and not entrada.esAnonimo %}
+                    <span style="color: red;">ADMINISTRADOR</span>
+                {% elif entrada.autor.rol == 'mod' and not entrada.esAnonimo %}
+                    <span style="color: yellow;">MODERADOR</span>
+                {% else %}{% endif %}
+            {% endif %}
         </i></small>
     </h2>
+    <p id="topico"><i>{{ entrada.topico }}</i></p>
     <p style="padding-left: 10px;">
         <small>
             <i>Publicado el {{ entrada.fechaCreacion }}</i><br>

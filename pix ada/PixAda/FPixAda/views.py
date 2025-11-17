@@ -35,7 +35,6 @@ def signinUsuario(request: HttpRequest):
             return redirect('homepage')
     else:
         formulario = RegistroUsuariosForm()
-    perfilusuario.objects.create(user=usuario.pk)
     variables = {
         'form': formulario,
     }
@@ -128,7 +127,7 @@ def crearPubView(request):
                 archivo = open("logModeracion.txt", "a")
                 archivo.write(f"{str(publicacion.idPublicacion)}, {str(request.user.nombre)}, {str(mod_score)}, \n")
                 archivo.close()
-                return redirect()
+                return redirect('foro')
             publicacion.save()
             return redirect('foro')
     else:
@@ -181,26 +180,23 @@ def badApple(request):
 @login_required(login_url='login')
 def edicion_perfil(request, userPK):
     userID= request.user
-    perfilActual = get_object_or_404(perfilusuario, user=userPK)
-    print(perfilActual)
-    perfil, creado = perfilusuario.objects.get_or_create(user=userID)
-    if request.method == 'POST':
-        form = perfilusuarioform(request.POST, instance=perfil)
+    perfilActual = get_object_or_404(perfilusuario, user__pk=userPK)
+    esUsuarioActual = perfilActual.user == userID
+    if request.method == 'POST' and esUsuarioActual:
+        form = perfilusuarioform(request.POST, instance=perfilActual)
         if form.is_valid():
             form.save()
             return redirect('perfil', str(userPK))
     else:
-        form = perfilusuarioform(instance=perfil)
+        form = perfilusuarioform(instance=perfilActual)
     variables = {
         'form': form,
         'usuario': userID,
         'nombreUsr': perfilActual.user.nombre,
         'aliasUsr': perfilActual.user.aliasUsuario,
         'perfilUsr': perfilActual,
-        'esUsuarioActual': perfilActual.user == userID,
+        'esUsuarioActual': esUsuarioActual,
     }
-    usuario = Usuarios.objects.get(nombre="Axius")
-    print(usuario)
     return render(request, 'perfilUsuario.html', variables)
 
 

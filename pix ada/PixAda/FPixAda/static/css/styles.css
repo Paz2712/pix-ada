@@ -57,22 +57,43 @@ body {
 }
 
 .logo-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 175px;
+    height: 75px;
     position: fixed;
     z-index: 100;
     left: 0;
     top: 0;
-    text-align: center;
-    align-content: center;
-    border-bottom: rgb(0, 0, 0) 2px solid;
-    border-right: #000000 2px solid;
-    background-image: url(../images/logoMorado.png);
+    background-image: url(../images/logoPIXADA.png);
     background-size: contain;
 }
-.logo {
+.logo-index {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.logout-wrapper {
+    right: 20px;
+    top: 0;
+    width: fit-content;
+    height: 75px;
+    position: fixed;
+    align-content: center;
+    z-index: 200;
+}
+.logout {
+    background-color: red;
+    text-decoration: none;
     color: #000000;
-    font-size: 3em;
+    border-radius: 10px;
+    padding: 8px 8px;
+    display: flex;
+    justify-content: center;
+}
+.logout:hover {
+    background-color: #221E64;
+    color: white;
 }
 
 
@@ -145,6 +166,14 @@ body {
 
 }
 
+#topico {
+    padding: 4px 8px 4px 8px;
+    background-color: #AC6CE4;
+    color: #000000;
+    border-radius: 5px;
+    width: fit-content;
+}
+
 body {
     .top-menu {
         background-color: #c96fe9;
@@ -159,7 +188,7 @@ body {
         position: fixed;
     }
     .title-field {
-        background-color: #c96fe9;
+        background-color: #93b3fa;
         font-family: 'Roboto', sans-serif;
         color: #221E64;
         display: block;
@@ -170,7 +199,7 @@ body {
         font-size: large;
     }
     .body-field {
-        background-color: #c96fe9;
+        background-color: #93b3fa;
         font-family: 'Roboto', sans-serif;
         color: #221E64;
         display: block;
@@ -235,14 +264,15 @@ body {
     .button {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #AC6CE4;
+        background-color: #93b3fa;
         color: #221E64;
         text-decoration: none;
         border-radius: 5px;
         cursor: pointer;
     }
     .button:hover {
-        background-color: #c96fe9;
+        background-color: #221E64;
+        color: white;
     }
     .content {
         padding-top: 55px;
@@ -307,4 +337,45 @@ em, i { /* Le dice a las fuentes que se pongan en itálica */
     background-color: #93B3FA;
     left: 0;
     border-bottom: #000000 1px solid;
+}
+
+
+
+
+
+
+
+#topicos-box {
+    position: fixed;
+    top: 390px; /* debajo del FAQ */
+    left: 0;
+    width: 175px;
+    background-color: #AEBCF9;
+    border-radius: 0 30px 30px 0;
+    padding: 10px;
+    border-right: 4px solid #221E64;
+    z-index: 90;
+}
+
+.topicos-title {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #221E64;
+}
+
+.topic-option {
+    display: block;
+    padding: 8px 10px;
+    border-bottom: 2px solid #7D38D0;
+    cursor: pointer;
+}
+
+.topic-option:hover {
+    background-color: #c96fe9;
+    border-radius: 0 30px 30px 0;
+}
+
+.topic-option input {
+    margin-right: 6px;
 }

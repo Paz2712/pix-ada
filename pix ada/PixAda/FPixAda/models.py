@@ -2,10 +2,9 @@ from django.db import models
 from django.contrib.auth.hashers import make_password, check_password, identify_hasher # No tocar, encripta las contraseñas
 from django.core.exceptions import ValidationError # Un error bien bonito que ocurre si no hacen lo que pedimos (lo uso para el correo)
 from django.core.validators import RegexValidator # Es un validador del que me enamoré, me hace la vida más facil
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-#--------sacar luego
-from django.contrib.auth.models import User
-#----------------
 
 '''
 Aquí se crea el modelo de la base de datos
@@ -17,6 +16,9 @@ usar models.charField y especifiquen un máximo de largo con (max_length=<el nú
 Para un atributo que requiera de SI o NO,
 usar models.BooleanField y especifiquen un valor por defecto con (default=<True o False>)
 '''
+
+
+
 # El usuario
 class Usuarios(models.Model):
     # Isidora, Pablo, Santi, probablemente Benja y Maca, este es el resultado de 3 noches sin dormir e investigación
@@ -68,7 +70,7 @@ class Usuarios(models.Model):
     # Me rindo, usaré las funciones de Django para hacer el login
     # Requiere estos dos campos, por si luego quiero integrarlo con la ventana de admin (solo nosotros lo veremos, no el usuario promedio)
     # Lo robé del tutorial de Mozilla
-    # Quiero un café
+    # Quiero un café.
 
     is_active = models.BooleanField(default=True) # Comprueba si el usuario está activo, lo desactivamos en lugar de eliminarlo, para evitar conflictos en la DB
     is_staff = models.BooleanField(default=False) # Comprueba si es uno de nosotros (nunca lo serán xdd)
@@ -82,6 +84,9 @@ class Usuarios(models.Model):
     @property
     def is_anonymous(self): # Ignorar, Django me obliga a ponerlo para el login. Las publicaciones serán anonimas (no usuarios)
         return False
+    @property
+    def perfil(self):
+        return self.perfilusuario
 
 
     # ----- Preferencias de usuario ----- #
@@ -183,10 +188,7 @@ class Publicacion(models.Model):
         # Al eliminarse el usuario vinculado al autor, este queda en None, sin eliminar la publicación
     )
     fechaCreacion = models.DateTimeField( # Fecha y Hora
-        auto_created=True, 
         auto_now_add=True, 
-        null=True, 
-        blank=True,
         # La fecha de creación se crea automáticamente al crear la publicación creadamente creada xdddd
         # Mátame, ese chiste fué malísimo, peor que los de la maca  
     )
@@ -244,15 +246,26 @@ class Comentario(models.Model):
         default=False,
     )
 
+# Esta cosa crea los perfiles de usuario automáticamente
+@receiver(post_save, sender=Usuarios)
+def auto_perfil(sender, instance, created, **kwargs):
+    if created:
+        perfilusuario.objects.create(user=instance)
+
+
 class perfilusuario(models.Model):
     user = models.OneToOneField( # Uno a uno
         Usuarios, 
         on_delete=models.CASCADE
     )
     description=models.TextField(max_length=700, blank=True ) #no es obligatorio crear una descripción
+    """
+    --- DESHECHADO ---
     fotoPerfil = models.CharField(
         blank=True,
     )
+    --- DESHECHADO ---
+    """
 
     def __str__(self): #esto es para que el alias se vea legible para los mortales
         return self.user.nombre

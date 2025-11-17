@@ -10,22 +10,33 @@
     {% block head %}{% endblock %}
 </head>
 <body 
-class="
-{% if usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
-
+class="{% if usuario.yanMode %}dyslexic {% else %}regular {% endif %}">
+    <div class="logo-wrapper">
+        <a href="{% url 'homepage' %}" class="logo-index" title="Ir a la pestaña de inicio"></a>
+    </div>
     <div id="left-border"></div>
-    <div id="top-border"></div>
+    <div id="top-border">
+        <div class="logout-wrapper">
+            <a href="{% url 'logout' %}" class="logout" title="Cerrar Sesión">Cerrar Sesión</a>
+        </div>
+    </div>
     <div class="profile-wrapper">
         <p class="profile">
         {% if usuario.rol == 'adm' %}
-            {{ usuario.nombre }} <a href="{% url 'redirectAdmin' %}" class="admin-trigger">ADMIN</a>
+            {{ usuario.nombre }} 
+            <a href="{% url 'redirectAdmin' %}" class="admin-trigger" title="Ir al panel de administrador">
+                ADMIN
+            </a>
         {% elif usuario.rol == 'mod' %}
-            {{ usuario.nombre }} <span class="mod-untrigger">MOD</span>
+            {{ usuario.nombre }} 
+            <span class="mod-untrigger">
+                MOD
+            </span>
         {% else %}
             {{ usuario.nombre }}
         {% endif %}
         </span>
-        <a href="{% url 'perfil' usuario.pk %}" class="profile-trigger">
+        <a href="{% url 'perfil' usuario.pk %}" class="profile-trigger" title="Ver tu perfil">
             {{ usuario.aliasUsuario }}
         </a>
         </p>
@@ -41,6 +52,37 @@ class="
             Preguntas Frecuentes
         </a>
     </div>
+
+    <!-- ★★★ RECUADRO DE TÓPICOS (PEGADO JUSTO AQUÍ) ★★★ -->
+    <div id="topicos-box">
+        <h3 class="topicos-title">Tópicos</h3>
+
+        <label class="topic-option">
+            <input type="checkbox" id="all-topics">
+            Todos los tópicos
+        </label>
+
+        <label class="topic-option">
+            <input type="checkbox" class="topic" value="General">
+            General
+        </label>
+
+        <label class="topic-option">
+            <input type="checkbox" class="topic" value="Avisos">
+            Avisos
+        </label>
+
+        <label class="topic-option">
+            <input type="checkbox" class="topic" value="Ayuda">
+            Ayuda
+        </label>
+
+        <label class="topic-option">
+            <input type="checkbox" class="topic" value="Off-topic">
+            Off-topic
+        </label>
+    </div>
+    <!-- ★★★ FIN DEL RECUADRO ★★★ -->
 
     </div>
 
