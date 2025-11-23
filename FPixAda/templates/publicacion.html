@@ -6,5 +6,11 @@
 {% endblock %}
 
 {% block sumShit %}
-    
+    <h1 id="focus-pagina">
+        {{ publicacion.titulo }}
+    </h1>
+    <a href="{% url 'perfil' publicacion.autor.pk %}">{{ publicacion.autor.aliasUsuario }}</a>
+    <p class="post-body">
+        {{ publicacion.cuerpo }}
+    </p>
 {% endblock %}

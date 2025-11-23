@@ -16,7 +16,9 @@
 {% else %}{% for entrada in foro %} 
 <div class="item-foro">
     <h2 style="padding-left: 10px;">
-        {{ entrada.titulo }}  
+        <a id="toEntry" href="{% url 'publicacion' entrada.idPublicacion %}" title="{% if entrada.autor == None%}Publicación de nadie{% else %}{% if entrada.esAnonimo %}Publicación de alguien{% else %}Publicación de {{ entrada.autor.aliasUsuario }}{% endif %}{% endif %}">
+            {{ entrada.titulo }}
+        </a>  
         <small><i>
             {% if entrada.autor == None%}
                 Por un Usuario Eliminado
@@ -34,11 +36,14 @@
             {% endif %}
         </i></small>
     </h2>
-    <p id="topico"><i>{{ entrada.topico }}</i></p>
+    <p>
+        <i id="topico">{{ entrada.topico }}</i>
+        <small><i>
+            Publicado el {{ entrada.fechaCreacion }}
+        </i></small><br>
+    </p>
     <p style="padding-left: 10px;">
-        <small>
-            <i>Publicado el {{ entrada.fechaCreacion }}</i><br>
-        </small>
+        
         {{ entrada.cuerpo }}
     </p>
 </div>

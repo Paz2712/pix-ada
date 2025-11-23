@@ -21,7 +21,7 @@ class RegistroUsuariosForm(forms.ModelForm):
         model = Usuarios
         fields = ('nombre', 'aliasUsuario', 'correo')
     
-    def clean(self):
+    def clean(self):# validación de la contraseña antes de guardarla en la base de datos
         cleaned = super().clean()
         p1 = cleaned.get('contrasena1') # No es Persona 1
         p2 = cleaned.get('contrasena2') # No es Persona 2
@@ -35,7 +35,7 @@ class RegistroUsuariosForm(forms.ModelForm):
             user.save()
         return user
     
-class LoginUsuariosForm(forms.Form):
+class LoginUsuariosForm(forms.Form): # no cambia la base de datos
     username = forms.CharField(
         label='Nombre de usuario',
         widget=forms.TextInput()
@@ -45,7 +45,7 @@ class LoginUsuariosForm(forms.Form):
         widget=forms.PasswordInput(),
     )
 
-class publicacionesForm(forms.ModelForm):
+class publicacionesForm(forms.ModelForm): # si agrega o modifica la base de datos  
     class Meta:
         model = Publicacion
         fields = ("titulo", "cuerpo", "topico", "esAnonimo" )
@@ -65,12 +65,4 @@ class perfilusuarioform(forms.ModelForm): #permite que el usuario elija un archi
 class apelarForm(forms.Form):
     motivo = forms.CharField(
         widget=forms.Textarea()
-    )
-        
-class imprimirForm(forms.Form):
-    encabezado = forms.CharField(
-    )
-    
-    texto = forms.CharField(
-        widget=forms.Textarea 
     )

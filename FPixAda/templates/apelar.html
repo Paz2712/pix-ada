@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Violación de contrato{% endblock %}
+
+{% block sumShit %}
+<h1 id="focus-pagina">
+    Tu post viola las normas de la comunidad
+</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>
+        Lamentamos informar que tu post posee contenido que podría ser tanto dañino para la comunidad como para ti mismo.<br>
+        Te recordamos que en Pix Ada apoyamos la libertad de expresión SIEMPRE Y CUANDO no pase a llevar los derechos de nadie más.<br>
+        <strong>Si crees que nos equivocamos, rellena el formulario de apelación a continuación explicando brevemente por qué tu publicación no infringe las normas. Nuestro equipo revisará tu caso lo antes posible.</strong>
+    </p>
+    {% render_field form.motivo placeholder="Justifícate" class="form-control body-field" %}
+    <button type="submit" class="button">Apelar</button>
+</form>
+{% endblock %}

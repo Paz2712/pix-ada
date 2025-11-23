@@ -96,6 +96,14 @@ body {
     color: white;
 }
 
+#toEntry {
+    color: #7D38D0;
+    text-decoration: none;
+}
+#toEntry:hover {
+    color: #93b3fa;
+}
+
 
 .profile-wrapper {
     width: 200px;
@@ -281,6 +289,10 @@ body {
     .item-foro {
         border-top: 1px dashed  ;
     }
+}
+
+.post-body {
+    font-size: 1.5em;
 }
 
 .view-profile {

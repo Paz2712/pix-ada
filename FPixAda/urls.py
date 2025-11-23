@@ -25,8 +25,7 @@ urlpatterns = [
     path('toadmin/', views.toAdmin, name='redirectAdmin'), ## http://localhost:8000/toadmin/
     path("perfil/<str:userPK>", views.edicion_perfil, name= "perfil"), ## http://127.0.0.1:8000/perfil/6
     path("FAQ/",views.preguntasfrecuentes,name="FAQ"), ## http://localhost:8000/FAQ/
-    path('foro/post/<str:postID>', views.postView, name='publicacion')
-
+    path('foro/post/<int:postID>', views.postView, name='publicacion'), ## http://localhost:8000/post/4
 ]
 '''
 De Maca: (que hace la función path() y que es urlpatterns)

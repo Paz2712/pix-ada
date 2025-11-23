@@ -130,3 +130,6 @@ AUTHENTICATION_BACKENDS = [ # Usa mi backend de autenticación :D
     'FPixAda.backends.UsuariosBackend',
 ]
 
+ADMINS = [
+    ('Axius Admin', 'altamiranoaxius@proton.me'),
+]

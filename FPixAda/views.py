@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, Http404
 from django.urls import reverse
+from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 # Lineas 5-6, funciones predefinidas de login de la mano de Django
@@ -113,22 +115,22 @@ def crearPubView(request):
     if request.method == 'POST': # Siempre va
         formulario = publicacionesForm(request.POST) # Se define el formulario
         if formulario.is_valid():
-            titulo = formulario.cleaned_data['titulo']
-            cuerpo = formulario.cleaned_data['cuerpo']
-            revision = f"{titulo}. {cuerpo}"
-            mod_resultado = revisarTexto(revision)
-            mod_flag = mod_resultado[0]['label']
-            mod_score = mod_resultado[0]['score']
-            publicacion = formulario.save(commit=False)
-            publicacion.autor = request.user
-            if mod_flag == 'offensive':
-                publicacion.ofensivo = True
-                publicacion.save()
-                archivo = open("logModeracion.txt", "a")
-                archivo.write(f"{str(publicacion.idPublicacion)}, {str(request.user.nombre)}, {str(mod_score)}, \n")
-                archivo.close()
-                return redirect('foro')
-            publicacion.save()
+            titulo = formulario.cleaned_data['titulo'] # Extrae el titulo
+            cuerpo = formulario.cleaned_data['cuerpo'] # Extrae el cuerpo
+            revision = f"{titulo}. {cuerpo}" # Une titulo y cuerpo
+            mod_resultado = revisarTexto(revision) # Entrega al modelo IA el titulo y cuerpo
+            mod_flag = mod_resultado[0]['label'] # Obtiene el resultado
+            mod_score = mod_resultado[0]['score'] # Obtiene el puntaje
+            publicacion = formulario.save(commit=False) # Guarda el formulario sin aplicar a la B.D.
+            publicacion.autor = request.user # Añade autor manualmente
+            if mod_flag == 'offensive': # Si el post resulta ofensivo.......
+                publicacion.ofensivo = True # Setea ofensivo manualmente
+                publicacion.save() # Guarda a la B.D.
+                archivo = open("logModeracion.txt", "a") # Abre el LOG de moderación en modo "append"
+                archivo.write(f"{str(publicacion.idPublicacion)}, {str(request.user.nombre)}, {str(mod_score)}, \n") # Añade al LOG el id de publicación, autor y puntaje
+                archivo.close() # Cierra el LOG de moderación
+                return redirect('publicacion', publicacion.idPublicacion)
+            publicacion.save() # Guarda a la B.D. si no resulta ofensivo
             return redirect('foro')
     else:
         formulario = publicacionesForm()
@@ -143,31 +145,53 @@ def crearPubView(request):
 def postView(request, postID):
     publicacion = get_object_or_404(Publicacion, idPublicacion=postID)
     if not publicacion.ofensivo: # Si el post no esta flageado, lo mandará a la visualización normal
-        return render(
-            request, 
-            'publicacion.html',
-            {
-                'publicacion': publicacion,
-                'usuario': request.user,
-            })
-    """
-    if publicacion.ofensivo and not publicacion.enRevision:
+        variables = {
+            'publicacion': publicacion,
+            'usuario': request.user,
+        }
+        return render(request, 'publicacion.html', variables)
+
+    elif publicacion.ofensivo and not publicacion.enRevision and publicacion.autor == request.user:
         if request.method == 'POST':
-            formulario = apelarForm(request.POST)
-            if formulario.is_valid():
+            form = apelarForm(request.POST)
+            if form.is_valid():
                 publicacion.enRevision = True
-                publicacion.motivoRevision = formulario.cleaned_data['motivo']
-                return redirect(
-                    request,
-                    '')
+                publicacion.motivoRevision = form.cleaned_data['motivo']
+                publicacion.save()
+                # notify site admins about the appeal
+                subject = f"Apelación de publicación #{publicacion.idPublicacion}"
+                message = (
+                    f"El usuario {getattr(request.user, 'nombre', request.user)} "
+                    f"ha apelado la eliminación de la publicación {publicacion.idPublicacion}.\n\n"
+                    f"Motivo de apelación:\n{publicacion.motivoRevision}\n\n"
+                    f"URL: {request.build_absolute_uri(reverse('publicacion', args=[publicacion.idPublicacion]))}"
+                )
+                recipients = [email for _, email in getattr(settings, 'ADMINS', [])]
+                if not recipients:
+                    default_from = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
+                    if default_from:
+                        recipients = [default_from]
+                if recipients:
+                    try:
+                        send_mail(subject, message, getattr(settings, 'DEFAULT_FROM_EMAIL', None), recipients, fail_silently=True)
+                    except Exception as e:
+                        print(f"Error sending appeal email: {e}")
+                return redirect('foro')
         else:
-            formulario = apelarForm()
-    return 0
-    """
+            form = apelarForm()
+        variables = {
+            'publicacion': publicacion,
+            'usuario': request.user,
+            'form': form,
+        }
+        return render(request, 'apelar.html', variables)
 
+    elif publicacion.ofensivo and not publicacion.enRevision and publicacion.autor != request.user:
+        raise Http404('El post viola las normas de la comunidad y se encuentra eliminado')
 
-def foroFilterView(request, filterBY):
-    return 0
+    else:
+        raise Http404('Post en revisión')
+
 
 
 
@@ -247,5 +271,3 @@ el contexto será todo lo interactivo que usará el HTML.
 Digamos que tienes adentro un ciclo que va cambiando cierta variable, crea un diccionario con esa variable que va cambiando,
 la cual será usada en el archivo HTML.
 '''
-def badApple(request):
-    return render(request, 'ba.html')

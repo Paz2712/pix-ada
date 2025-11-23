@@ -6,7 +6,7 @@
 
 {% block sumShit %}
 <div>
-    <h2>Crea tu publicación</h2>
+    <h1 id="focus-pagina">Crea tu publicación</h1>
 <form method="post">
     {% csrf_token %}
     {% render_field form.titulo placeholder="Título" id="titulo" class="form-control title-field" %} <br>
